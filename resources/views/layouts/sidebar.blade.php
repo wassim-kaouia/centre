@@ -7,7 +7,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title" key="t-menu">@lang('translation.Menu')</li>
+                <li class="menu-title" key="t-menu"></li>
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
@@ -21,7 +21,7 @@
                 <li class="menu-title" key="t-apps">Applications</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="waves-effect">
+                    <a href="{{ route('users.index') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">Utilisateurs</span>
                     </a>
@@ -33,7 +33,8 @@
                         <span>Etudiants</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Gestion des Etudiants</a></li>
+                        <li><a href="{{ route('etudiants.create') }}">Création Etudiant</a></li>
+                        <li><a href="{{ route('etudiants.index') }}">Gestion des Etudiants</a></li>
                         <li><a href="#">Formations</a></li>
                         <li><a href="#">Facture</a></li>
                         <li><a href="#">Statistiques</a></li>
@@ -46,7 +47,8 @@
                         <span>Formateurs</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Gestion des Formateurs</a></li>
+                        <li><a href="{{ route('formateurs.create') }}">Création Formateur</a></li>
+                        <li><a href="{{ route('formateurs.index') }}">Gestion des Formateurs</a></li>
                         <li><a href="#">Formations</a></li>
                         <li><a href="#">Facture</a></li>
                         <li><a href="#">Statistiques</a></li>
@@ -59,7 +61,8 @@
                         <span>Formations</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Gestion des Formations</a></li>
+                        <li><a href="{{ route('formations.create') }}">Création de Formation</a></li>
+                        <li><a href="{{ route('formations.index') }}">Gestion des Formations</a></li>
                         <li><a href="#">Promotions</a></li>
                         <li><a href="#">Facture</a></li>
                         <li><a href="#">Statistiques</a></li>
@@ -67,9 +70,16 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="waves-effect">
+                    <a href="{{ route('tags.index') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
-                        <span key="t-dashboards">test</span>
+                        <span key="t-dashboards">Tags</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('categories.index') }}" class="waves-effect">
+                        <i class="bx bx-home-circle"></i>
+                        <span key="t-dashboards">Categories</span>
                     </a>
                 </li>
 

@@ -7,3 +7,15 @@
 <!-- App Css-->
 <link href="{{ URL::asset('/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+<link href="{{ URL::asset('assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
+<link href="{{ URL::asset('assets/libs/dropzone/dropzone.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
+<link href="{{ URL::asset('assets/libs/toastr/toastr.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
+
+{{-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">  --}}
+
+
+
+

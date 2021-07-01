@@ -1,7 +1,7 @@
 @extends('layouts.master-without-nav')
 
 @section('title')
-    
+Recuperation de mot de passe
 @endsection
 
 @section('css')
@@ -15,7 +15,7 @@
     @endsection
 
     @section('content')
-
+        
         <div>
             <div class="container-fluid p-0">
                 <div class="row g-0">
@@ -32,45 +32,11 @@
                                             <div class="col-lg-7">
                                                 <div class="text-center">
 
-                                                    <h4 class="mb-3"><i
-                                                            class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span
-                                                            class="text-primary">5k</span>+ Satisfied clients</h4>
+                                                    <h4 class="mb-3">
+                                                            
 
                                                     <div dir="ltr">
-                                                        <div class="owl-carousel owl-theme auth-review-carousel"
-                                                            id="auth-review-carousel">
-                                                            <div class="item">
-                                                                <div class="py-3">
-                                                                    <p class="font-size-16 mb-4">" Fantastic theme with a
-                                                                        ton of options. If you just want the HTML to
-                                                                        integrate with your project, then this is the
-                                                                        package. You can find the files in the 'dist'
-                                                                        folder...no need to install git and all the other
-                                                                        stuff the documentation talks about. "</p>
-
-                                                                    <div>
-                                                                        <h4 class="font-size-16 text-primary">Abs1981</h4>
-                                                                        <p class="font-size-14 mb-0">- Skote User</p>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="item">
-                                                                <div class="py-3">
-                                                                    <p class="font-size-16 mb-4">" If Every Vendor on Envato
-                                                                        are as supportive as Themesbrand, Development with
-                                                                        be a nice experience. You guys are Wonderful. Keep
-                                                                        us the good work. "</p>
-
-                                                                    <div>
-                                                                        <h4 class="font-size-16 text-primary">nezerious</h4>
-                                                                        <p class="font-size-14 mb-0">- Skote User</p>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,21 +51,20 @@
                     <div class="col-xl-3">
                         <div class="auth-full-page-content p-md-5 p-4">
                             <div class="w-100">
-
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5">
                                         <a href="index" class="d-block auth-logo">
-                                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="18"
+                                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="50"
                                                 class="auth-logo-dark">
-                                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="18"
+                                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="50"
                                                 class="auth-logo-light">
                                         </a>
                                     </div>
                                     <div class="my-auto">
 
                                         <div>
-                                            <h5 class="text-primary"> Reset Password</h5>
-                                            <p class="text-muted">Re-Password with Skote.</p>
+                                            <h5 class="text-primary"> Recuperer le Mot de Passe</h5>
+                                            <p class="text-muted">Re-Password</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -115,7 +80,7 @@
                                                     <label for="useremail" class="form-label">Email</label>
                                                     <input type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        id="useremail" name="email" placeholder="Enter email"
+                                                        id="useremail" name="email" placeholder="Tapez email"
                                                         value="{{ old('email') }}" id="email">
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
@@ -131,8 +96,8 @@
 
                                             </form>
                                             <div class="mt-5 text-center">
-                                                <p>Remember It ? <a href="{{ url('login') }}"
-                                                        class="font-weight-medium text-primary"> Sign In here</a> </p>
+                                                <p>Se seviens ? <a href="{{ url('login') }}"
+                                                        class="font-weight-medium text-primary"> Se Connecter Ici</a> </p>
                                             </div>
                                         </div>
                                     </div>
@@ -141,8 +106,8 @@
                                         <p class="mb-0">© <script>
                                                 document.write(new Date().getFullYear())
 
-                                            </script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                            Themesbrand</p>
+                                            </script> Developed with <i class="mdi mdi-heart text-danger"></i> by
+                                            DevWas</p>
                                     </div>
                                 </div>
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Models\Student;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,11 +13,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
@@ -29,7 +25,11 @@ class User extends Authenticatable
 
 
     public function role(){
-        return $this->hasOne(Role::class);
+        return $this->hasOne(Role::class,'id','role_id');  
+    }
+
+    public function student(){
+        return $this->belongsTo(Student::class);
     }
 
     protected $hidden = [

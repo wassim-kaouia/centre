@@ -1,16 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Database\Seeders\UserAdminSeeder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+ 
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -21,18 +19,19 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->date('b_day');
-            $table->string('avatar');
-            $table->foreignId('role_id');
+            $table->string('avatar')->default('/profile_default.jpeg');
+            $table->foreignId('role_id')->constrained();
+            // $table->unsignedBigInteger('role_id');
             $table->rememberToken();
             $table->timestamps();
         });
+        
+        Artisan::call('db:seed',[
+            '--class' => UserAdminSeeder::class
+        ]);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('users');

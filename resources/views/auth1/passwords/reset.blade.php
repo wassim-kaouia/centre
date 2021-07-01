@@ -19,7 +19,7 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-4">
-                                            <h5 class="text-primary"> Reset Password</h5>
+                                            <h5 class="text-primary"> Reset Passwordddd</h5>
                                             <p>Re-Password with Skote.</p>
                                         </div>
                                     </div>

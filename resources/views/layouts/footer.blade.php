@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <script>document.write(new Date().getFullYear())</script> © WassDev.
+                <script>document.write(new Date().getFullYear())</script> © Green City Centre.
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end d-none d-sm-block">
-                    Developed By Wassim Kaouia 2021
+                    Developed By DevWas
                 </div>
             </div>
         </div>

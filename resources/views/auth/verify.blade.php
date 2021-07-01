@@ -33,7 +33,7 @@
 
                                                     <h4 class="mb-3"><i
                                                             class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span
-                                                            class="text-primary">5k</span>+ Satisfied clients</h4>
+                                                            class="text-primary">10k</span>+ Satisfied clients</h4>
 
                                                     <div dir="ltr">
                                                         <div class="owl-carousel owl-theme auth-review-carousel"
@@ -88,9 +88,9 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5">
                                         <a href="index" class="d-block auth-logo">
-                                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="18"
+                                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="50"
                                                 class="auth-logo-dark">
-                                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="18"
+                                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="50"
                                                 class="auth-logo-light">
                                         </a>
                                     </div>
@@ -98,7 +98,7 @@
 
                                         <div>
                                             <h5 class="text-primary"> Verifier Le Mot de Passe</h5>
-                                            <p class="text-muted">Re-Password with Skote.</p>
+                                            <p class="text-muted">Recuperation du Mot De Passe</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -124,8 +124,8 @@
                                                 </div>
                                             </form>
                                             <div class="mt-5 text-center">
-                                                <p>Remember It ? <a href="{{ url('login') }}"
-                                                        class="font-weight-medium text-primary"> Sign In here</a> </p>
+                                                <p>Se seviens du mot de passe ? <a href="{{ url('login') }}"
+                                                        class="font-weight-medium text-primary"> Se Connecter</a> </p>
                                             </div>
                                         </div>
                                     </div>
@@ -134,8 +134,8 @@
                                         <p class="mb-0">© <script>
                                                 document.write(new Date().getFullYear())
 
-                                            </script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                            Themesbrand</p>
+                                            </script> Developed with <i class="mdi mdi-heart text-danger"></i> by
+                                            DevWas</p>
                                     </div>
                                 </div>
                             </div>

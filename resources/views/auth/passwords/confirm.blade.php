@@ -88,17 +88,17 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5">
                                         <a href="index" class="d-block auth-logo">
-                                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="18"
+                                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="50"
                                                 class="auth-logo-dark">
-                                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="18"
+                                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="50"
                                                 class="auth-logo-light">
                                         </a>
                                     </div>
                                     <div class="my-auto">
 
                                         <div>
-                                            <h5 class="text-primary"> Confirm Password</h5>
-                                            <p class="text-muted">Re-Password with Skote.</p>
+                                            <h5 class="text-primary"> Confirmation de Mot De Passe</h5>
+                                            <p class="text-muted">Re-Password</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -110,10 +110,10 @@
                                                     <div class="float-end">
                                                         @if (Route::has('password.request'))
                                                             <a href="{{ route('password.request') }}"
-                                                                class="text-muted">Forgot password?</a>
+                                                                class="text-muted">Mot de Passe Oublié ?</a>
                                                         @endif
                                                     </div>
-                                                    <label for="userpassword">Password</label>
+                                                    <label for="userpassword">Mot de Passe</label>
                                                     <input type="password"
                                                         class="form-control @error('password') is-invalid @enderror"
                                                         name="password" id="userpassword" placeholder="Enter password">
@@ -126,13 +126,13 @@
 
                                                 <div class="text-end">
                                                     <button class="btn btn-primary w-md waves-effect waves-light"
-                                                        type="submit">Confirm Password</button>
+                                                        type="submit">Confirmez le mot de passe</button>
                                                 </div>
 
                                             </form>
                                             <div class="mt-5 text-center">
-                                                <p>Remember It ? <a href="{{ url('login') }}"
-                                                        class="font-weight-medium text-primary"> Sign In here</a> </p>
+                                                <p>Se seviens ? <a href="{{ url('login') }}"
+                                                        class="font-weight-medium text-primary"> Se Connecter Ici</a> </p>
                                             </div>
                                         </div>
                                     </div>
@@ -141,8 +141,8 @@
                                         <p class="mb-0">© <script>
                                                 document.write(new Date().getFullYear())
 
-                                            </script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                            Themesbrand</p>
+                                            </script> Developed with <i class="mdi mdi-heart text-danger"></i> by
+                                            DevWas</p>
                                     </div>
                                 </div>
 

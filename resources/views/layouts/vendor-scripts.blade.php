@@ -4,7 +4,11 @@
 <script src="{{ URL::asset('assets/libs/metismenu/metismenu.min.js')}}"></script>
 <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{ URL::asset('assets/libs/node-waves/node-waves.min.js')}}"></script>
+<!-- bootstrap datepicker -->
+<script src="{{ URL::asset('assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 
+<!-- dropzone plugin -->
+<script src="{{ URL::asset('assets/libs/dropzone/dropzone.min.js') }}"></script>
 @yield('script')
 
 <!-- App js -->

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -64,14 +65,18 @@ class RegisterController extends Controller
             $avatar->move($avatarPath, $avatarName);
         }
 
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'b_day' => date('Y-m-d', strtotime($data['b_day'])),
             'avatar' => "/images/" . $avatarName,
-            'role_id' => "1",
+            'role_id' => "2",
         ]);
+
+        Toastr::success('Utilisateur est Bien Crée');
+
+        return $user;
     }
 }
