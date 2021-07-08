@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->date('b_day');
             $table->string('avatar')->default('/profile_default.jpeg');
             $table->foreignId('role_id')->constrained();
-            // $table->unsignedBigInteger('role_id');
+            $table->string('sexe');
             $table->rememberToken();
             $table->timestamps();
         });

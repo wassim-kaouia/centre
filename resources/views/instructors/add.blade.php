@@ -42,20 +42,20 @@ Ajouter un Formateur
                 <form action="{{ route('formateurs.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-4">
-                        <label for="nom" class="col-form-label col-lg-2">Nom (*)</label>
+                        <label for="nom" class="col-form-label col-lg-2">Nom <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <input  id="nom" name="first_name" type="text" class="form-control" placeholder="Entrer le prénom...">
                         </div>
                     </div>
                     <div class="row mb-4">
-                        <label for="last_name" class="col-form-label col-lg-2">Prénom (*)</label>
+                        <label for="last_name" class="col-form-label col-lg-2">Prénom <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <input autocomplete="off" id="last_name" name="last_name" type="text" class="form-control" placeholder="Entrer le nom...">
                         </div>
                     </div>
 
                     <div class="row mb-4">
-                        <label for="natioanlity" class="col-form-label col-lg-2">Nationalité (*)</label>
+                        <label for="natioanlity" class="col-form-label col-lg-2">Nationalité <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <select class="form-select mb-4" name="nationality">
                                <option value="Maroc">Marocaine</option>
@@ -67,14 +67,24 @@ Ajouter un Formateur
                     </div>
 
                     <div class="row mb-4">
-                        <label for="age" class="col-form-label col-lg-2">L'age (*)</label>
+                        <label for="sexe" class="col-form-label col-lg-2">Sexe <span class="text-danger">(*)</span></label>
+                        <div class="col-lg-10">
+                            <select class="form-select mb-4" name="sexe">
+                               <option value="Male">Male</option>
+                               <option value="Female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <label for="age" class="col-form-label col-lg-2">L'age <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <input id="age" autocomplete="off" name="age" type="text" class="form-control" placeholder="Entrer l'age...">
                         </div>
                     </div>
 
                     <div class="row mb-4">
-                        <label class="col-form-label col-lg-2">Date de Naissance (*)</label>
+                        <label class="col-form-label col-lg-2">Date de Naissance <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                         <div class="input-group" id="datepicker2">
                                 <input autocomplete="off" type="text" class="form-control" placeholder="dd-M-yyyy" name="birth"
@@ -87,14 +97,14 @@ Ajouter un Formateur
                    
 
                     <div class="row mb-4">
-                        <label for="cin" class="col-form-label col-lg-2">CIN (*)</label>
+                        <label for="cin" class="col-form-label col-lg-2">CIN <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <input autocomplete="off" id="cin" name="cin" type="text" class="form-control" placeholder="Entrer le numero d'identité national...">
                         </div>
                     </div>
 
                     <div class="row mb-4">
-                        <label for="email" class="col-form-label col-lg-2">Email (*)</label>
+                        <label for="email" class="col-form-label col-lg-2">Email <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <input autocomplete="off" id="email" name="email" type="text" class="form-control" placeholder="Entrer l'email...">
                         </div>
@@ -102,25 +112,23 @@ Ajouter un Formateur
 
                     
                     <div class="row mb-4">
-                        <label for="address" class="col-form-label col-lg-2">Adresse (*)</label>
+                        <label for="address" class="col-form-label col-lg-2">Adresse <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <textarea autocomplete="off"  class="form-control" name="address" id="projectdesc" rows="3" placeholder="Entrer l'adresse..."></textarea>
                         </div>
                     </div>
 
                     <div class="row mb-4">
-                        <label for="gsm" class="col-form-label col-lg-2">Téléphone - GSM (*)</label>
+                        <label for="gsm" class="col-form-label col-lg-2">Téléphone - GSM <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <input autocomplete="off" id="gsm" name="gsm" type="text" class="form-control" placeholder="Entrer le numero de telephone...">
                         </div>
                     </div>
 
                     <div class="row mb-4">
-                        <label for="natioanlity" class="col-form-label col-lg-2">Niveau d'etudes (*)</label>
+                        <label for="natioanlity" class="col-form-label col-lg-2">Niveau d'etudes <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <select class="form-select mb-4" name="study_level">
-                               {{-- <option value="without_bac">Sans Bac</option>
-                               <option value="level_bac">Niveau Bac</option> --}}
                                <option value="bac">Bac</option>
                                <option value="superior">Etudes Superieurs</option>
                             </select>
@@ -128,7 +136,7 @@ Ajouter un Formateur
                     </div>
 
                     <div class="row mb-4">
-                    <label class="col-form-label col-lg-2">Photo de Profile (*)</label>
+                    <label class="col-form-label col-lg-2">Photo de Profile </label>
                     <div class="col-lg-10">
                         <input type="file" name="avatar" class="form-control" id="inputGroupFile01">
                     </div>

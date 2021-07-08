@@ -232,10 +232,37 @@ Modifier un Etudiant
 
 <div class="row mb-4 mt-4">
     <div class="col-lg-12">
+        
        <div class="card">
            <div class="card-title mt-2 p-4">
-               <h4>Affecter Les Formations:</h4>
+               <h4>Affecter Les Formations :</h4>
            </div>
+        <div class="card-body">
+            <form action="{{ route('etudiants.book') }}" method="post" enctype="multipart/form-data">
+                @csrf
+
+                <p>Liste Des Formations :</p>
+                <div class="row">
+                    <div class="col-lg-10">
+                        <select class="form-select mb-4" name="formation">
+                            @forelse ($formations as $formation)
+                                <option value="{{ $formation->id }}">{{ $formation->title }} - Par  {{ $formation->instructor->user->full_name }}</option>
+                            @empty
+                            <option value="0">Pas de Formations</option>                                
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <input type="hidden" name="student_id" value="{{ $student->id }}">
+                            <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Inscrire au Formation</button>  
+                        </div> 
+                    </div>
+                </div>
+                
+            </form>
+
+       </div>
            <div class="p-4">
             <div class="table-responsive">
                 <table class="table mb-0">
@@ -250,26 +277,21 @@ Modifier un Etudiant
                     </thead>
                     <tbody>
                         <?php $i=1; ?>
-                        @forelse ($student->attachments()->get() as $attachment)
+                        @forelse ($student->courses()->get() as $course)
                         <tr>
                             <th scope="row"><?php echo $i++; ?></th>
-                            <td>{{ $attachment->name }}</td>
-                            <td>{{ $attachment->student->user->full_name }}</td>
-                            <td>{{ $attachment->created_at }}</td>
+                            <td>{{ $course->title }}</td>
+                            <td>-----</td>
+                            <td>{{ $course->created_at }}</td>
                             <td colspan="2">
                                 <a class="btn btn-outline-success btn-sm"
-                                href="{{ route('attachments.etudiant.view',['id' => $attachment->id]) }}"
+                                href=""
                                 role="button"><i class="fas fa-eye"></i>&nbsp;
                                 Voir</a>
 
-                            <a class="btn btn-outline-info btn-sm"
-                                href="{{ route('attachments.etudiant.download',['id' => $attachment->id]) }}"
-                                role="button"><i
-                                    class="fas fa-download"></i>&nbsp;
-                                Telecharger</a>
-
                                 <button id="deleteAtt" class="btn btn-outline-danger btn-sm"
-                                data-attachment_id="{{ $attachment->id }}" 
+                                data-course_id="{{ $course->id }}" 
+                                data-student_id="{{ $student->id }}" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#staticBackdrop">Supprimer</button>
                             </td> 
@@ -291,19 +313,19 @@ Modifier un Etudiant
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Suppression de Document</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Suppression de Formation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        <form action="{{ route('attachments.etudiant.destroy') }}" method="POST" autocomplete="off">
+        <form action="{{ route('etudiants.bookDelete') }}" method="POST" autocomplete="off">
             @csrf
-            @method('DELETE')
             
             <div class="modal-body">
-                <p>Vous êtes sûr de vouloir Supprimer ce Document ?</p>
+                <p>Vous êtes sûr de vouloir Supprimer cette Formation ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
-                <input type="hidden" name="attachment_id" id="attachment_id" value="" />
+                <input type="hidden" name="course_id" id="course_id" value="" />
+                <input type="hidden" name="student_id" id="student_id" value="" />
                 <button type="submit" class="btn btn-danger">Je suis Sûr !</button>
             </div>
         </form>
@@ -324,9 +346,11 @@ Modifier un Etudiant
 <script>
     $('#staticBackdrop').on('show.bs.modal',function(event){
          var button = $(event.relatedTarget);
-         var attachmentId = button.data('attachment_id');
+         var courseId = button.data('course_id');
+         var studentId = button.data('student_id');
 
-         $('#attachment_id').val(attachmentId);
+         $('#course_id').val(courseId);
+         $('#student_id').val(studentId);
          console.log('done');
     });
 </script>

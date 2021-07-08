@@ -38,13 +38,14 @@ Route::get('/testcourse',function(){
 
 //Update User Details
 Route::get('/users',[UserController::class,'index'])->name('users.index');
+Route::get('/users/create',[UserController::class,'create'])->name('users.create');
+Route::post('/users/store',[UserController::class,'store'])->name('users.store');
 Route::get('/users/edit_profile/{id}',[UserController::class,'edit'])->name('users.edit');
 Route::put('/users/edited_profile',[UserController::class,'profile_edit'])->name('users.edited');
 Route::get('users/show/{id}',[UserController::class,'show'])->name('users.show');
 Route::delete('/users/delete',[UserController::class,'destroy'])->name('users.destroy');
 Route::post('/update-profile/{id}', [HomeController::class, 'updateProfile'])->name('updateProfile');
 Route::post('/update-password/{id}', [HomeController::class, 'updatePassword'])->name('updatePassword');
-
 
 //tags
 Route::get('/tags',[TagController::class,'index'])->name('tags.index');
@@ -64,6 +65,8 @@ Route::post('/etudiant',[StudentController::class,'store'])->name('etudiants.sto
 Route::get('/etudiant/show/{id}',[StudentController::class,'show'])->name('etudiants.show');
 Route::put('/etudiant/{id}',[StudentController::class,'update'])->name('etudiants.update');
 Route::delete('/etudiant/delete',[StudentController::class,'destroy'])->name('etudiants.destroy');
+Route::post('/etudiant/course',[StudentController::class,'bookCourse'])->name('etudiants.book');
+Route::post('/etudiant/course/delete',[StudentController::class,'deleteBookedCourse'])->name('etudiants.bookDelete');
 Route::post('/attachment_upload/etudiant',[StudentController::class,'upload_documents'])->name('attachments.etudiant.store');
 Route::get('/attachment_download/{id}/etudiant',[StudentController::class,'download_document'])->name('attachments.etudiant.download');
 Route::get('/attachment_view/{id}/etudiant',[StudentController::class,'view_document'])->name('attachments.etudiant.view');
@@ -88,6 +91,8 @@ Route::get('/formation/create',[CourseController::class,'create'])->name('format
 Route::post('/formation/store',[CourseController::class,'store'])->name('formations.store');
 Route::get('/formation/{id}/edit',[CourseController::class,'edit'])->name('formations.edit');
 Route::delete('/formation/{id}/delete',[CourseController::class,'destroy'])->name('formations.destroy');
+Route::get('/formation/non-approuver',[CourseController::class,'pendingCourses'])->name('formations.pending');
+Route::get('/formation/approuver/{id}/{approuver}',[CourseController::class,'approuveCourse'])->name('formations.approuved');
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 

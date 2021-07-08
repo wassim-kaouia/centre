@@ -7,7 +7,6 @@ Utilisateurs
 @section('content')
 
 {{-- start the list from here  --}}
- 
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
@@ -27,8 +26,13 @@ Utilisateurs
                         <!-- end page title -->
 
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12"> 
                                 <div class="card">
+                                    <div class="card-title">
+                                        <div class="p-2">
+                                            <button class="btn btn-primary"><a class="text-white" href="{{ route('users.create') }}">Création d'un Utilisateur</a></button>
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table align-middle table-nowrap table-hover">

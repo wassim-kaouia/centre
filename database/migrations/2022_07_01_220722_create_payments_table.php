@@ -15,9 +15,10 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->double('due');
+            $table->double('paid');
+            $table->double('rest');
             $table->string('status');
-            
+            $table->foreignId('student_id')->constrained();
             $table->timestamps();
         });
     }

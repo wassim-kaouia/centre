@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Student;
 use App\Mail\StudentMail;
 use App\Models\Sattachment;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\StudentRequest;
 
 class StudentController extends Controller
 {
@@ -28,39 +30,18 @@ class StudentController extends Controller
         return view('students.add');
     }
 
-    public function store(Request $request){
-
-        // dd($request->all());
-        $request->validate([
-            'first_name'  => 'required|string',
-            'last_name'   => 'required|string',
-            'nationality' => 'required|string',
-            'age'         => 'required|numeric',
-            'cin'         => 'required|alpha_num',
-            'email'       => 'required|email',
-            'address'     => 'required|max:255',
-            'gsm'         => 'required|numeric',
-            
-        ],[
-            'first_name.required'  => 'Le prenom est requis',
-            'last.required'        => 'Le nom est requis',
-            'nationality.required' => 'La Nationalité est requise',
-            'age.required'         => "L'age est requis",
-            'cin.required'         => 'La CIN est requise',
-            'email.required'       => "L'email est requis",
-            'address.required'     => "L'adresse est requise",
-            'gsm.required'         => 'Le telephone portable est requis',
-        ]);
+    public function store(StudentRequest $request){
 
         //create user for student
         $user = new User();
         $user->full_name       = Str::lower($request->first_name.' '.$request->last_name);
         $user->name            = Str::lower($request->first_name);
         $user->email           = Str::lower($request->email);
+        $user->sexe            = $request->sexe;
         $user->password        = bcrypt($request->first_name.'2021');
         $user->b_day           = date('Y-m-d', strtotime($request->birth));
         $user->role_id         = 4;
-
+        
         //upload avatar - profile photo
         if (request()->has('avatar')) {            
             $avatar = request()->file('avatar');
@@ -103,10 +84,47 @@ class StudentController extends Controller
 
     public function edit(Request $request,$id){
         $student = Student::findOrFail($id);
-
-        return view('students.edit',['student' => $student]);
+        $formations = Course::all();
+        return view('students.edit',[
+            'student'    => $student,
+            'formations' => $formations,
+        ]);
     }
 
+    public function bookCourse(Request $request){
+        // dd($request->all());
+        $student_id   = $request->student_id;
+        $course_id    = $request->formation;
+
+        $student   = Student::find($student_id);
+        $course    = Course::find($course_id);
+
+        $exists = $student->courses->contains($course->id);
+        if($exists){
+           Toastr::error("L'étudiant dèja Inscris Dans Cette Formation");
+           return redirect()->back();
+        }else{
+           $student->courses()->syncWithoutDetaching([$course->id]);
+           Toastr::success("L'étudiant est inscris avec succée");
+           return redirect()->back();
+        }
+        
+    }
+
+    public function deleteBookedCourse(Request $request){
+        // dd($request->all());
+        $course_id   = $request->course_id;
+        $student_id = $request->student_id;
+
+        $student   = Student::find($student_id);
+        $course = Course::find($course_id);
+
+        $student->courses()->detach([$course->id]);
+
+        Toastr::success("La Formation est supprimée avec succée");
+        return redirect()->back();
+
+    }
 
     public function update(Request $request,$id){
 

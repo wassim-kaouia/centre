@@ -3,29 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+   
     public function __construct()
     {
         $this->middleware('auth');
+
+        
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+   
     public function index(Request $request)
     {
         if (view()->exists($request->path())) {
@@ -34,12 +31,74 @@ class HomeController extends Controller
         return abort(404);
     }
 
-    public function root()
-    {
-        return view('index');
+
+    public function revenueTotalPerYear(){
+
+        $coursesCurrentYear = Course::whereYear('created_at', date('Y'))->where('status','=',true)->get();
+        $coursePreviousYear = Course::whereYear('created_at',date("Y",strtotime("-1 year")))->where('status','=',true)->get();
+    
+        $totalCurrentPerCourse = 0; 
+        for($i=0; $i< $coursesCurrentYear->count(); $i++){
+                if($coursesCurrentYear[$i]->students()->exists()){
+                    $totalCurrentPerCourse += $coursesCurrentYear[$i]->students()->count() * $coursesCurrentYear[$i]->price; 
+                }
+        }
+
+        $totalPreviousPerCourse = 0; 
+        for($i=0; $i< $coursePreviousYear->count(); $i++){
+                if($coursePreviousYear[$i]->students()->exists()){
+                    $totalPreviousPerCourse += $coursePreviousYear[$i]->students()->count() * $coursePreviousYear[$i]->price; 
+                }
+        }
+        
+        
+        $difference = ($totalCurrentPerCourse-$totalPreviousPerCourse)/100;
+        
+        return [
+            'totalcurrent'   => $totalCurrentPerCourse,
+            'difference'     => $difference,
+        ];
     }
 
- 
+
+    public function getStudents(){
+        $students = Student::all();
+        return $students;
+
+    }
+
+    public function getCourses(){
+        $courses = Course::all();
+        return $courses;
+    }
+
+    public function highRevenueCourse(){
+        $courses = Course::all();
+        $highrevenue=0;
+        $course=null;
+
+        for($i=0; $i<$courses->count(); $i++){
+            if(($courses[$i]->price * $courses[$i]->students()->count()) > $highrevenue){
+                $highrevenue = $courses[$i]->price * $courses[$i]->students()->count();
+                $course = $courses[$i];
+            }
+        }
+        return [
+            'course'  => $course,
+            'revenue' => $highrevenue,
+        ];
+    }
+
+    public function root()
+    {
+        return view('index',
+        [
+          'course'    => $this->revenueTotalPerYear(),
+          'students'  => $this->getStudents(),
+          'courses'   => $this->getCourses(),
+          'high'      => $this->highRevenueCourse(),
+        ]);
+    }
 
     public function updateProfile(Request $request, $id)
     {

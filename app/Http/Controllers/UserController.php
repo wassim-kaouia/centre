@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Brian2694\Toastr\Facades\Toastr;
@@ -27,11 +28,62 @@ class UserController extends Controller
         return view('users.show',['user' => $user]);
     }
 
+    public function create(){
+
+        return view('users.add');
+    }
     public function edit(Request $request,$id){
 
         $user = User::findOrFail($id);
 
         return view('users.edit',['user' => $user]);
+    }
+
+    public function store(Request $request){
+        // dd($request->all());
+        $request->validate([
+            'full_name' => 'required|min:10|max:20',
+            'name'      => 'required|string',
+            'email'     => 'required|email',
+            'avatar'    => 'mimes:png,jpg,jpeg',
+            'sexe'      => 'required|string',
+            'birth'     => 'required',
+            'role'      => 'string',
+            'password'  => 'required',
+        ],[
+            'full_name.required'     =>  'Le Nom Complet est requis',
+            'name.required'          =>  'Le Nom est Requis',
+            'email.required'         =>  "L'email est requis",
+            'avatar.required'        =>  'La photo de profil est requise',
+            'sexe.required'          =>  'Le sexe est requis',
+            'birth.required'         =>  'La date de naissance est requise',
+            'password.required'      =>  'Le Password est requis',  
+        ]);
+
+        $user = new User();
+        $user->full_name = Str::lower($request->full_name);
+        $user->name      = Str::lower($request->name);
+        $user->email     = Str::lower($request->email);
+        $user->sexe      = $request->sexe;
+        $user->b_day     = date('Y-m-d', strtotime($request->birth));
+        $user->password  = bcrypt($request->password);
+        $user->role_id   = $request->role;
+
+        //upload avatar - profile photo
+        if (request()->has('avatar')) {            
+            $avatar = request()->file('avatar');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatarPath = public_path('/images/utilisateurs/');
+            $avatar->move($avatarPath, $avatarName);
+            $user->avatar = "/images/utilisateurs/" . $avatarName;
+        }else{
+            $user->avatar ='/profile_default.jpeg';
+        }
+
+        $user->save();
+
+        Toastr::success('Utilisateur'.' '.$user->full_name.' est crée avec succée !');
+        return redirect()->back();
     }
 
     public function profile_edit(Request $request){
@@ -57,6 +109,7 @@ class UserController extends Controller
 
         return redirect()->back();
     }   
+    
 
     public function destroy(Request $request){
         

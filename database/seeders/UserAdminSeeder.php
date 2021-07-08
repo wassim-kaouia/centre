@@ -23,6 +23,7 @@ class UserAdminSeeder extends Seeder
             'b_day'  => "1994-07-06",
             'avatar' => "/profile_default.jpeg",
             'role_id' => 1,
+            'sexe' => 'Male',
         ]);
     }
 }

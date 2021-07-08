@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use App\Models\Student;
 use App\Models\Category;
 use App\Models\Instructor;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,10 @@ class Course extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function students(){
+        return $this->belongsToMany(Student::class);
+    }
+
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -25,4 +30,6 @@ class Course extends Model
     public function instructor(){
         return $this->belongsTo(Instructor::class);
     }
+
+    
 }

@@ -66,8 +66,8 @@
                         <label class="col-form-label col-lg-2">Dates <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
-                                <input type="text" class="form-control" placeholder="Début" name="start" />
-                                <input type="text" class="form-control" placeholder="Fin" name="end" />
+                                <input autocomplete="off" type="text" class="form-control" placeholder="Début" name="start" />
+                                <input autocomplete="off" type="text" class="form-control" placeholder="Fin" name="end" />
                             </div>
                         </div>
                     </div>
@@ -79,6 +79,12 @@
                         </div>
                     </div>
 
+                    <div class="row mb-4">
+                        <label for="projectbudget" class="col-form-label col-lg-2">Nombre Limit <span class="text-danger">(*)</span></label>
+                        <div class="col-lg-10">
+                            <input id="limit" name="limit" type="text" placeholder="Entrer le nombre maximal des etudiants..." class="form-control">
+                        </div>
+                    </div>
                     
                     <div class="row mb-4">
                         <label class="col-form-check-label col-lg-2" for="active_discount">Activer La Remise</label>
