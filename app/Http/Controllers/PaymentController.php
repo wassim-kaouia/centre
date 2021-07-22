@@ -62,16 +62,23 @@ class PaymentController extends Controller
         //apres modification je peux mettre une tva fixe (fach nhder m3a abdelhamid)
         
         $payment = new Payment();
-        $payment->full_price = $totalprice;
-        $payment->paid = $request->amount;
-        $payment->rest = $course->price - $request->amount;
+        
+
         if($course->price - $request->amount == 0){
+            $payment->full_price = $course->price;
+            $payment->paid = $request->amount;
+            $payment->rest = 0;
             $payment->status = 'paid';
         }else if($course->price - $request->amount < 0){
             Toastr::error('Vous pouvez pas payer plus que le montant de formation !');
             return redirect()->route('etudiants.edit',['id' => $student]);
         }else if($course->price - $request->amount > 0){
+            $payment->full_price = $course->price;
+            $payment->paid = $request->amount;
+            $payment->rest = $course->price - $request->amount;
             $payment->status = 'avance';
+            //créer le reçu pdf et ajouter au detail de paiements
+            
         }
         $payment->student_id = $student->id;
         $payment->course_id  = $course->id;
@@ -84,10 +91,7 @@ class PaymentController extends Controller
         $paymentdetail = new PaymentDetail();
         $paymentdetail->paid = $payment->paid;
         $paymentdetail->status = $payment->status;
-        
-        // dd('ok');
         $paymentdetail->payment_id = $payment->id;
-        
         
         view()->share('payment',$payment);
         $pdf = PDF::loadview('invoices.model',$payment)->setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);

@@ -28,9 +28,7 @@ class InvoiceController extends Controller
     public function destroy(Request $request){
         // dd($request->all());
         $invoice = Payment::findOrFail($request->invoice_id);
-        // dd($invoice->student->courses()->detach($invoice->course->id));
-        // $invoice->student->courses()->detach([$invoice->course->id]);
-        // dd($invoice->detailsPayment);
+       
         PaymentDetail::where('payment_id','=',$invoice->id)->delete();
         $invoice->delete();
 

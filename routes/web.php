@@ -130,17 +130,18 @@ Route::post('/paiements',[PaymentController::class,'store'])->name('paiements.st
 Route::put('/paiement/{id}',[PaymentController::class,'update'])->name('paiements.update');
 Route::delete('/paiement/{id}',[PaymentController::class,'destroy'])->name('paiements.destroy');
 
-
 //invocie
 Route::get('invoices',[InvoiceController::class,'index'])->name('invoices.index');
-Route::get('invoice/show/{id}',[InvoiceController::class,'show'])->name('invoices.show');
-Route::delete('invoice/delete',[InvoiceController::class,'destroy'])->name('invoices.destroy');
+Route::get('receipts/complet',[InvoiceController::class,''])->name('invoices.receipt');
+Route::get('receipts/avance',[InvoiceController::class,''])->name('invoices.avance');
+Route::get('invoice/show/{id}',[InvoiceController::class,'show_invoice'])->name('invoices.show');
+Route::get('receipt/show/{id}',[InvoiceController::class,'show_receipt'])->name('receipts.show');
+Route::delete('invoice/delete',[InvoiceController::class,'destroy_invoice'])->name('invoices.destroy');
+Route::delete('receipt/delete',[InvoiceController::class,'destroy_receipt'])->name('receipts.destroy');
 
 //fees
 Route::get('fees/index',[FeesController::class,'create'])->name('fees.index');
 Route::put('fees/update',[FeesController::class,'update'])->name('fees.update');
-
-
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
