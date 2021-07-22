@@ -1,5 +1,16 @@
 @extends('layouts.master')
 
+@section('css')
+    <style>
+        .inner{
+            display: inline-flex;
+        }
+
+        .space_element{
+            padding-right: 5px;
+        }
+    </style>
+@endsection
 @section('title')
 Modifier un Etudiant
 @endsection
@@ -283,11 +294,19 @@ Modifier un Etudiant
                             <td>{{ $course->title }}</td>
                             <td>-----</td>
                             <td>{{ $course->created_at }}</td>
-                            <td colspan="2">
-                                <a class="btn btn-outline-success btn-sm"
-                                href=""
-                                role="button"><i class="fas fa-eye"></i>&nbsp;
-                                Voir</a>
+                            <td class="inner" colspan="2">
+                                @if (!$course->payment()->exists())
+                                    <div class="space_element">
+                                        <form action="{{ route('etudiants.book') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="student_id" value="{{ $student->id }}">
+                                            <input type="hidden" name="formation" value="{{ $course->id }}">
+                                            
+                                      <button class="btn btn-outline-success btn-sm" type="submit"><i class="bx bxs-shopping-bag
+                                        "></i> Payer</button>
+                                        </form>
+                                    </div>
+                                @endif
 
                                 <button id="deleteAtt" class="btn btn-outline-danger btn-sm"
                                 data-course_id="{{ $course->id }}" 

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
+use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 
 class HomeController extends Controller
 {
@@ -51,7 +53,6 @@ class HomeController extends Controller
                 }
         }
         
-        
         $difference = ($totalCurrentPerCourse-$totalPreviousPerCourse)/100;
         
         return [
@@ -60,6 +61,23 @@ class HomeController extends Controller
         ];
     }
 
+    public function getAllHigherCoursesWithRevenue(){
+        $coursesArrayRevenue = [];
+        $coursesSorted = [];
+        $courses = Course::get()->sortBy(function($query){
+            return $query->students()->count() * $query->price;
+        })->take(8);
+
+        for($i=0;$i<count($courses); $i++){
+            array_push($coursesArrayRevenue,($courses[$i]->price * $courses[$i]->students()->count()).'MAD');
+            array_push($coursesSorted,$courses[$i]->title);
+        }
+
+        return [
+            'revenues' => $coursesArrayRevenue,
+            'courses'  => $coursesSorted,
+        ];
+    }
 
     public function getStudents(){
         $students = Student::all();
@@ -70,6 +88,22 @@ class HomeController extends Controller
     public function getCourses(){
         $courses = Course::all();
         return $courses;
+    }
+
+    public function chartRevenue(){
+        $revenues = $this->getAllHigherCoursesWithRevenue();
+        $courses = $this->getAllHigherCoursesWithRevenue();
+        // dd($revenues['revenues']);
+        $sortedArray = Arr::sort($revenues['revenues']);    
+        // dd(($sortedArray));
+
+        $chart = LarapexChart::barChart()
+        ->setTitle('Revenue Par Formation')
+        ->setSubtitle('Les 5 Meilleurs Formations en terme de rentabilitée')
+        ->addData('Revenue', $revenues['revenues'])      
+        ->setXAxis($revenues['courses']);
+
+        return $chart;
     }
 
     public function highRevenueCourse(){
@@ -89,14 +123,17 @@ class HomeController extends Controller
         ];
     }
 
+    
+
     public function root()
     {
         return view('index',
         [
-          'course'    => $this->revenueTotalPerYear(),
-          'students'  => $this->getStudents(),
-          'courses'   => $this->getCourses(),
-          'high'      => $this->highRevenueCourse(),
+          'course'        => $this->revenueTotalPerYear(),
+          'students'      => $this->getStudents(),
+          'courses'       => $this->getCourses(),
+          'high'          => $this->highRevenueCourse(),
+          'chart'         => $this->chartRevenue(),
         ]);
     }
 

@@ -34,8 +34,8 @@ Formations
                         </span>
                     </div>
                     <div class="media-body overflow-hidden">
-                        <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $course->title }}</a></h5>
-                        <p class="text-muted mb-4">Prix Total HT: {{ $course->students()->count() * $course->price }} MAD</p>
+                        <h5 class="text-truncate font-size-15"><a href="{{ route('formations.edit',['id' => $course->id]) }}" class="text-dark">{{ $course->title }}</a></h5>
+                        <p class="text-muted mb-4">Revenue Total HT: {{ $course->students()->count() * $course->price }} MAD</p>
                         <p>Nombre Limit: {{ $course->student_limit }} - reste {{ $course->student_limit-$course->students()->count()  }} places</p>
                         <div class="avatar-group">
                             @foreach ($course->students()->take(6)->get() as $student)

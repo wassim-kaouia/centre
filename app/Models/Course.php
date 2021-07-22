@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use App\Models\Payment;
 use App\Models\Student;
 use App\Models\Category;
 use App\Models\Instructor;
@@ -29,6 +30,10 @@ class Course extends Model
     
     public function instructor(){
         return $this->belongsTo(Instructor::class);
+    }
+
+    public function payment(){
+        return $this->hasOne(Payment::class);
     }
 
     

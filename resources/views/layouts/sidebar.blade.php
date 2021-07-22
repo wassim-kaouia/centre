@@ -75,7 +75,55 @@
                         <span key="t-dashboards">Categories</span>
                     </a>
                 </li>
+                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-shopping-bag"></i>
+                        <span>Paiements</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('paiements.index') }}">Transactions</a></li>
+                        <li><a href="{{ route('paiements.paid') }}">Effectué</a></li>
+                        <li><a href="{{ route('paiements.avance') }}">Avec Avance</a></li>
+                    </ul>
+                </li>
 
+                <li>
+                    <a href="{{ route('tags.index') }}" class="waves-effect">
+                        <i class="bx bx-home-circle"></i>
+                        <span key="t-dashboards">Séries</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-shopping-bag"></i>
+                        <span>Factures</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('invoices.index') }}">Liste des factures</a></li>
+                        <li><a href="{{ route('formations.pending') }}">Reçus de Paiements <span class="badge rounded-pill bg-danger float-end">{{ $pending->count()>0 ? $pending->count() : 0 }}</span></a></li>
+                        <li><a href="{{ route('formations.pending') }}">Reçus d'avances <span class="badge rounded-pill bg-danger float-end">{{ $pending->count()>0 ? $pending->count() : 0 }}</span></a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{{ route('tags.index') }}" class="waves-effect">
+                        <i class="bx bx-home-circle"></i>
+                        <span key="t-dashboards">Promotions</span>
+                    </a>
+                </li>
+                     
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-shopping-bag"></i>
+                        <span>Gestion general</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('fees.index') }}">Les frais</a></li>
+                        <li><a href="{{ route('formations.pending') }}">Liste des reçus <span class="badge rounded-pill bg-danger float-end">{{ $pending->count()>0 ? $pending->count() : 0 }}</span></a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

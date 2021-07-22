@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class CourseController extends Controller
 {
@@ -37,10 +38,86 @@ class CourseController extends Controller
         ]);
     }
 
-    
+    public function edit(Request $request , $id){
+
+        $course = Course::findOrFail($id);
+        $instructors = Instructor::all();
+
+        return view('courses.edit',[
+            'course'       => $course,
+            'instructors'  => $instructors,
+        ]);
+    }
+
+    public function update(Request $request){
+        // dd($request->all());
+        $request->validate([
+            'title'        => 'required|min:4|max:100',
+            'description'  => 'required',
+            'start'        => 'required',
+            'end'          => 'required',
+            'thumbnail'    => 'mimes:png,jpg,jpeg',
+            'price'        => 'required|numeric',
+            'langue'       => 'string',
+            'what_learn'   => 'required',
+            'difficulty'   => 'numeric',
+            'limit'        => 'numeric',
+            'pourcentage'  => 'required|numeric',
+        ],[
+            'title.required'        => 'Le titre est requis',
+            'description.required'  => 'La description est requise',
+            'start.required'        => 'La date de debut est requise',
+            'end.required'          => 'La date de fin est requise',
+            'thumbnail.required'    => 'La Thumbnail est requise',
+            'thumbnail.mimes'       => 'La Thumbnail peut comprendre que : PNG,JPG,JPEG',
+            'price.required'        => 'Le prix est requis',
+            'what_learn.required'   => 'Le contenue de formation est requis', 
+            'limit.numeric'         => 'Le nombre doit etre entier',          
+        ]);
+
+        $course = Course::findOrFail($request->course_id);
+        
+        $course->title        = Str::ucfirst($request->title);
+        $course->subtitle     = $request->subtitle === null ? '' : $request->subtitle;
+        $course->description  = Str::ucfirst($request->description);
+        $course->start_date   = date('Y-m-d', strtotime($request->start_date)); 
+        $course->end_date     = date('Y-m-d', strtotime($request->end_date));
+        $course->price        = $request->price;
+        $course->isDiscounted = $request->discountable === 'on' ? true : false;
+        $course->langue       = Str::lower($request->langue);
+        $course->what_to_learn= $request->what_learn;
+        $course->difficulty   = $request->difficulty;
+        $course->category_id  = $request->category;
+        $course->pourcentage_instructor  = $request->pourcentage;
+        $course->student_limit= (int)$request->limit;
+        $course->isCertified  = $request->is_certified === 'on' ? true : false;
+        $course->discount     = $request->discountable === 'on' ? $request->discount : 0;
+
+        
+        $thumbnail_path = public_path($course->thumbnail);
+        if (request()->has('thumbnail')) {    
+            //delete image from application folder 
+            if(File::exists($thumbnail_path)){
+                File::delete($thumbnail_path);
+            }
+
+            $thumbnail     = request()->file('thumbnail');
+            $thumbnailName = time() . '.' . $thumbnail->getClientOriginalExtension();
+            $thumbnailPath = public_path('/courses/thumbnails/');
+            $thumbnail->move($thumbnailPath, $thumbnailName);
+            //save in DB
+            $course->thumbnail = "/courses/thumbnails/" . $thumbnailName;
+            Toastr::success('Image Uploadé avec succée !');
+        }
+
+        $course->save();
+        Toastr::success('Formation modifié avec succée !');
+
+        return redirect()->back();
+
+    }
 
     public function store(Request $request){
-        // dd($request->all());
         $request->validate([
             'title'        => 'required|min:4|max:100',
             'description'  => 'required',
@@ -52,6 +129,7 @@ class CourseController extends Controller
             'what_learn'   => 'required',
             'difficulty'   => 'numeric',
             'limit'        => 'numeric',
+            'pourcentage'  => 'required|numeric',
         ],[
             'title.required'        => 'Le titre est requis',
             'description.required'  => 'La description est requise',
@@ -61,7 +139,8 @@ class CourseController extends Controller
             'thumbnail.mimes'       => 'La Thumbnail peut comprendre que : PNG,JPG,JPEG',
             'price.required'        => 'Le prix est requis',
             'what_learn.required'   => 'Le contenue de formation est requis', 
-            'limit.numeric'         => 'Le nombre doit etre entier',          
+            'limit.numeric'         => 'Le nombre doit etre entier',   
+            'pourcentage.required'  => 'le pourcentage % est requis' ,      
         ]);
         
         $course = new Course();
@@ -77,7 +156,8 @@ class CourseController extends Controller
         $course->what_to_learn= $request->what_learn;
         $course->difficulty   = $request->difficulty;
         $course->category_id  = $request->category;
-        $curse->student_limit = $request->limit;
+        $course->student_limit= (int)$request->limit;
+        $course->pourcentage_instructor  = $request->pourcentage;
         $course->isCertified  = $request->is_certified === 'on' ? true : false;
         $course->discount     = $request->discountable === 'on' ? $request->discount : 0;
         

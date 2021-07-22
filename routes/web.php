@@ -1,13 +1,18 @@
 <?php
 
+use App\Models\Payment;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\FeesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UploadAttachment;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AttachmentController;
@@ -33,6 +38,24 @@ Route::get('/testpage',function(){
 
 Route::get('/testcourse',function(){
     return view('courses.index');
+});
+
+
+Route::get('/getpdf',function(){
+    // set_time_limit(300);
+    $data = Payment::find(1);
+
+    view()->share('payment',$data);
+    $pdf = PDF::loadview('invoices.model',$data)->setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+    return $pdf->stream('wassim.pdf');
+});
+
+Route::get('testpagehtml',function(){
+    $data = Payment::find(1);
+
+    view()->share('payment',$data);
+    return view('invoices.modele_invoice');
 });
 
 
@@ -63,6 +86,7 @@ Route::get('/etudiant/create',[StudentController::class,'create'])->name('etudia
 Route::get('/etudiant/edit/{id}',[StudentController::class,'edit'])->name('etudiants.edit');
 Route::post('/etudiant',[StudentController::class,'store'])->name('etudiants.store');
 Route::get('/etudiant/show/{id}',[StudentController::class,'show'])->name('etudiants.show');
+Route::get('/etudiant/perId/{id}',[StudentController::class,'getStudent'])->name('etudiant.get');
 Route::put('/etudiant/{id}',[StudentController::class,'update'])->name('etudiants.update');
 Route::delete('/etudiant/delete',[StudentController::class,'destroy'])->name('etudiants.destroy');
 Route::post('/etudiant/course',[StudentController::class,'bookCourse'])->name('etudiants.book');
@@ -89,10 +113,34 @@ Route::delete('/attachment_destroy/formateur',[InstructorController::class,'dest
 Route::get('/formations',[CourseController::class,'index'])->name('formations.index');
 Route::get('/formation/create',[CourseController::class,'create'])->name('formations.create');
 Route::post('/formation/store',[CourseController::class,'store'])->name('formations.store');
+Route::post('/formation/edit/{id}',[CourseController::class,'edit'])->name('formations.edit');
+Route::put('/formation/update',[CourseController::class,'update'])->name('formations.update');
 Route::get('/formation/{id}/edit',[CourseController::class,'edit'])->name('formations.edit');
 Route::delete('/formation/{id}/delete',[CourseController::class,'destroy'])->name('formations.destroy');
 Route::get('/formation/non-approuver',[CourseController::class,'pendingCourses'])->name('formations.pending');
 Route::get('/formation/approuver/{id}/{approuver}',[CourseController::class,'approuveCourse'])->name('formations.approuved');
+
+//payment
+Route::get('/paiements',[PaymentController::class,'index'])->name('paiements.index');
+Route::get('/paiements/paid',[PaymentController::class,'paid'])->name('paiements.paid');
+Route::get('/paiements/avance',[PaymentController::class,'withavance'])->name('paiements.avance');
+Route::get('/paiement/create/{student}',[PaymentController::class,'create'])->name('paiements.create');
+Route::get('/paiements/show/{id}',[PaymentController::class,'show'])->name('paiements.show');
+Route::post('/paiements',[PaymentController::class,'store'])->name('paiements.store');
+Route::put('/paiement/{id}',[PaymentController::class,'update'])->name('paiements.update');
+Route::delete('/paiement/{id}',[PaymentController::class,'destroy'])->name('paiements.destroy');
+
+
+//invocie
+Route::get('invoices',[InvoiceController::class,'index'])->name('invoices.index');
+Route::get('invoice/show/{id}',[InvoiceController::class,'show'])->name('invoices.show');
+Route::delete('invoice/delete',[InvoiceController::class,'destroy'])->name('invoices.destroy');
+
+//fees
+Route::get('fees/index',[FeesController::class,'create'])->name('fees.index');
+Route::put('fees/update',[FeesController::class,'update'])->name('fees.update');
+
+
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 

@@ -26,6 +26,18 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    public function render($request, Throwable $exception)
+{
+    // if ($exception instanceof CustomException) {
+    //     return response()->view('errors.custom', [], 500);
+    // }
+    if($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException){
+        return redirect('/');
+    }
+
+    return parent::render($request, $exception);
+}
+
     /**
      * Register the exception handling callbacks for the application.
      *
@@ -34,7 +46,7 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            
         });
     }
 }

@@ -26,6 +26,8 @@ Tableau de Board
         </div>
     </div>
 
+    {{-- j'ajouterai meilleur formateurs + meilleur formation en terme de feedback + taux de reussite --}}
+    
     <div class="col-lg-3">
         <div class="card">
             <div class="card-body">
@@ -90,31 +92,45 @@ Tableau de Board
     </div>
 </div>
 
-<div class="row">
+<div class="row p-2">
     <div class="col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="avatar-xs me-3">
-                        <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                            <i class="bx bx-copy-alt"></i>
-                        </span>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar-xs me-3">
+                            <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                <i class="bx bx-copy-alt"></i>
+                            </span>
+                        </div>
+                        <h5 class="font-size-14 mb-0">Haute Formation</h5>
                     </div>
-                    <h5 class="font-size-14 mb-0">Haute Formation</h5>
-                </div>
-                <div class="text-muted mt-4">
-                    <h4>{{ $high['revenue'].' MAD' }} <i class="{{ $high['revenue'] > 0 ? 'mdi mdi-chevron-up ms-1 text-success' : 'mdi mdi-chevron-down ms-1 text-danger'}}"></i></h4>
-                    <div class="d-flex">
-                        <span class="badge badge-soft-success font-size-12"> Titre: {{ $high['course']->title }} </span> 
+                    <div class="text-muted mt-4">
+                        <h4>{{ $high['revenue'].' MAD' }} <i class="{{ $high['revenue'] > 0 ? 'mdi mdi-chevron-up ms-1 text-success' : 'mdi mdi-chevron-down ms-1 text-danger'}}"></i></h4>
+                        <div class="d-flex">
+                            <span class="badge badge-soft-success font-size-12"> {{ $high['course'] ? 'Titre:'.$high['course']->title : 'No title available'}} </span> 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    
     </div>
+
+    <div class="col-lg-9">
+        <div class="card">
+            <div class="card-body">
+                {!! $chart->container() !!}
+            </div>
+        </div>
+    </div> 
+   
 </div>
 
 @endsection
 
 @section('script')
+<script src="{{ LarapexChart::cdn() }}"></script>
+{{ $chart->script() }}
 
 @endsection

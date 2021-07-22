@@ -57,8 +57,9 @@ Liste Des Etudiants
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a class="dropdown-item" href="{{ route('etudiants.edit',['id' => $student->id]) }}">Modifier</a>
+                                        <a class="dropdown-item" href="{{ route('paiements.show',['id' => $student->id]) }}">Paiements</a>
                                         <a class="dropdown-item" href="#">Factures</a>
-                                        <a class="dropdown-item" href="#">Formations</a>
+                                        <a class="dropdown-item" href="{{ route('paiements.destroy',['id' => $student->id]) }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

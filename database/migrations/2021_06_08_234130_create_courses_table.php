@@ -27,6 +27,7 @@ class CreateCoursesTable extends Migration
             $table->string('difficulty')->nullable();
             $table->foreignId('category_id')->constrained();
             $table->foreignId('instructor_id')->constrained()->nullable();
+            $table->double('pourcentage_instructor')->default(0.0);
             $table->boolean('status');
             $table->timestamps();
         });

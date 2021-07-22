@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Payment;
 use App\Models\Student;
 use App\Mail\StudentMail;
 use App\Models\Sattachment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\PaymentDetail;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
@@ -75,7 +77,7 @@ class StudentController extends Controller
 
         return redirect()->back();
     }
-
+    
     public function show(Request $request,$id){
         $student = Student::findOrFail($id);
 
@@ -84,48 +86,59 @@ class StudentController extends Controller
 
     public function edit(Request $request,$id){
         $student = Student::findOrFail($id);
-        $formations = Course::all();
+        $formations = Course::where('status','=',true)->get();
+        
         return view('students.edit',[
             'student'    => $student,
             'formations' => $formations,
         ]);
     }
-
+    
     public function bookCourse(Request $request){
-        // dd($request->all());
+        // dd($request->all());         
         $student_id   = $request->student_id;
         $course_id    = $request->formation;
 
         $student   = Student::find($student_id);
         $course    = Course::find($course_id);
 
+        $payment = Payment::where('course_id','=',$course->id)->where('student_id','=',$student->id)->exists();
+        // dd($payment);
         $exists = $student->courses->contains($course->id);
-        if($exists){
+        if($exists && $payment){
            Toastr::error("L'étudiant dèja Inscris Dans Cette Formation");
            return redirect()->back();
         }else{
-           $student->courses()->syncWithoutDetaching([$course->id]);
-           Toastr::success("L'étudiant est inscris avec succée");
-           return redirect()->back();
+           //$student->courses()->syncWithoutDetaching([$course->id]);
+           Toastr::success("Vous passez à la phase de paiement");
+           return view('payments.create',[
+               'student' => $student,
+               'course'  => $course,
+            ]);
         }
-        
+    }
+
+    public function getStudent(Request $request,$id){
+        $students = Student::findOrFail($id);
+
+        $courses = $students->courses;
+        return $courses;
     }
 
     public function deleteBookedCourse(Request $request){
-        // dd($request->all());
         $course_id   = $request->course_id;
         $student_id = $request->student_id;
 
         $student   = Student::find($student_id);
         $course = Course::find($course_id);
-
+        
         $student->courses()->detach([$course->id]);
-
+        PaymentDetail::where('payment_id','=',$course->payment->id)->delete();
+        $course->payment->delete();
         Toastr::success("La Formation est supprimée avec succée");
         return redirect()->back();
-
     }
-
+    
     public function update(Request $request,$id){
 
         $student = Student::findOrFail($id);

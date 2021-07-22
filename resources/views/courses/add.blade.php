@@ -144,6 +144,13 @@
                             </select>
                         </div>
                     </div>
+                    
+                    <div class="row mb-4">
+                        <label class="col-form-check-label col-lg-2" for="isCertified">Pourcentage Formateur<span class="text-danger">(*) </span></label>
+                        <div class="col-lg-10">     
+                            <input type="text" class="form-control" name="pourcentage" id="pourcentage">
+                        </div>
+                    </div>
 
                     <div class="row mb-4">
                         <label class="col-form-check-label col-lg-2" for="isCertified">Contenue de Formation <span class="text-danger">(*) </span></label>
