@@ -19,24 +19,28 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $pending = Course::where('status','=',false)->get();
-        view()->share('pending', $pending);
+        if ( !app()->runningInConsole() ){
+            // it's not console.
+            $pending = Course::where('status','=',false)->get();
+            view()->share('pending', $pending);
 
-        $categories = Category::all();
-        view()->share('categories', $categories);
+            $categories = Category::all();
+            view()->share('categories', $categories);
 
-        $paymentspaid = Payment::where('status','=','paid')->get();
-        view()->share('payments_paid',$paymentspaid);
+            $paymentspaid = Payment::where('status','=','paid')->get();
+            view()->share('payments_paid',$paymentspaid);
 
-        $paymentsavance = Payment::where('status','=','avance')->get();
-        view()->share('payments_avance',$paymentsavance);
+            $paymentsavance = Payment::where('status','=','avance')->get();
+            view()->share('payments_avance',$paymentsavance);
 
-        $students = Student::all();
-        view()->share('students', $students);
+            $students = Student::all();
+            view()->share('students', $students);
 
-        $feeelement = Fees::first()->get();
-        $fee = Fees::findOrFail($feeelement[0]->id);
-        view()->share('fees',$fee);
+            $feeelement = Fees::first()->get();
+            $fee = Fees::findOrFail($feeelement[0]->id);
+            view()->share('fees',$fee);
+        }
 
+        
     }
 }
