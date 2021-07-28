@@ -28,6 +28,13 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('calendar.index') }}" class="waves-effect">
+                        <i class="bx bx-home-circle"></i>
+                        <span key="t-dashboards">Calendrier</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-store"></i>
                         <span>Etudiants</span>
@@ -88,12 +95,12 @@
                     </ul>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ route('tags.index') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">Séries</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -102,13 +109,13 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('invoices.index') }}">Liste des factures</a></li>
-                        <li><a href="{{ route('formations.pending') }}">Reçus de Paiements <span class="badge rounded-pill bg-danger float-end">{{ $pending->count()>0 ? $pending->count() : 0 }}</span></a></li>
-                        <li><a href="{{ route('formations.pending') }}">Reçus d'avances <span class="badge rounded-pill bg-danger float-end">{{ $pending->count()>0 ? $pending->count() : 0 }}</span></a></li>
+                        <li><a href="{{ route('invoices.receipt') }}">Reçus de Paiements <span class="badge rounded-pill bg-danger float-end">{{ $payments_paid->count()>0 ? $payments_paid->count() : 0 }}</span></a></li>
+                        <li><a href="{{ route('invoices.avance') }}">Reçus d'avances <span class="badge rounded-pill bg-danger float-end">{{ $payments_avance->count()>0 ? $payments_avance->count() : 0 }}</span></a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="{{ route('tags.index') }}" class="waves-effect">
+                    <a href="{{ route('sms.index') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">Promotions</span>
                     </a>

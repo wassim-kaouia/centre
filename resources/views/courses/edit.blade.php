@@ -67,8 +67,8 @@ Modifier Une Formation
                         <label class="col-form-label col-lg-2">Dates <span class="text-danger">(*)</span></label>
                         <div class="col-lg-10">
                             <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
-                                <input autocomplete="off" type="text" class="form-control" value="{{ $course->start_date }}" name="start" />
-                                <input autocomplete="off" type="text" class="form-control" value="{{ $course->end_date }}" name="end" />
+                                <input autocomplete="off" type="text" class="form-control" value="{{ $course->start }}" name="start" />
+                                <input autocomplete="off" type="text" class="form-control" value="{{ $course->end }}" name="end" />
                             </div>
                         </div>
                     </div>
@@ -143,6 +143,13 @@ Modifier Une Formation
                                   <option value="0"><p>Aucun formateur n'est disponible<p></option>
                                @endforelse
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <label class="col-form-check-label col-lg-2" for="isCertified">Pourcentage Formateur<span class="text-danger">(*) </span></label>
+                        <div class="col-lg-10">     
+                            <input type="text" class="form-control" name="pourcentage" id="pourcentage" value="{{ $course->pourcentage_instructor }}">
                         </div>
                     </div>
 

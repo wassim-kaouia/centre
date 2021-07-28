@@ -22,6 +22,8 @@ class Payment extends Model
         return $this->belongsTo(Course::class);
     }
 
+    
+
     public function detailsPayment(){
         return $this->hasMany(PaymentDetail::class);
     }
@@ -57,6 +59,8 @@ class Payment extends Model
     public function getTotal(){
         return $this->getHT() + $this->getTVA() + $this->getPourcentageInstructor() + $this->getFees()->dossier + $this->getFees()->inscription;
     }
+
+   
 
     
 }

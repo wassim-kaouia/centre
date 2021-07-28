@@ -14,8 +14,8 @@ class CreateCoursesTable extends Migration
             $table->string('subtitle')->nullable();
             $table->string('thumbnail');
             $table->text('description');
-            $table->date('start_date');
-            $table->date('end_date');// atravers les date je peux conclur la forme '2 weeks' pour la duree de formation
+            $table->dateTime('start');
+            $table->dateTime('end');// atravers les date je peux conclur la forme '2 weeks' pour la duree de formation
             $table->double('price')->default(0);
             $table->string('discount')->nullable();
             $table->boolean('isDiscounted')->default(false);
@@ -29,6 +29,7 @@ class CreateCoursesTable extends Migration
             $table->foreignId('instructor_id')->constrained()->nullable();
             $table->double('pourcentage_instructor')->default(0.0);
             $table->boolean('status');
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }

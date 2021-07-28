@@ -18,7 +18,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "laraveldaily/laravel-invoices": "^2.0"
+        "twilio/sdk": "^6.27"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

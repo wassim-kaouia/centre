@@ -80,8 +80,8 @@ class CourseController extends Controller
         $course->title        = Str::ucfirst($request->title);
         $course->subtitle     = $request->subtitle === null ? '' : $request->subtitle;
         $course->description  = Str::ucfirst($request->description);
-        $course->start_date   = date('Y-m-d', strtotime($request->start_date)); 
-        $course->end_date     = date('Y-m-d', strtotime($request->end_date));
+        $course->start        = date('Y-m-d', strtotime($request->start)); 
+        $course->end          = date('Y-m-d', strtotime($request->end));
         $course->price        = $request->price;
         $course->isDiscounted = $request->discountable === 'on' ? true : false;
         $course->langue       = Str::lower($request->langue);
@@ -92,6 +92,7 @@ class CourseController extends Controller
         $course->student_limit= (int)$request->limit;
         $course->isCertified  = $request->is_certified === 'on' ? true : false;
         $course->discount     = $request->discountable === 'on' ? $request->discount : 0;
+        
 
         
         $thumbnail_path = public_path($course->thumbnail);
@@ -148,8 +149,8 @@ class CourseController extends Controller
         $course->title        = Str::ucfirst($request->title);
         $course->subtitle     = $request->subtitle === null ? '' : $request->subtitle;
         $course->description  = Str::ucfirst($request->description);
-        $course->start_date   = date('Y-m-d', strtotime($request->start_date)); 
-        $course->end_date     = date('Y-m-d', strtotime($request->end_date));
+        $course->start        = date('Y-m-d', strtotime($request->start)); 
+        $course->end          = date('Y-m-d', strtotime($request->end));
         $course->price        = $request->price;
         $course->isDiscounted = $request->discountable === 'on' ? true : false;
         $course->langue       = Str::lower($request->langue);
@@ -160,6 +161,7 @@ class CourseController extends Controller
         $course->pourcentage_instructor  = $request->pourcentage;
         $course->isCertified  = $request->is_certified === 'on' ? true : false;
         $course->discount     = $request->discountable === 'on' ? $request->discount : 0;
+        $course->color        = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
         
         if(Auth::user()->role->name === 'Admin'){
             $course->status = true;

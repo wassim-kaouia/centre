@@ -93,6 +93,18 @@
     .invoice-box.rtl table tr td:nth-child(2) {
         text-align: left;
     }
+
+    .button-print{
+		position: absolute;
+		bottom: 5px;
+		padding-bottom: 10px;
+	}
+
+	@media print {
+ 	 #printPageButton {
+   		 display: none;
+  }
+}
 </style>
 @endsection
 
@@ -104,6 +116,9 @@ Les factures
 <div class="row">
     <div class="col-lg-12">  
               <div class="invoice-box">
+                <div class="button-print">
+                    <button id="printPageButton"  class="btn btn-success" onClick="window.print();">Imprimer</button>
+                </div>
                     <table cellpadding="0" cellspacing="0">
                         <tr class="top">
                             <td colspan="2">

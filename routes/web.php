@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Payment;
+use App\Models\PaymentDetail;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,12 +12,15 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UploadAttachment;
+use App\Http\Controllers\BulkSmsController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\PaymentDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,18 +134,34 @@ Route::post('/paiements',[PaymentController::class,'store'])->name('paiements.st
 Route::put('/paiement/{id}',[PaymentController::class,'update'])->name('paiements.update');
 Route::delete('/paiement/{id}',[PaymentController::class,'destroy'])->name('paiements.destroy');
 
+//payment detail
+Route::get('/payemnts_details/{id}',[PaymentDetailController::class,'getHistoriques'])->name('historique.payments');
+Route::get('/payment_details/edit/{id}',[PaymentDetailController::class,'edit'])->name('historique.edit');
+Route::post('/payment_details/regularisation',[PaymentDetailController::class,'regularisation'])->name('historique.update');
 //invocie
 Route::get('invoices',[InvoiceController::class,'index'])->name('invoices.index');
-Route::get('receipts/complet',[InvoiceController::class,''])->name('invoices.receipt');
-Route::get('receipts/avance',[InvoiceController::class,''])->name('invoices.avance');
+Route::get('receipts/complet',[InvoiceController::class,'getPaidReceipts'])->name('invoices.receipt');
+Route::get('receipts/avance',[InvoiceController::class,'getAvanceReceipts'])->name('invoices.avance');
 Route::get('invoice/show/{id}',[InvoiceController::class,'show_invoice'])->name('invoices.show');
-Route::get('receipt/show/{id}',[InvoiceController::class,'show_receipt'])->name('receipts.show');
+Route::get('receipt/show/{id}',[InvoiceController::class,'show_receipt_avance'])->name('receipts.show');
+Route::get('receipt/paiement/show/{id}',[InvoiceController::class,'show_paid'])->name('paiements.show');
 Route::delete('invoice/delete',[InvoiceController::class,'destroy_invoice'])->name('invoices.destroy');
 Route::delete('receipt/delete',[InvoiceController::class,'destroy_receipt'])->name('receipts.destroy');
 
 //fees
 Route::get('fees/index',[FeesController::class,'create'])->name('fees.index');
 Route::put('fees/update',[FeesController::class,'update'])->name('fees.update');
+
+//calendar
+Route::get('calendrier/courses', [CalendarController::class, 'index'])->name('calendar.index');
+
+//promotions
+Route::get('smsbulk/index',[BulkSmsController::class,'index'])->name('sms.index');
+Route::post('smsbulk/send/compaign',[BulkSmsController::class,'sndSms'])->name('sms.send');
+
+Route::view('/bulksms', 'testsms');
+Route::get('/getNumbers/{id}', [BulkSmsController::class,'dataToViewOnRequest'])->name('sms.numbers');
+Route::post('/sendSMS', [BulkSmsController::class,'sendSMS'])->name('sms.send');;
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
