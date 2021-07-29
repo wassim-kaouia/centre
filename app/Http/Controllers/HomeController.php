@@ -18,7 +18,7 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 class HomeController extends Controller
 {
    
-    
+   
    
     public function index(Request $request)
     {

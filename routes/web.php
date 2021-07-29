@@ -37,8 +37,8 @@ Auth::routes();
 
 
 Route::get('/',[HomeController::class,'main'])->name('main');
-Route::get('/login_register',[HomeController::class,'login_register'])->name('login.register');
-Route::post('/nouveau/etudiant',[HomeController::class,'store_user_front'])->name('etudiant.register');
+Route::get('/login_register',[HomeController::class,'login_register'])->name('login.register')->middleware('islogged');
+Route::post('/nouveau/etudiant',[HomeController::class,'store_user_front'])->name('etudiant.register')->middleware('islogged');;
 
 
 Route::middleware(['auth','rolechecker'])->group(function () {
