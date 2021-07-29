@@ -22,21 +22,21 @@
 
                 <li>
                     <a href="{{ route('users.index') }}" class="waves-effect">
-                        <i class="bx bx-home-circle"></i>
+                        <i class="bx bx-user"></i>
                         <span key="t-dashboards">Utilisateurs</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('calendar.index') }}" class="waves-effect">
-                        <i class="bx bx-home-circle"></i>
+                        <i class="bx bx-calendar"></i>
                         <span key="t-dashboards">Calendrier</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-store"></i>
+                        <i class="bx bxs-school"></i>
                         <span>Etudiants</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -47,7 +47,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-store"></i>
+                        <i class="bx bxs-user-badge"></i>
                         <span>Formateurs</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -59,7 +59,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-store"></i>
+                        <i class="bx bxs-book-open"></i>
                         <span>Formations</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -71,14 +71,14 @@
 
                 <li>
                     <a href="{{ route('tags.index') }}" class="waves-effect">
-                        <i class="bx bx-home-circle"></i>
+                        <i class="bx bxs-bookmark-star"></i>
                         <span key="t-dashboards">Tags</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('categories.index') }}" class="waves-effect">
-                        <i class="bx bx-home-circle"></i>
+                        <i class="bx bx-tag"></i>
                         <span key="t-dashboards">Categories</span>
                     </a>
                 </li>
@@ -104,7 +104,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bxs-shopping-bag"></i>
+                        <i class="bx bx-receipt"></i>
                         <span>Factures</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -116,14 +116,14 @@
 
                 <li>
                     <a href="{{ route('sms.index') }}" class="waves-effect">
-                        <i class="bx bx-home-circle"></i>
+                        <i class="bx bx-user-voice"></i>
                         <span key="t-dashboards">Promotions</span>
                     </a>
                 </li>
                      
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bxs-shopping-bag"></i>
+                        <i class="bx bx-plug"></i>
                         <span>Gestion general</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">

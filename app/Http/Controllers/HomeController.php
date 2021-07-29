@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,7 @@ use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 class HomeController extends Controller
 {
    
-    public function __construct()
-    {
-        $this->middleware('auth');
-
-        
-    }
-
+    
    
     public function index(Request $request)
     {
@@ -31,6 +26,51 @@ class HomeController extends Controller
             return view($request->path());
         }
         return abort(404);
+    }
+
+    public function main(){
+        return view('front.index');
+    }
+
+    public function login_register(){
+
+        return view('front.login_register');
+    }
+
+    public function store_user_front(Request $request){
+        // dd($request->all());
+        $request->validate([
+            'full_name' => 'required|min:10|max:20',
+            'email'     => 'required|email',
+            'password'  => 'required|confirmed',
+        ],[
+            'full_name.required'     =>  'Le Nom Complet est requis',
+            'email.required'         =>  "L'email est requis",
+            'password.required'      =>  'Le Password est requis',  
+        ]);
+
+        $user = new User();
+        $user->full_name = Str::lower($request->full_name);
+        $user->email     = Str::lower($request->email);        
+        $user->password  = bcrypt($request->password);
+        $user->role_id   = 4;
+        
+        //upload avatar - profile photo
+        if (request()->has('avatar')) {            
+            $avatar = request()->file('avatar');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatarPath = public_path('/images/utilisateurs/');
+            $avatar->move($avatarPath, $avatarName);
+            $user->avatar = "/images/utilisateurs/" . $avatarName;
+        }else{
+            $user->avatar ='/profile_default.jpeg';
+        }
+
+
+        $user->save();
+
+        session()->flash('message','Votre compte est bien crée ! ');
+        return redirect()->back();
     }
 
 
@@ -126,7 +166,7 @@ class HomeController extends Controller
     
 
     public function root()
-    {
+    {   
         return view('index',
         [
           'course'        => $this->revenueTotalPerYear(),

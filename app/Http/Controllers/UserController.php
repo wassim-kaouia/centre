@@ -80,11 +80,14 @@ class UserController extends Controller
             $user->avatar ='/profile_default.jpeg';
         }
 
+
         $user->save();
 
         Toastr::success('Utilisateur'.' '.$user->full_name.' est crée avec succée !');
         return redirect()->back();
     }
+
+   
 
     public function profile_edit(Request $request){
 

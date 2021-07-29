@@ -16,7 +16,6 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-
     public function boot()
     {
         if ( !app()->runningInConsole() ){
@@ -40,7 +39,5 @@ class AppServiceProvider extends ServiceProvider
             $fee = Fees::findOrFail($feeelement[0]->id);
             view()->share('fees',$fee);
         }
-
-        
     }
 }
