@@ -88,12 +88,24 @@
                             
                         </li>
 
+                        @auth
+                        @if (Auth::check() && (Auth::user()->role->role == 'Admin' ||  Auth::user()->role->role == 'Secretariat'))
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route('root') }}" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administration
+                            </a>
+                            
+                        </li>   
+                        @else
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Mon espace
                             </a>
                             
-                        </li>
+                        </li>                        
+                        @endif
+                        @endauth
                         
                         <li class="nav-item ">
                             <a href="contact.html" class="nav-link">
