@@ -159,7 +159,7 @@ Page de formation
                                   <input type="hidden" name="student" id="student" value="{{Auth::user()->student->id}}">
                                   <input type="hidden" name="course" id="course" value="{{ $course->id }}">
                                   {{-- <input type="hidden" name="amount" id="amount" value="130"> --}}
-                                <button type="submit" {{ $course->payment->student_id == Auth::user()->student->id ? 'disabled' : '' }} class="btn btn-main btn-block">S'inscrire</button>
+                                <button type="submit" {{ $course->payment()->exists() && $course->payment->student_id == Auth::user()->student->id ? 'disabled' : '' }} class="btn btn-main btn-block">S'inscrire</button>
                                 @else
                                 
                                 @endif
