@@ -43,6 +43,9 @@ Paiements
                                @if ($payment->status === 'partie')
                                    <span class="badge badge-pill badge-soft-danger font-size-11">Paiement Partiel</span>
                                @endif
+                               @if ($payment->status === 'withoutavance')
+                               <span class="badge badge-pill badge-soft-danger font-size-11">Sans Avance</span>
+                               @endif
                                @if ($payment->status === 'canceled')
                                    <span class="badge badge-pill badge-soft-danger font-size-11">Annulé</span>
                                @endif
