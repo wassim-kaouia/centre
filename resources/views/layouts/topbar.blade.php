@@ -3,7 +3,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index" class="logo logo-dark">
+                <a href="{{ route('main') }}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ URL::asset ('/assets/images/logo.svg') }}" alt="" height="22">
                     </span>
@@ -90,9 +90,6 @@
                 </form>
             </div>
         </div>
-
-    
-        
     </div>
 </div>
 </header>

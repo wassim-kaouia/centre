@@ -23,7 +23,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PaymentDetailController;
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/',[HomeController::class,'main'])->name('main');
 Route::get('/login_register',[HomeController::class,'login_register'])->name('login.register')->middleware('islogged');
