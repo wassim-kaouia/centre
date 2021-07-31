@@ -155,12 +155,15 @@ Page de formation
                         <div class="course-price-wrapper">
                             <div class="course-price ml-3"><h4>Prix: <span>{{ $course->price }} MAD</span></h4></div>
                             <div class="buy-btn">
-                                @if (Auth::check())
+                                @if (Auth::check() && Auth::user()->student()->exists())
                                   <input type="hidden" name="student" id="student" value="{{Auth::user()->student->id}}">
                                   <input type="hidden" name="course" id="course" value="{{ $course->id }}">
+                                  {{-- <input type="hidden" name="amount" id="amount" value="130"> --}}
+                                <button type="submit" {{ $course->payment->student_id == Auth::user()->student->id ? 'disabled' : '' }} class="btn btn-main btn-block">S'inscrire</button>
+                                @else
+                                
                                 @endif
-                                 {{-- <input type="hidden" name="amount" id="amount" value="130"> --}}
-                                <button type="submit" {{ $course->payment()->exists() ? 'disabled' : '' }} class="btn btn-main btn-block">S'inscrire</button>
+                                 
                             </div>
                         </div>
                     </div>
