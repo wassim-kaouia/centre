@@ -19,6 +19,7 @@
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}">
+
 @endsection
 
 @section('title')
@@ -31,7 +32,99 @@ Page Principale
 
 {{-- content here --}}
 
+@if ($courses->count() > 0)
+    
+<section class="section-padding popular-course bg-grey">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <span class="subheading">Dèrnieres formations</span>
+                    <h3>Formations présentiels</h3>
+                </div>
+            </div>
 
+            <div class="col-lg-6">
+                <div class="course-btn text-lg-right"><a href="{{ route('show.courses') }}" class="btn btn-success"><i class="fas fa-book-reader mr-2"></i>Toutes les formations</a></div>
+            </div>
+        </div>
+
+        <div class="row">
+            @forelse ($courses as $course)
+            <div class="col-lg-4 col-md-6">
+                <div class="course-block">
+                    <div class="course-img">
+                        <img src="{{ $course->thumbnail }}" alt="" class="" width="100%" height="240px">
+                        <span class="course-label">{{ $course->isCertified == true ? 'Formation Certifiée' : 'Formation Non Certifiée' }}</span>
+                    </div>
+                    
+                    <div class="course-content">
+                        <div class="course-price ">{{ $course->price }} MAD</div>   
+                        
+                        <h4><a href="#">{{ $course->title }}</a></h4>    
+                        <div class="rating">
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <span>(5.00)</span>
+                        </div>
+                        <p>{{ $course->description }}</p>
+
+                        <div class="course-footer d-lg-flex align-items-center justify-content-between">
+                            <div class="course-meta">
+                                <span class="course-student"><i class="bi bi-group"></i>{{ $course->students->count() }}</span>
+                                <span class="course-duration"><i class="bi bi-badge3"></i>Max {{ $course->student_limit }} étudiants</span>
+                            </div> 
+                           
+                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id]) }}" class="btn btn-main-2 btn-small">Détails</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @empty
+                
+            @endforelse
+        </div>
+    </div>
+</section>
+@endif
+
+<section class="section-padding bg-grey team-2">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-heading center-heading">
+                    <span class="subheading">Top meilleurs formateurs</span>
+                    <h3>Nos formateurs profesionnaux</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach ($insctructors as $instructor)
+            <div class="col-lg-4 col-sm-6">
+                <div class="team-block">
+                    <div class="team-img">
+                        <img src="{{ $instructor->user->avatar }}" alt="" class="img-fluid">
+                    </div>
+                    <div class="team-info">
+                        <h4>{{ $instructor->user->full_name }}</h4>
+                        <p>Formateur</p>
+                    </div>
+                    <ul class="team-socials list-inline">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+@include('layouts_front.reviews')
 @include('layouts_front.newsletter')
 @endsection
 

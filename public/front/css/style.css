@@ -179,25 +179,25 @@ BUTTONS STYLE
 }
 
 .btn-main-2:hover {
-  background: #FF1949;
+  background: #96c221;
   color: #fff;
-  border-color: #FF1949;
+  border-color: #96c221;
 }
 
 .btn-tp {
   background: #fff;
-  color: #FF1949;
+  color: #96c221;
   border: 1px solid transparent;
 }
 
 .btn-tp:hover {
-  background: #FF1949;
+  background: #96c221;
   color: #fff;
-  border-color: #FF1949;
+  border-color: #96c221;
 }
 
 a {
-  color: #FF1949;
+  color: #96c221;
   outline: none;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
@@ -429,7 +429,7 @@ Header TopBar
 }
 
 .navbar-nav .nav-link:hover {
-  color: #FF1949;
+  color: #96c221;
 }
 
 .navbar-nav .nav-link i {
@@ -470,7 +470,7 @@ Header TopBar
 .dropdown-item:hover {
   color: #fff;
   text-decoration: none;
-  background-color: #FF1949;
+  background-color: #96c221;
 }
 
 .dropdown-toggle::after {
@@ -483,7 +483,7 @@ Header TopBar
   border: 0px;
   padding: 0px;
   position: absolute;
-  border-top: 2px solid #FF1949;
+  border-top: 2px solid #96c221;
   min-width: 220px;
 }
 
@@ -596,7 +596,7 @@ Header TopBar
 }
 
 .nav-link.active {
-  color: #FF1949;
+  color: #96c221;
 }
 
 .nav-tp {
@@ -621,7 +621,7 @@ Header TopBar
 .banner {
   padding: 130px 0px;
   padding-bottom: 180px;
-  background: url("../images/bg/video-bg.jpg");
+  background: url("../image-1.jpeg");
   background-size: cover;
   position: relative;
 }
@@ -664,7 +664,7 @@ Banner 2
 .banner-2 {
   padding-bottom: 220px;
   padding-top: 100px;
-  background: url("../images/banner/banner-4.jpg") center center no-repeat;
+  background: url("../image-1.jpeg") center center no-repeat;
   background-size: cover;
   position: relative;
 }
@@ -701,7 +701,7 @@ Banner 2
   left: 0px;
   width: 40px;
   height: 2px;
-  background: #FF1949;
+  background: #96c221;
   top: 0px;
   bottom: 0px;
   margin: auto 0px;
@@ -891,7 +891,7 @@ Banner 6
 }
 
 .primary-bg {
-  background: #FF1949;
+  background: #96c221;
 }
 
 /* ================
@@ -908,7 +908,7 @@ Features
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.04);
   margin: 0px 5px;
   border-radius: 5px;
-  border-top: 2px solid #FF1949;
+  border-top: 2px solid #96c221;
   display: flex;
   transition: .4s;
   margin-bottom: 20px;
@@ -924,7 +924,7 @@ Features
 }
 
 .feature-item:hover .feature-icon {
-  color: #FF1949;
+  color: #96c221;
 }
 
 .feature-icon {
@@ -2826,7 +2826,7 @@ Home Page 2
   display: inline-block;
   text-align: center;
   height: 50px;
-  background: #FF1949;
+  background: #385777;
   color: #fff;
   width: 50px;
   border-radius: 100%;
@@ -5111,9 +5111,9 @@ Single Blog Page
 }
 
 .single-tags a:hover {
-  background: #FF1949;
+  background: #96c221;
   color: #fff;
-  border-color: #FF1949;
+  border-color: #96c221;
 }
 
 .post-share a {

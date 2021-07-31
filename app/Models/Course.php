@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use App\Models\Review;
 use App\Models\Payment;
 use App\Models\Student;
 use App\Models\Category;
@@ -35,6 +36,12 @@ class Course extends Model
     public function payment(){
         return $this->hasOne(Payment::class);
     }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+   
 
     
 }

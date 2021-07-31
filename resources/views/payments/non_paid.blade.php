@@ -46,6 +46,9 @@ Paiements
                                             @if ($payment->status === 'canceled')
                                                 <span class="badge badge-pill badge-soft-danger font-size-11">Annulé</span>
                                             @endif
+                                            @if ($payment->status === 'withoutavance')
+                                            <span class="badge badge-pill badge-soft-danger font-size-11">Sans Avance</span>
+                                            @endif
                                 </td>
                                 <td>
                                     <i class="bx bx-money me-1"></i> Espèces

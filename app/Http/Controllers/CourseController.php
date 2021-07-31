@@ -216,7 +216,43 @@ class CourseController extends Controller
         $course->save();
 
         Toastr::success('Formation Approuvée');
-
+        
         return redirect()->back();
     }
+
+    // front section controller
+
+    public function show_courses_front(){
+
+        $courses = Course::where('status','=',true)->paginate(2);
+
+        return view('front.courses',[
+            'courses' => $courses,
+        ]);
+    }
+
+
+    public function show_detail(Request $request,$id){
+
+        $course = Course::findOrFail($id);
+        $nbr_students = 0;
+        $instructor = $course->instructor;
+        
+        foreach($instructor->courses as $course){
+            $nbr_students+=$course->students->count();
+        }
+
+        $req = $course->requirement;
+        
+        $requirements = explode('/',$req);
+        
+        
+        return view('front.course_detail',[
+            'course'        => $course,
+            'nbr_students'  => $nbr_students,
+            'requirements'  => $requirements,
+        ]);
+    }
+
+
 }

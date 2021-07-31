@@ -89,13 +89,22 @@ Se connecter / s'inscrire
                           </p>
                       </form>
                   </div>
+
                   <div class="col-md-6">
                       <h2 class="font-weight-bold mb-4">S'inscrire</h2>
                       <form action="{{ route('etudiant.register') }}" method="POST" class="woocommerce-form woocommerce-form-register register">
                         @csrf
                           <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                              <label>Nom complet<span class="required">*</span></label>
-                              <input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="full_name" id="" autocomplete="user-name" value="">
+                              <label>Prenom<span class="required">*</span></label>
+                              <input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="first_name" id="" autocomplete="user-name" value="">
+                          </p>
+                          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                            <label>Nom<span class="required">*</span></label>
+                            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="last_name" id="" autocomplete="user-name" value="">
+                          </p>
+                          <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                            <label>Telephone<span class="required">*</span></label>
+                            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="gsm" id="" autocomplete="user-name" value="">
                           </p>
                           <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                               <label>Email<span class="required">*</span></label>

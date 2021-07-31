@@ -59,6 +59,9 @@ Historique de paiements
                                             @if ($detailPayment->status === 'avance')
                                                 <span class="badge badge-pill badge-soft-danger font-size-11">Avec Avance</span>
                                             @endif
+                                            @if ($detailPayment->status === 'withoutavance')
+                                                <span class="badge badge-pill badge-soft-danger font-size-11">Sans Avance</span>
+                                            @endif
                                             @if ($detailPayment->status === 'partie')
                                                 <span class="badge badge-pill badge-soft-danger font-size-11">Paiement Partiel</span>
                                             @endif

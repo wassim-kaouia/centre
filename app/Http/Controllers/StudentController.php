@@ -68,10 +68,10 @@ class StudentController extends Controller
         $student->study_level   = $request->study_level;
         $student->photo_profile = $user->avatar;
         $student->user_id       = $user->id;
-
+        
         $student->save();
 
-        Mail::to($request->email)->send(new StudentMail($request->first_name.'2021'));
+        // Mail::to($request->email)->send(new StudentMail($request->first_name.'2021'));
 
         Toastr::success('Etudiant crée avec succée');
 

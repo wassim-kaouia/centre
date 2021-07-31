@@ -48,26 +48,35 @@ class PaymentController extends Controller
     }
     
     public function store(Request $request){
-        
+
+
+        // dd($request->all());
+        $amount =0;
+        if(!$request->has('amount')){
+            $amount=0;
+        }else{
+            $amount = $request->amount;
+        }
         $request->validate([
             'student' => 'required',
             'course'  => 'required',
-            'amount'  => 'required|numeric'  
+            'amount'  => 'sometimes|required|numeric'  
         ]);
         
+        // dd($amount);
         $student = Student::findOrFail($request->student);
         $course  = Course::findOrFail($request->course);
 
         //calculate ttc price 
         $totalprice = $request->amount; 
-        //apres modification je peux mettre une tva fixe (fach nhder m3a abdelhamid)
+        //apres modification je peux mettre une tva fixe (fach nhder m3a abdelhamid) 
         
         $payment = new Payment();
         
-        if($course->price - $request->amount == 0){
+        if($course->price - $amount == 0){
 
             $payment->full_price = $course->price;
-            $payment->paid = $request->amount;
+            $payment->paid = $amount;
             $payment->rest = 0;
             $payment->status = 'paid';
             $payment->student_id = $student->id;
@@ -95,19 +104,25 @@ class PaymentController extends Controller
             Toastr::success("L'operation est bien effectuée ..");
             return redirect()->route('etudiants.edit',['id' => $student]);
 
-        }else if($course->price - $request->amount < 0){
+        }else if($course->price - $amount < 0){
             Toastr::error('Vous pouvez pas payer plus que le montant de formation !');
             return redirect()->route('etudiants.edit',['id' => $student]);
-        }else if($course->price - $request->amount > 0){
-
+        }else if($course->price - $amount > 0){
+            
             $payment->full_price = $course->price;
-            $payment->paid = $request->amount;
-            $payment->rest = $course->price - $request->amount;
-            $payment->status = 'avance';
+            $payment->paid = $amount;
+            $payment->rest = $course->price - $amount;
+
+            if($amount == 0){
+                $payment->status = 'withoutavance';
+            }else{
+                $payment->status = 'avance';
+            }
+
             $payment->student_id = $student->id;
             $payment->course_id  = $course->id;
             $payment->save();
-
+            
             //attach the course
             $student->courses()->syncWithoutDetaching([$course->id]);
 
@@ -128,11 +143,14 @@ class PaymentController extends Controller
 
             $paymentdetail->save();
             Toastr::success("L'operation est bien effectuée ..");
-            return redirect()->route('etudiants.edit',['id' => $student]);
+            // return redirect()->route('etudiants.edit',['id' => $student]);
+            return redirect()->back();
 
         }
         
     }
+
+
 
     public function show(Request $request,$id){
         

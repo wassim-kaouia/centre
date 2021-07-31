@@ -14,8 +14,8 @@ class CreateStudentsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('nationality')->nullable();
-            $table->integer('age');
-            $table->string('cin');
+            $table->integer('age')->nullable();
+            $table->string('cin')->nullable();
             $table->text('address')->nullable();
             $table->string('gsm');
             $table->string('study_level')->nullable();

@@ -11,7 +11,7 @@
                 <div class="subscribe-form">
                     <form action="#">
                         <input type="text" class="form-control" placeholder="Email Address">
-                        <a href="#" class="btn btn-main">Subscribe<i class="fa fa-angle-right ml-2"></i> </a>
+                        <a href="#" class="btn btn-success">Subscribe<i class="fa fa-angle-right ml-2"></i> </a>
                     </form>
                 </div>
             </div>

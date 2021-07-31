@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Instructor;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
@@ -27,7 +29,14 @@ class HomeController extends Controller
     }
 
     public function main(){
-        return view('front.index');
+
+        $courses     = Course::where('status','=',true)->take(3)->get();
+        $instructors = Instructor::take(3)->get();
+
+        return view('front.index',[
+            'courses'      => $courses,
+            'insctructors' => $instructors,
+        ]);
     }
 
     public function login_register(){
@@ -38,37 +47,54 @@ class HomeController extends Controller
     public function store_user_front(Request $request){
         // dd($request->all());
         $request->validate([
-            'full_name' => 'required|min:10|max:20',
-            'email'     => 'required|email',
-            'password'  => 'required|confirmed',
+            'first_name' => 'required|min:4|max:20',
+            'last_name'  => 'required|min:4|max:20',
+            'gsm'        => 'required|numeric',
+            'email'      => 'required|email',
+            'password'   => 'required|confirmed',
         ],[
-            'full_name.required'     =>  'Le Nom Complet est requis',
-            'email.required'         =>  "L'email est requis",
-            'password.required'      =>  'Le Password est requis',  
+            'first_name.required'     =>  'Le prenom est requis',
+            'last_name.required'      =>  'Le nom est requis',
+            'gsm.required'            =>  'Le telephone portable est requis ',
+            'email.required'          =>  "L'email est requis",
+            'password.required'       =>  'Le Password est requis',  
         ]);
-
-        $user = new User();
-        $user->full_name = Str::lower($request->full_name);
-        $user->email     = Str::lower($request->email);        
-        $user->password  = bcrypt($request->password);
-        $user->role_id   = 4;
-        
-        //upload avatar - profile photo
-        if (request()->has('avatar')) {            
-            $avatar = request()->file('avatar');
-            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-            $avatarPath = public_path('/images/utilisateurs/');
-            $avatar->move($avatarPath, $avatarName);
-            $user->avatar = "/images/utilisateurs/" . $avatarName;
-        }else{
-            $user->avatar ='/profile_default.jpeg';
-        }
-
-
-        $user->save();
-
-        session()->flash('message','Votre compte est bien crée ! ');
-        return redirect()->back();
+         
+         //create user for student
+         $user = new User();
+         $user->full_name       = Str::lower($request->first_name.' '.$request->last_name);
+         $user->name            = Str::lower($request->first_name);
+         $user->email           = Str::lower($request->email);
+         $user->password        = bcrypt($request->password);
+         $user->role_id         = 4;
+         
+         //upload avatar - profile photo
+         if (request()->has('avatar')) {            
+             $avatar = request()->file('avatar');
+             $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+             $avatarPath = public_path('/images/etudiants');
+             $avatar->move($avatarPath, $avatarName);
+             $user->avatar = "/images/etudiants/" . $avatarName;
+         }else{
+             $user->avatar ='/profile_default.jpeg';
+         }
+         
+         $user->save();
+         //create student 
+         $student = new Student();
+         $student->first_name    = Str::lower($request->first_name);
+         $student->last_name     = Str::lower($request->last_name);
+         $student->gsm           = $request->gsm;
+         $student->photo_profile = $user->avatar;
+         $student->user_id       = $user->id;
+ 
+         $student->save();
+ 
+        //  Mail::to($request->email)->send(new StudentMail($request->first_name.'2021'));
+ 
+         session()->flash('message','Votre compte est bien créee');
+         return redirect()->back();
+    
     }
 
 
@@ -165,7 +191,7 @@ class HomeController extends Controller
 
     public function root()
     {   
-        return view('index',
+        return view('dashboard',
         [
           'course'        => $this->revenueTotalPerYear(),
           'students'      => $this->getStudents(),

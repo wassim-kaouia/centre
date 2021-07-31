@@ -49,7 +49,7 @@
     <div class="site-navigation main_menu " id="mainmenu-area">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{ route('main') }}">
                     <img src="{{ asset('assets/images/logo-dark.png') }}" alt="Edutim" class="img-fluid" width="200">
                 </a>
 
@@ -63,7 +63,7 @@
                 <div class="collapse navbar-collapse" id="navbarMenu">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbar3" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('main') }}" id="navbar3" role="button" aria-haspopup="true" aria-expanded="false">
                                 Acceil
                             </a>
                         </li>
@@ -74,7 +74,7 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="{{ route('show.courses') }}" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Courses
                             </a>
                            
@@ -93,8 +93,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{ route('root') }}" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Administration
-                            </a>
-                            
+                            </a> 
                         </li>   
                         @else
 

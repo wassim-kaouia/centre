@@ -22,24 +22,14 @@ use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PaymentDetailController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Auth::routes();
 
-
 Route::get('/',[HomeController::class,'main'])->name('main');
 Route::get('/login_register',[HomeController::class,'login_register'])->name('login.register')->middleware('islogged');
-Route::post('/nouveau/etudiant',[HomeController::class,'store_user_front'])->name('etudiant.register')->middleware('islogged');;
-
+Route::post('/nouveau/etudiant',[HomeController::class,'store_user_front'])->name('etudiant.register')->middleware('islogged');
+Route::get('/formations/lists',[CourseController::class,'show_courses_front'])->name('show.courses');
+Route::get('/formation/{id}/show',[CourseController::class,'show_detail'])->name('show.detail.course');
 
 Route::middleware(['auth','rolechecker'])->group(function () {
 //Update User Details
@@ -116,16 +106,16 @@ Route::get('/formation/non-approuver',[CourseController::class,'pendingCourses']
 Route::get('/formation/approuver/{id}/{approuver}',[CourseController::class,'approuveCourse'])->name('formations.approuved');    
 });
 
-Route::middleware(['auth','rolechecker'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 //payment
-Route::get('/paiements',[PaymentController::class,'index'])->name('paiements.index');
-Route::get('/paiements/paid',[PaymentController::class,'paid'])->name('paiements.paid');
-Route::get('/paiements/avance',[PaymentController::class,'withavance'])->name('paiements.avance');
-Route::get('/paiement/create/{student}',[PaymentController::class,'create'])->name('paiements.create');
-Route::get('/paiements/show/{id}',[PaymentController::class,'show'])->name('paiements.show');
+Route::get('/paiements',[PaymentController::class,'index'])->name('paiements.index')->middleware('rolechecker');
+Route::get('/paiements/paid',[PaymentController::class,'paid'])->name('paiements.paid')->middleware('rolechecker');;
+Route::get('/paiements/avance',[PaymentController::class,'withavance'])->name('paiements.avance')->middleware('rolechecker');;
+Route::get('/paiement/create/{student}',[PaymentController::class,'create'])->name('paiements.create')->middleware('rolechecker');;
+Route::get('/paiements/show/{id}',[PaymentController::class,'show'])->name('paiements.show')->middleware('rolechecker');;
 Route::post('/paiements',[PaymentController::class,'store'])->name('paiements.store');
-Route::put('/paiement/{id}',[PaymentController::class,'update'])->name('paiements.update');
-Route::delete('/paiement/{id}',[PaymentController::class,'destroy'])->name('paiements.destroy');    
+Route::put('/paiement/{id}',[PaymentController::class,'update'])->name('paiements.update')->middleware('rolechecker');;
+Route::delete('/paiement/{id}',[PaymentController::class,'destroy'])->name('paiements.destroy')->middleware('rolechecker');;    
 });
 
 Route::middleware(['auth','rolechecker'])->group(function () {
@@ -164,10 +154,10 @@ Route::get('smsbulk/index',[BulkSmsController::class,'index'])->name('sms.index'
 Route::post('smsbulk/send/compaign',[BulkSmsController::class,'sndSms'])->name('sms.send');    
 });
 
-
 // Route::view('/bulksms', 'testsms');
 // Route::get('/getNumbers/{id}', [BulkSmsController::class,'dataToViewOnRequest'])->name('sms.numbers');
 // Route::post('/sendSMS', [BulkSmsController::class,'sendSMS'])->name('sms.send');;
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
 
