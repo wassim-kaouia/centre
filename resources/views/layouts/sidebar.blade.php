@@ -128,7 +128,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('fees.index') }}">Les frais</a></li>
-                        <li><a href="{{ route('formations.pending') }}">Liste des reçus <span class="badge rounded-pill bg-danger float-end">{{ $pending->count()>0 ? $pending->count() : 0 }}</span></a></li>
+                        <li><a href="{{ route('settings.edit') }}">Paramètres Generales</a></li>
                     </ul>
                 </li>
             </ul>

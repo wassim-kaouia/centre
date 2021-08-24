@@ -113,14 +113,14 @@ Page Principale
                         <p>Formateur</p>
                     </div>
                     <ul class="team-socials list-inline">
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a href="{{ $settings->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div>
             @endforeach
-        </div>
+        </div> 
     </div>
 </section>
 

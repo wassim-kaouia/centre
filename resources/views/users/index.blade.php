@@ -52,12 +52,12 @@ Utilisateurs
                                                         <td>
                                                             <div class="avatar-xs">
                                                                 <span class="avatar-title rounded-circle">
-                                                                    <a href="{{ route('users.show',['id' => $user->id]) }}"><img class="rounded-circle avatar-xs" src="{{ asset($user->avatar) }}" alt="photo de profil"></a>
+                                                                    <a href="{{ route('users.edit',['id' => $user->id]) }}"><img class="rounded-circle avatar-xs" src="{{ asset($user->avatar) }}" alt="photo de profil"></a>
                                                                 </span>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-size-14 mb-1"><a href="{{ route('users.show',['id' => $user->id]) }}" class="text-dark">{{ $user->full_name }}</a></h5>
+                                                            <h5 class="font-size-14 mb-1"><a href="{{ route('users.edit',['id' => $user->id]) }}" class="text-dark">{{ $user->full_name }}</a></h5>
                                                             <p class="text-muted mb-0">{{ $user->role->role }}</p>
                                                         </td>
                                                         <td>{{ $user->email }}</td>
@@ -67,12 +67,12 @@ Utilisateurs
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('users.show',['id' => $user->id]) }}">{{ $user->name }}</a>
+                                                            <a href="{{ route('users.edit',['id' => $user->id]) }}">{{ $user->name }}</a>
                                                         </td>
                                                         <td>
                                                             <ul class="list-inline font-size-20 contact-links mb-0">
                                                                 <li class="list-inline-item px-2">
-                                                                    <a href="{{ route('users.show',['id' => $user->id]) }}" title="Profile"><i class="bx bx-user-circle"></i></a>
+                                                                    <a href="{{ route('users.edit',['id' => $user->id]) }}" title="modifier"><i class="bx bx-user-circle"></i></a>
                                                                 </li>
                                                                     
                                                                 <li class="list-inline-item px-2">

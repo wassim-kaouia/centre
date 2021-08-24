@@ -7,8 +7,8 @@
                         <i class="bi bi-badge2"></i>
                     </div>
                     <div class="feature-text">
-                        <h4>Learn from Industry Experts</h4>
-                        <p>Behind the word mountains, far from the countries Vokalia </p>
+                        <h4>{{ json_decode($settings->bloc1,true)['title'] }}</h4>
+                        <p>{{ json_decode($settings->bloc1,true)['description'] }}</p>
                     </div>
                 </div>
             </div>
@@ -18,8 +18,8 @@
                         <i class="bi bi-article"></i>
                     </div>
                     <div class="feature-text">
-                        <h4>Learn the Latest Top Skills</h4>
-                        <p>Behind the word mountains, far from the countries Vokalia </p>
+                        <h4>{{ json_decode($settings->bloc2,true)['title'] }}</h4>
+                        <p>{{ json_decode($settings->bloc2,true)['description'] }}</p>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                         <i class="bi bi-headset"></i>
                     </div>
                     <div class="feature-text">
-                        <h4>Lifetime Access & Support</h4>
-                        <p>Behind the word mountains, far from the countries Vokalia </p>
+                        <h4>{{ json_decode($settings->bloc3,true)['title'] }}</h4>
+                        <p>{{ json_decode($settings->bloc3,true)['description'] }}</p>
                     </div>
                 </div>
             </div>

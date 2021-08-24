@@ -6,11 +6,11 @@
                     <ul class="header-contact">
                         <li>
                             <span>Appeler nous sur :</span>
-                           +212 524 24 44 43
+                           {{ $settings->phone }}
                         </li>
                         <li>
                             <span>Email :</span>
-                            services@greencitycentre.com
+                            {{ $settings->email }}
                         </li>
                     </ul>
                 </div>
@@ -18,10 +18,10 @@
                     <div class="header-right float-right">
                         <div class="header-socials">
                             <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                                <li><a href="{{ $settings->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="{{ $settings->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="{{ $settings->linkedin }}"><i class="fab fa-linkedin"></i></a></li>
+                                <li><a href="{{ $settings->pinterest }}"><i class="fab fa-pinterest"></i></a></li>
                             </ul>
                         </div>
                         @guest

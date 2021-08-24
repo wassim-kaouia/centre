@@ -3,13 +3,15 @@
 		<div class="row">
 			<div class="col-lg-4 mr-auto col-sm-6 col-md-6">
 				<div class="widget footer-widget mb-5 mb-lg-0">
-					<h5 class="widget-title">About Us</h5>
-					<p class="mt-3">Veniam Sequi molestias aut necessitatibus optio magni at natus accusamus.Lorem ipsum dolor sit amet, consectetur adipisicin gelit, sed do eiusmod tempor incididunt .</p>
+					<h5 class="widget-title">À Propos</h5>
+					<p class="mt-3">
+						{{ $settings->about }}
+					</p>
 					<ul class="list-inline footer-socials">
-						<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-						<li class="list-inline-item"> <a href="#"><i class="fab fa-twitter"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+						<li class="list-inline-item"><a href="{{ $settings->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="list-inline-item"> <a href="{{ $settings->twitter }}"><i class="fab fa-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="{{ $settings->linkedin }}"><i class="fab fa-linkedin"></i></a></li>
+						<li class="list-inline-item"><a href="{{ $settings->pinterest }}"><i class="fab fa-pinterest"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -46,20 +48,20 @@
 						<li><i class="bi bi-headphone"></i>
 							<div>
 								<strong>Telephone</strong>
-								0666 66 45 54
+								{{ $settings->phone }}
 							</div>
 							
 						</li>
 						<li> <i class="bi bi-envelop"></i>
 							<div>
-								<strong>Email Address</strong>
-								services@greencitycentre.com
+								<strong>Adresse Mail</strong>
+								{{ $settings->email }}
 							</div>
 						</li>
 						<li><i class="bi bi-location-pointer"></i>
 							<div>
 								<strong>Office Address</strong>
-								Benguerire CA , 3231
+								{{ $settings->address }}
 							</div>
 						</li>
 					</ul>

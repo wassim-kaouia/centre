@@ -42,10 +42,14 @@ Modification
                             <div class="mb-3">
                                 <label for="formrow-inputState" class="form-label">Role</label>
                                 <select name="role" id="formrow-inputState" class="form-select">
-                                    <option value="1" {{ $user->role->role === 'Admin' ? 'Selected' : '' }}>Admin</option>
-                                    <option value="2" {{ $user->role->role === 'Secretariat' ? 'Selected' : '' }}>Secretariat</option>
-                                    <option value="3" {{ $user->role->role === 'Instructor' ? 'Selected' : '' }}>Formateur</option>
-                                    <option value="4" {{ $user->role->role === 'Student' ? 'Selected' : '' }}>Etudiant</option>
+                                    @if ($user->role->role == 'Admin')
+                                        <option disabled value="1" selected>Vous pouvez pas changer votre rôle</option>
+                                    @else 
+                                        <option value="1" {{ $user->role->role === 'Admin' ? 'Selected' : '' }}>Admin</option>
+                                        <option value="2" {{ $user->role->role === 'Secretariat' ? 'Selected' : '' }}>Secretariat</option>
+                                        <option value="3" {{ $user->role->role === 'Instructor' ? 'Selected' : '' }}>Formateur</option>
+                                        <option value="4" {{ $user->role->role === 'Student' ? 'Selected' : '' }}>Etudiant</option>    
+                                    @endif
                                 </select>
                             </div>
                         </div>

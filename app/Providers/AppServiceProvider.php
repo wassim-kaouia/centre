@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Fees;
 use App\Models\Course;
 use App\Models\Payment;
+use App\Models\Setting;
 use App\Models\Student;
 use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
             $feeelement = Fees::first()->get();
             $fee = Fees::findOrFail($feeelement[0]->id);
             view()->share('fees',$fee);
+
+            $settings = Setting::first();
+            view()->share('settings',$settings);
+
+        
         }
     }
 }

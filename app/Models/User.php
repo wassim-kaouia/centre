@@ -32,6 +32,15 @@ class User extends Authenticatable
         return $this->belongsTo(Student::class,'id','user_id');
     }
 
+
+    public static function boot(){
+        parent::boot();
+
+        static::deleting(function($user){
+            $user->student()->delete();
+        });
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

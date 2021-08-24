@@ -31,4 +31,12 @@ class Student extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public static function boot(){
+        parent::boot();
+
+        static::deleting(function($student){
+            $student->payments()->delete();
+        });
+    }
+
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\UploadAttachment;
 use App\Http\Controllers\BulkSmsController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CategoryController;
@@ -153,6 +154,9 @@ Route::middleware(['auth','rolechecker'])->group(function () {
 Route::get('smsbulk/index',[BulkSmsController::class,'index'])->name('sms.index');
 Route::post('smsbulk/send/compaign',[BulkSmsController::class,'sndSms'])->name('sms.send');    
 });
+
+Route::get('/parametres/modification',[SettingController::class,'edit'])->name('settings.edit');
+Route::put('/parametres/miseajour',[SettingController::class,'update'])->name('settings.update');
 
 // Route::view('/bulksms', 'testsms');
 // Route::get('/getNumbers/{id}', [BulkSmsController::class,'dataToViewOnRequest'])->name('sms.numbers');
