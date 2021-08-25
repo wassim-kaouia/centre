@@ -23,7 +23,13 @@ Modifier les parametres générales
     </div>
 </div>
 <!-- end page title -->
-
+<div>
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -37,29 +43,29 @@ Modifier les parametres générales
                             <div class="form-group row mb-4">
                                 <label for="title" class="col-form-label col-lg-2">Grand Titre</label>
                                 <div class="col-lg-10">
-                                    <input id="title" name="title" type="text" class="form-control" value="{{ $setting->last()->title }}">
+                                    <input id="title" name="title" type="text" class="form-control" value="{{ $setting->first()->title }}">
                                 </div>
                             </div>
                             
                             <div class="form-group row mb-4">
                                 <label for="subtitle" class="col-form-label col-lg-2">Sous Titre</label>
                                 <div class="col-lg-10">
-                                    <input id="subtitle" name="subtitle" type="text" class="form-control" value="{{ $setting->last()->subtitle }}">
+                                    <input id="subtitle" name="subtitle" type="text" class="form-control" value="{{ $setting->first()->subtitle }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="leftbloc" class="col-form-label col-lg-2">Titre Bloc-Gauche</label>
                                 <div class="col-lg-10">
-                                    <input id="leftbloc" name="leftbloc" type="text" class="form-control" value="">
+                                    <input id="leftbloc" name="leftbloc" type="text" class="form-control" value="{{ json_decode($settings->bloc1,true)['title'] }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="desleftbloc" class="col-form-label col-lg-2">Description Bloc-Gauche</label>
                                 <div class="col-lg-10">
-                                    <textarea name="desleftbloc" id="desleftbloc" style="width:100%" rows="4">
-                                        
+                                    <textarea class="form-control" name="desleftbloc" id="desleftbloc" cols="20" rows="4">
+                                        {{ json_decode($settings->bloc1,true)['description'] }} 
                                     </textarea>
                                 </div>
                             </div>
@@ -67,7 +73,7 @@ Modifier les parametres générales
                             <div class="form-group row mb-4">
                                 <label for="centrebloc" class="col-form-label col-lg-2">Titre Bloc-Centre</label>
                                 <div class="col-lg-10">
-                                    <input id="centrebloc" name="centrebloc" type="text" class="form-control" value="">
+                                    <input id="centrebloc" name="centrebloc" type="text" class="form-control" value="{{ json_decode($settings->bloc2,true)['title'] }}">
                                 </div>
                             </div>
 
@@ -75,7 +81,7 @@ Modifier les parametres générales
                                 <label for="descentrebloc" class="col-form-label col-lg-2">Description Bloc-Centre</label>
                                 <div class="col-lg-10">
                                     <textarea name="descentrebloc" id="descentrebloc" style="width:100%" rows="4">
-                                        
+                                        {{ json_decode($settings->bloc2,true)['description'] }} 
                                     </textarea>
                                 </div>
                             </div>
@@ -83,7 +89,7 @@ Modifier les parametres générales
                             <div class="form-group row mb-4">
                                 <label for="rightbloc" class="col-form-label col-lg-2">Titre Bloc-Droite</label>
                                 <div class="col-lg-10">
-                                    <input id="rightbloc" name="rightbloc" type="text" class="form-control" value="">
+                                    <input id="rightbloc" name="rightbloc" type="text" class="form-control" value="{{ json_decode($settings->bloc3,true)['title'] }}">
                                 </div>
                             </div>
 
@@ -91,7 +97,7 @@ Modifier les parametres générales
                                 <label for="desrightbloc" class="col-form-label col-lg-2">Description Bloc-Droite</label>
                                 <div class="col-lg-10">
                                     <textarea name="desrightbloc" id="desrightbloc" style="width:100%" rows="4">
-                                        
+                                        {{ json_decode($settings->bloc3,true)['description'] }} 
                                     </textarea>
                                 </div>
                             </div>
@@ -99,21 +105,21 @@ Modifier les parametres générales
                             <div class="form-group row mb-4">
                                 <label for="phone" class="col-form-label col-lg-2">Telephone</label>
                                 <div class="col-lg-10">
-                                    <input id="phone" name="phone" type="text" class="form-control" value="{{ $setting->last()->phone }}">
+                                    <input id="phone" name="phone" type="text" class="form-control" value="{{ $setting->first()->phone }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="address" class="col-form-label col-lg-2">Adresse</label>
                                 <div class="col-lg-10">
-                                    <input id="address" name="address" type="text" class="form-control" value="{{ $setting->last()->address }}">
+                                    <input id="address" name="address" type="text" class="form-control" value="{{ $setting->first()->address }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="email" class="col-form-label col-lg-2">Email</label>
                                 <div class="col-lg-10">
-                                    <input id="email" name="email" type="text" class="form-control" value="{{ $setting->last()->email }}">
+                                    <input id="email" name="email" type="text" class="form-control" value="{{ $setting->first()->email }}">
                                 </div>
                             </div>
 
@@ -129,7 +135,7 @@ Modifier les parametres générales
                             <div class="form-group row mb-4">
                                 <label for="facebook" class="col-form-label col-lg-2">Facebook</label>
                                 <div class="col-lg-10">
-                                    <input id="facebook" name="facebook" type="text" class="form-control" value="{{ $setting->last()->facebook }}">
+                                    <input id="facebook" name="facebook" type="text" class="form-control" value="{{ $setting->first()->facebook }}">
                                 </div>
                             </div>
 
@@ -138,35 +144,35 @@ Modifier les parametres générales
                             <div class="form-group row mb-4">
                                 <label for="instagram" class="col-form-label col-lg-2">Instagram</label>
                                 <div class="col-lg-10">
-                                    <input id="instagram" name="instagram" type="text" class="form-control" value="{{ $setting->last()->instagram }}">
+                                    <input id="instagram" name="instagram" type="text" class="form-control" value="{{ $setting->first()->instagram }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="pinterest" class="col-form-label col-lg-2">Pinterest</label>
                                 <div class="col-lg-10">
-                                    <input id="pinterest" name="pinterest" type="text" class="form-control" value="{{ $setting->last()->pinterest }}">
+                                    <input id="pinterest" name="pinterest" type="text" class="form-control" value="{{ $setting->first()->pinterest }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="linkedin" class="col-form-label col-lg-2">LinkedIn</label>
                                 <div class="col-lg-10">
-                                    <input id="linkedin" name="linkedin" type="text" class="form-control" value="{{ $setting->last()->linkedin }}">
+                                    <input id="linkedin" name="linkedin" type="text" class="form-control" value="{{ $setting->first()->linkedin }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="youtube" class="col-form-label col-lg-2">Youtube</label>
                                 <div class="col-lg-10">
-                                    <input id="youtube" name="youtube" type="text" class="form-control" value="{{ $setting->last()->youtube }}">
+                                    <input id="youtube" name="youtube" type="text" class="form-control" value="{{ $setting->first()->youtube }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
                                 <label for="twitter" class="col-form-label col-lg-2">Twitter</label>
                                 <div class="col-lg-10">
-                                    <input id="twitter" name="twitter" type="text" class="form-control" value="{{ $setting->last()->twitter }}">
+                                    <input id="twitter" name="twitter" type="text" class="form-control" value="{{ $setting->first()->twitter }}">
                                 </div>
                             </div>
 

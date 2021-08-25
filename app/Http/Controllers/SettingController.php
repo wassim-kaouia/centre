@@ -13,8 +13,9 @@ class SettingController extends Controller
     }
 
     public function update(Request $request){
+        // dd($request->phone);   
         $setting = Setting::first();
-        
+
         $setting->title       = $request->title;
         $setting->subtitle    = $request->subtitle;
         $setting->phone       = $request->phone;
@@ -48,7 +49,9 @@ class SettingController extends Controller
         $setting->bloc3 = $bloc3;
 
         $setting->save();
+        
+        session()->flash('success','Mise à jour réussie !');
 
-        dd('ok');
+        return redirect()->back();
     }
 }

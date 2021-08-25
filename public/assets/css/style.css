@@ -2034,7 +2034,7 @@ Footer Section
 }
 
 .footer .footer-contact ul li i {
-  color: #FF1949;
+  color: #96c221;
   margin-right: 20px;
   float: left;
   margin-top: 7px;
@@ -2057,11 +2057,11 @@ Footer Section
 }
 
 .footer .footer-links a {
-  color: rgba(255, 255, 255, 0.8);
+  color: #96c221;
 }
 
 .footer .footer-links a:hover {
-  color: #FF1949;
+  color: #96c221;
 }
 
 .footer .footer-socials {
@@ -2081,7 +2081,7 @@ Footer Section
 }
 
 .footer .footer-socials a:hover {
-  background: #FF1949;
+  background: #96c221;
   color: #fff;
 }
 
@@ -2111,7 +2111,7 @@ Footer Section
   position: absolute;
   right: 0px;
   top: 0px;
-  background: #FF1949;
+  background: #96c221;
 }
 
 .form-subscribe button:hover {
@@ -2230,7 +2230,7 @@ Course Style 2
 }
 
 .course-sidebar .course-widget.single-info i {
-  color: #FF1949;
+  color: #96c221;
   margin-right: 10px;
 }
 
@@ -2246,7 +2246,7 @@ Course Style 2
 
 .course-sidebar .course-widget ul li i {
   margin-right: 10px;
-  color: #FF1949;
+  color: #96c221;
   width: 20px;
   display: inline-block;
 }
@@ -2302,7 +2302,7 @@ Course Style 2
 }
 
 .course-sidebar .course-widget.single-info span {
-  color: #FF1949;
+  color: #96c221;
 }
 
 .course-sidebar .course-widget.course-metarials ul li {
@@ -2330,9 +2330,9 @@ Course Style 2
 }
 
 .course-sidebar .course-widget .single-course-tags a:hover {
-  background: #FF1949;
+  background: #96c221;
   color: #fff;
-  border-color: #FF1949;
+  border-color: #96c221;
 }
 
 .course-title {
@@ -2382,7 +2382,7 @@ COURse Single Details
 }
 
 .course-single-header .single-course-meta ul li a:hover {
-  color: #FF1949;
+  color: #96c221;
 }
 
 .course-single-header .single-course-meta ul span {
@@ -2392,7 +2392,7 @@ COURse Single Details
 
 .course-single-header .single-course-meta ul span i {
   margin-right: 10px;
-  color: #FF1949;
+  color: #96c221;
 }
 
 .single-course-details {

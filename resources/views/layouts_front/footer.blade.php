@@ -18,25 +18,20 @@
 			
 			<div class="col-lg-2 col-sm-6 col-md-6">
 				<div class="footer-widget mb-5 mb-lg-0">
-					<h5 class="widget-title">Company</h5>
+					<h5 class="widget-title">GCC</h5>
 					<ul class="list-unstyled footer-links">
-						<li><a href="#">About us</a></li>
-						<li><a href="#">Contact us</a></li>
-						<li><a href="#">Projects</a></li>
-						<li><a href="#">Terms & Condition</a></li>
-						<li><a href="#">Privacy policy</a></li>
+						<li><a href="#">À Propos</a></li>
+						<li><a href="#">Contacter Nous</a></li>
+						<li><a href="#">Conditions Générales</a></li>
+						<li><a href="#">Politique de Confidentialité</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-2 col-sm-6 col-md-6">
 				<div class="footer-widget mb-5 mb-lg-0">
-					<h5 class="widget-title">Courses</h5>
+					<h5 class="widget-title">Formations</h5>
 					<ul class="list-unstyled footer-links">
-						<li><a href="#">SEO Business</a></li>
-						<li><a href="#">Digital Marketing</a></li>
-						<li><a href="#">Graphic Design</a></li>
-						<li><a href="#">Site Development</a></li>
-						<li><a href="#">Social Marketing</a></li>
+						<li><a href="#">Formation</a></li>
 					</ul>
 				</div>
 			</div>
@@ -44,21 +39,21 @@
 				<div class="footer-widget footer-contact mb-5 mb-lg-0">
 					<h5 class="widget-title">Contacte </h5>
 					
-					<ul class="list-unstyled">
-						<li><i class="bi bi-headphone"></i>
+					<ul class="list-unstyled ">
+						<li><i style="color: #96c221" class="bi bi-headphone"></i>
 							<div>
 								<strong>Telephone</strong>
 								{{ $settings->phone }}
 							</div>
 							
 						</li>
-						<li> <i class="bi bi-envelop"></i>
+						<li> <i style="color: #96c221" class="bi bi-envelop"></i>
 							<div>
 								<strong>Adresse Mail</strong>
 								{{ $settings->email }}
 							</div>
 						</li>
-						<li><i class="bi bi-location-pointer"></i>
+						<li><i style="color: #96c221" class="bi bi-location-pointer"></i>
 							<div>
 								<strong>Office Address</strong>
 								{{ $settings->address }}
