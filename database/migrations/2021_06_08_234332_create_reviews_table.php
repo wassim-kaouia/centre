@@ -14,6 +14,7 @@ class CreateReviewsTable extends Migration
             $table->string('content');
             $table->integer('stars')->default(5);
             $table->foreignId('course_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
