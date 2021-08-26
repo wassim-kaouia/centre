@@ -11,78 +11,50 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="testimonials-slides owl-carousel owl-theme">
+                    @foreach ($reviews as $review)
                     <div class="review-item">
                         <div class="client-info">
                             <i class="bi bi-quote"></i>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni eius autem aliquid pariatur rerum. Deserunt, praesentium.
-                             Adipisci, voluptates nihil debitis</p>
+                            <p>{{ $review->content }}</p>
                              <div class="rating">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
+                                @if ($review->stars == null || $review->stars == 0 || $review->stars == 1)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 2)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 3)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 4)
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 5)
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
                             </div>
                         </div>
                         <div class="client-desc">
                             <div class="client-img">
-                                <img src="assets/images/clients/test-1.jpg" alt="" class="img-fluid">
+                                <img src="{{ $review->user->avatar }}" alt="" class="img-fluid">
                             </div>
                             <div class="client-text">
-                                <h4>John Doe</h4>
-                                <span class="designation">Developer</span>
+                                <h4>{{ $review->user->name }}</h4>
+                                <span class="designation">Etudiant</span>
                             </div>
                         </div>
                     </div>
-
-                     <div class="review-item">
-                        <div class="client-info">
-                            <i class="bi bi-quote"></i>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni eius autem aliquid pariatur rerum. Deserunt, praesentium.
-                             Adipisci, voluptates nihil debitis</p>
-                             <div class="rating">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                            </div>
-                        </div>
-                        <div class="client-desc">
-                            <div class="client-img">
-                                <img src="assets/images/clients/test-2.jpg" alt="" class="img-fluid">
-                            </div>
-                            <div class="client-text">
-                                <h4>John Doe</h4>
-                                <span class="designation">Developer</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="review-item">
-                        <div class="client-info">
-                            <i class="bi bi-quote"></i>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni eius autem aliquid pariatur rerum. Deserunt, praesentium.
-                             Adipisci, voluptates nihil debitis</p>
-                             <div class="rating">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                            </div>
-                        </div>
-                        <div class="client-desc">
-                            <div class="client-img">
-                                <img src="assets/images/clients/test-3.jpg" alt="" class="img-fluid">
-                            </div>
-                            <div class="client-text">
-                                <h4>John Doe</h4>
-                                <span class="designation">Developer</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                   </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Review;
 use App\Models\Student;
 use App\Models\Instructor;
 use Illuminate\Support\Arr;
@@ -32,10 +33,13 @@ class HomeController extends Controller
 
         $courses     = Course::where('status','=',true)->take(3)->get();
         $instructors = Instructor::take(3)->get();
+        $reviews = Review::where('stars','>=',4)->paginate(6);
+
 
         return view('front.index',[
             'courses'      => $courses,
             'insctructors' => $instructors,
+            'reviews'      => $reviews,
         ]);
     }
 

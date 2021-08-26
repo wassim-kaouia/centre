@@ -128,11 +128,11 @@ Page de formation
           </div>
       </div>
   </div>
-
   
-    @if (Auth::check() && !Auth::user()->reviews()->exists()
-             && App\Models\Payment::where('course_id','=',$course->id)->where('student_id','=',Auth::user()->student->id)->exists())
-    <div>
+
+    @if (Auth::check() && Auth::user()->role->role == 'Admin')
+    @else 
+        @if (Auth::check() && !Auth::user()->reviews()->exists() && App\Models\Payment::where('course_id','=',$course->id)->where('student_id','=',Auth::user()->student->id)->exists() )
         <form action="{{ route('reviews.store') }}" method="POST"> 
             @csrf
             <div class="row">
@@ -150,8 +150,8 @@ Page de formation
                 </div>
              </div>
            </form>
-       </div>
-    @endif
+        @endif
+    @endif 
 
 
   <div class="course-widget course-info">
@@ -220,7 +220,8 @@ Page de formation
                                   {{-- <input type="hidden" name="amount" id="amount" value="130"> --}}
                                 <button type="submit" {{ App\Models\Payment::where('student_id',Auth::user()->student->id)->where('course_id',$course->id)->exists() ? 'disabled' : '' }} class="btn btn-danger btn-block">S'inscrire</button>                                
                                 @else
-                                <button type="submit" class="btn btn-danger btn-block">S'inscrire</button>                                
+                                <p>Pour s'inscrire, il faut créer un <a href="/login_register">nouveau compte</a></p>
+                                <button type="submit" {{ Auth::check() && Auth::user()->role->role == 'Admin' ? 'disabled' : 'disabled'  }} class="btn btn-danger btn-block">S'inscrire</button>                                
 
                                 @endif
                                 
