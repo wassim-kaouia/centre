@@ -14,12 +14,27 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
+        $bloc1 = collect([
+            'title'       => 'test1',
+            'description' => 'test1',
+        ])->toJson();
+
+        $bloc2 = collect([
+            'title'       => 'test2',
+            'description' => 'test2',
+        ])->toJson();
+        
+        $bloc3 = collect([
+            'title'       => 'test3',
+            'description' => 'test3',
+        ])->toJson();
+
         DB::table('settings')->insert([
             'title'     => 'title',
             'subtitle'  => 'subtitle',
-            'bloc1' => "{'title' : 'title1','description' : 'description 1'}",
-            'bloc2' => "{'title' : 'title2','description' : 'description 2'}",
-            'bloc3' => "{'title' : 'title3','description' : 'description 3'}",
+            'bloc1' => $bloc1,
+            'bloc2' => $bloc2,
+            'bloc3' => $bloc3,
         ]);   
     }
 }
