@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UploadAttachment;
 use App\Http\Controllers\BulkSmsController;
 use App\Http\Controllers\InvoiceController;
@@ -157,6 +158,8 @@ Route::post('smsbulk/send/compaign',[BulkSmsController::class,'sndSms'])->name('
 
 Route::get('/parametres/modification',[SettingController::class,'edit'])->name('settings.edit');
 Route::put('/parametres/miseajour',[SettingController::class,'update'])->name('settings.update');
+
+Route::post('/commentaire/ajouter',[ReviewController::class,'store'])->name('reviews.store');
 
 // Route::view('/bulksms', 'testsms');
 // Route::get('/getNumbers/{id}', [BulkSmsController::class,'dataToViewOnRequest'])->name('sms.numbers');

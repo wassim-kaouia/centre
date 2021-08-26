@@ -69,15 +69,15 @@
                         </li>
                         <li class="nav-item ">
                             <a href="#" class="nav-link js-scroll-trigger">
-                                Qui nous
+                                Qui Somme nous
                             </a>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{ route('show.courses') }}" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Courses
+                                Formations
                             </a>
-                           
+                            
                         </li>
                       
                     

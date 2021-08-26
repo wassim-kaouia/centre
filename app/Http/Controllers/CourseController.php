@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Review;
 use App\Models\Student;
 use App\Models\Category;
 use App\Models\Instructor;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\File;
 
 class CourseController extends Controller
 {
-    
+
     public function index(){
         
         $courses  = Course::where('status','=',true)->get();
@@ -131,6 +132,7 @@ class CourseController extends Controller
             'difficulty'   => 'numeric',
             'limit'        => 'numeric',
             'pourcentage'  => 'required|numeric',
+            // 'requirements' => 'required|string', 
         ],[
             'title.required'        => 'Le titre est requis',
             'description.required'  => 'La description est requise',
@@ -141,7 +143,8 @@ class CourseController extends Controller
             'price.required'        => 'Le prix est requis',
             'what_learn.required'   => 'Le contenue de formation est requis', 
             'limit.numeric'         => 'Le nombre doit etre entier',   
-            'pourcentage.required'  => 'le pourcentage % est requis' ,      
+            'pourcentage.required'  => 'Le pourcentage % est requis',
+            // 'requirements.required' => 'Le pré-requis sont obligatoires'      
         ]);
         
         $course = new Course();
@@ -162,6 +165,7 @@ class CourseController extends Controller
         $course->isCertified  = $request->is_certified === 'on' ? true : false;
         $course->discount     = $request->discountable === 'on' ? $request->discount : 0;
         $course->color        = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+        // $course->requirement  = $request->requirements;
         
         if(Auth::user()->role->name === 'Admin'){
             $course->status = true;
@@ -245,14 +249,21 @@ class CourseController extends Controller
         $req = $course->requirement;
         
         $requirements = explode('/',$req);
+
+        $reviews = Review::paginate(10);
+        
         
         
         return view('front.course_detail',[
             'course'        => $course,
             'nbr_students'  => $nbr_students,
             'requirements'  => $requirements,
+            'reviews'       => $reviews,
         ]);
     }
+
+    
+    
 
 
 }

@@ -172,6 +172,8 @@
                             {{-- put the preview image --}}
                         </div>
                     </div>
+
+                
     
                     <div class="row justify-content-end">
                         <div class="col-lg-10">

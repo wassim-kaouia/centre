@@ -26,7 +26,7 @@ Modifier Une Formation
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Formations</a></li>
-                    <li class="breadcrumb-item active">Ajouter Une Formation</li>
+                    <li class="breadcrumb-item active">Modifier Une Formation</li>
                 </ol>
             </div>
 
@@ -178,6 +178,8 @@ Modifier Une Formation
 
                         </div>
                     </div>
+
+                  
 
                     <input type="hidden" name="course_id" id="course_id" value="{{ $course->id }}">
     

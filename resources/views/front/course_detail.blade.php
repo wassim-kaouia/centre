@@ -19,6 +19,15 @@
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}">
+
+<!-- default styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+
+<!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme CSS files as mentioned below (and change the theme property of the plugin) -->
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+
+
 @endsection
 
 @section('title')
@@ -119,28 +128,78 @@ Page de formation
           </div>
       </div>
   </div>
+
+  
+    @if (Auth::check() && !Auth::user()->reviews()->exists()
+             && App\Models\Payment::where('course_id','=',$course->id)->where('student_id','=',Auth::user()->student->id)->exists())
+    <div>
+        <form action="{{ route('reviews.store') }}" method="POST"> 
+            @csrf
+            <div class="row">
+                
+                <input id="input-id" name="stars" type="text" class="rating" data-size="md" >
+        
+                <div class="col-lg-12">
+                    <textarea name="content" id="" class="form-control" cols="30" rows="10"></textarea>
+                </div>
+                
+                <div class="col-lg-4 mt-2 mb-4">
+                    <input type="hidden" name="course_id" id="course_id" value="{{ $course->id }}">
+                    <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+             </div>
+           </form>
+       </div>
+    @endif
+
+
   <div class="course-widget course-info">
       <h4 class="course-title">Feedback des étudiants</h4>
   
       <div class="course-review-wrapper">
-          <div class="course-review">
-              <div class="profile-img">
-                  <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
-              </div>
-              <div class="review-text">
-                  <h5>Mehedi Rasedh  <span>26th june 2020</span></h5>
-                 
-                  <div class="rating">
-                      <a href="#"><i class="fa fa-star"></i></a>
-                      <a href="#"><i class="fa fa-star"></i></a>
-                      <a href="#"><i class="fa fa-star"></i></a>
-                      <a href="#"><i class="fa fa-star"></i></a>
-                      <a href="#"><i class="fa fa-star-half"></i></a>
-                  </div>
-                  <p>Great course. Well structured, paced and I feel far more confident using this software now then I did back in school when I was learning. And the guy doing the voice over really is great at what he does</p>
-              </div>
-          </div>
-
+            @forelse ($reviews as $review)
+            <div class="course-review">
+                <div class="profile-img">
+                    <img src="{{ $review->user->avatar }}" alt="" class="img-fluid">
+                </div>
+                <div class="review-text">
+                    <h5>{{ $review->user->name }}  <span>{{ $review->created_at }}</span></h5>
+                   
+                    <div class="rating">
+                        @if ($review->stars == null || $review->stars == 0 || $review->stars == 1)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 2)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 3)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 4)
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if ($review->stars == 5)
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                     
+                    </div>
+                    <p>{{ $review->content }}</p>
+                </div>
+            </div>
+            @empty
+                
+            @endforelse
       </div>
   </div>
               </div>
@@ -159,11 +218,12 @@ Page de formation
                                   <input type="hidden" name="student" id="student" value="{{Auth::user()->student->id}}">
                                   <input type="hidden" name="course" id="course" value="{{ $course->id }}">
                                   {{-- <input type="hidden" name="amount" id="amount" value="130"> --}}
-                                <button type="submit" {{ $course->payment()->exists() && $course->payment->student_id == Auth::user()->student->id ? 'disabled' : '' }} class="btn btn-main btn-block">S'inscrire</button>
+                                <button type="submit" {{ App\Models\Payment::where('student_id',Auth::user()->student->id)->where('course_id',$course->id)->exists() ? 'disabled' : '' }} class="btn btn-danger btn-block">S'inscrire</button>                                
                                 @else
-                                
+                                <button type="submit" class="btn btn-danger btn-block">S'inscrire</button>                                
+
                                 @endif
-                                 
+                                
                             </div>
                         </div>
                     </div>
@@ -220,7 +280,7 @@ Page de formation
       </div>
   
   
-      <div class="course-widget course-share d-flex justify-content-between align-items-center">
+      {{-- <div class="course-widget course-share d-flex justify-content-between align-items-center">
           <span>Share</span>
           <ul class="social-share list-inline">
               <li class="list-inline-item"><a href="#"><i class="fab fa-facebook"></i></a></li>
@@ -228,19 +288,23 @@ Page de formation
               <li  class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
               <li  class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
           </ul>
-      </div>
+      </div> --}}
   
       <div class="course-widget course-metarials">
           <h4 class="course-title">Prerequis</h4>
           <ul>
-            @forelse ($requirements as $requirement)
+            {{-- @forelse ($requirements as $requirement)
             <li>
                 <i class="fa fa-check"></i>
                 {{ $requirement }}
             </li>
             @empty
                 <p>Pas de prerequis pour cette formation</p>
-            @endforelse
+            @endforelse --}}
+            <li>
+                <i class="fa fa-check"></i>
+                Pas de pré-requis 
+            </li>
           </ul>
       </div>
   
@@ -316,6 +380,19 @@ Page de formation
 
 
 @section('scriptjs')
+
+
+
+    <!-- important mandatory libraries -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/js/star-rating.min.js" type="text/javascript"></script>
+
+<!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme JS files as mentioned below (and change the theme property of the plugin) -->
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/themes/krajee-svg/theme.js"></script>
+
+<!-- optionally if you need translation for your language then include locale file as mentioned below (replace LANG.js with your own locale file) -->
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/js/locales/LANG.js"></script>
+
     <!-- Main jQuery -->
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4.5 -->
@@ -328,4 +405,12 @@ Page de formation
     <!--  Owlk Carousel-->
     <script src="{{ asset('assets/js/carousel.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+
+    <script>
+        // initialize with defaults
+    $("#input-id").rating();
+    
+    // with plugin options (do not attach the CSS class "rating" to your input if using this approach)
+    $("#input-id").rating({'size':'xs'});
+    </script>
 @endsection

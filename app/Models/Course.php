@@ -34,14 +34,11 @@ class Course extends Model
     }
 
     public function payment(){
-        return $this->hasOne(Payment::class);
+        return $this->hasMany(Payment::class);
     }
 
     public function reviews(){
         return $this->hasMany(Review::class);
     }
-
-   
-
     
 }

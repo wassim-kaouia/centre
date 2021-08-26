@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Models\Review;
 use App\Models\Student;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -32,7 +33,11 @@ class User extends Authenticatable
         return $this->belongsTo(Student::class,'id','user_id');
     }
 
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
 
+    
     public static function boot(){
         parent::boot();
 

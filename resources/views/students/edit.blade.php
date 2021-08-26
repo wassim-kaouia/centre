@@ -149,7 +149,7 @@ Modifier un Etudiant
                
                 <div class="row justify-content-end">
                     <div class="col-lg-10">
-                        <button type="submit" class="btn btn-primary">Création de l'Etudiant</button>
+                        <button type="submit" class="btn btn-primary">Modifier L'etudiant</button>
                         <button type="reset" class="btn btn-success">Annuler</button>
 
                     </div>
