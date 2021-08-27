@@ -72,19 +72,19 @@ Page de formation
           <span>(5.00)</span>
       </div>
   
-      <h3 class="single-course-title">{{ $course->title }}</h3> 
-      <p>{{ $course->subtitle }}</p>  
+      <h3 class="single-course-title">{{ $specific_course->title }}</h3> 
+      <p>{{ $specific_course->subtitle }}</p>  
       
       <div class="single-course-meta ">
           <ul>
               <li>
                   <span><i class="fa fa-calendar"></i>Dèrniere mise à jour :</span>
-                  <a href="#" class="d-inline-block">{{ $course->updated_at }} </a>
+                  <a href="#" class="d-inline-block">{{ $specific_course->updated_at }} </a>
               </li>
               
               <li>
                   <span><i class="fa fa-bookmark"></i>Categorie :</span>
-                  <a href="#" class="d-inline-block">{{ $course->category->name }}</a>
+                  <a href="#" class="d-inline-block">{{ $specific_course->category->name }}</a>
               </li>
           </ul>
       </div>
@@ -92,13 +92,13 @@ Page de formation
   
                   <div class="single-course-details ">
       <h4 class="course-title">Description</h4>
-      <p>{{ $course->description }}</p>
+      <p>{{ $specific_course->description }}</p>
   
   
       <div class="course-widget course-info">
           <h4 class="course-title">Qu'est ce que vous allez apprendre ?</h4>
           <div>
-            {!! $course->what_to_learn !!}
+            {!! $specific_course->what_to_learn !!}
           </div>
       </div>
   </div>
@@ -108,10 +108,10 @@ Page de formation
       <h4 class="course-title">A propos de Formateur</h4>
       <div class="instructor-profile">
           <div class="profile-img">
-              <img src="{{ $course->instructor->user->avatar }}" alt="" class="img-fluid">
+              <img src="{{ $specific_course->instructor->user->avatar }}" alt="" class="img-fluid">
           </div>
           <div class="profile-info">
-              <h5>{{ $course->instructor->user->full_name }}</h5>
+              <h5>{{ $specific_course->instructor->user->full_name }}</h5>
               <div class="rating">
                   <a href="#"><i class="fa fa-star"></i></a>
                   <a href="#"><i class="fa fa-star"></i></a>
@@ -120,9 +120,9 @@ Page de formation
                   <a href="#"><i class="fa fa-star-half"></i></a>
                   <span>3.79 ratings (29 )</span>
               </div>
-              <p>{{ $course->instructor->about }}</p>
+              <p>{{ $specific_course->instructor->about }}</p>
               <div class="instructor-courses">
-                  <span><i class="bi bi-folder"></i>{{ $course->instructor->courses->count() <= 1 ? $course->instructor->courses->count().' formation' : $course->instructor->courses->count().' formations'  }} </span>
+                  <span><i class="bi bi-folder"></i>{{ $specific_course->instructor->courses->count() <= 1 ? $specific_course->instructor->courses->count().' formation' : $specific_course->instructor->courses->count().' formations'  }} </span>
                   <span><i class="bi bi-group"></i>{{ $nbr_students }} Etudiants</span>
               </div>
           </div>
@@ -132,19 +132,17 @@ Page de formation
 
     @if (Auth::check() && Auth::user()->role->role == 'Admin')
     @else 
-        @if (Auth::check() && !Auth::user()->reviews()->exists() && App\Models\Payment::where('course_id','=',$course->id)->where('student_id','=',Auth::user()->student->id)->exists() )
+        @if (Auth::check() && !$specific_course->reviews->contains('user_id',Auth::user()->id) && 
+        App\Models\Payment::where('student_id',Auth::user()->student->id)->where('course_id',$specific_course->id)->exists())
         <form action="{{ route('reviews.store') }}" method="POST"> 
             @csrf
             <div class="row">
-                
                 <input id="input-id" name="stars" type="text" class="rating" data-size="md" >
-        
                 <div class="col-lg-12">
                     <textarea name="content" id="" class="form-control" cols="30" rows="10"></textarea>
                 </div>
-                
                 <div class="col-lg-4 mt-2 mb-4">
-                    <input type="hidden" name="course_id" id="course_id" value="{{ $course->id }}">
+                    <input type="hidden" name="course_id" id="course_id" value="{{ $specific_course->id }}">
                     <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
@@ -152,7 +150,6 @@ Page de formation
            </form>
         @endif
     @endif 
-
 
   <div class="course-widget course-info">
       <h4 class="course-title">Feedback des étudiants</h4>
@@ -210,15 +207,15 @@ Page de formation
                     @csrf
                     
                     <div class="course-single-thumb">
-                        <img src="{{ $course->thumbnail }}" alt="" class="img-fluid w-100">
+                        <img src="{{ $specific_course->thumbnail }}" alt="" class="img-fluid w-100">
                         <div class="course-price-wrapper">
-                            <div class="course-price ml-3"><h4>Prix: <span>{{ $course->price }} MAD</span></h4></div>
+                            <div class="course-price ml-3"><h4>Prix: <span>{{ $specific_course->price }} MAD</span></h4></div>
                             <div class="buy-btn">
                                 @if (Auth::check() && Auth::user()->student()->exists())
                                   <input type="hidden" name="student" id="student" value="{{Auth::user()->student->id}}">
-                                  <input type="hidden" name="course" id="course" value="{{ $course->id }}">
+                                  <input type="hidden" name="course" id="course" value="{{ $specific_course->id }}">
                                   {{-- <input type="hidden" name="amount" id="amount" value="130"> --}}
-                                <button type="submit" {{ App\Models\Payment::where('student_id',Auth::user()->student->id)->where('course_id',$course->id)->exists() ? 'disabled' : '' }} class="btn btn-danger btn-block">S'inscrire</button>                                
+                                <button type="submit" {{ App\Models\Payment::where('student_id',Auth::user()->student->id)->where('course_id',$specific_course->id)->exists() ? 'disabled' : '' }} class="btn btn-danger btn-block">S'inscrire</button>                                
                                 @else
                                 <p>Pour s'inscrire, il faut créer un <a href="/login_register">nouveau compte</a></p>
                                 <button type="submit" {{ Auth::check() && Auth::user()->role->role == 'Admin' ? 'disabled' : 'disabled'  }} class="btn btn-danger btn-block">S'inscrire</button>                                
@@ -233,7 +230,7 @@ Page de formation
   
       <div class="course-widget single-info">
           <i class="bi bi-group"></i>
-          Dèja inscris <span>{{ $course->students->count() <= 1 ? $course->students->count().' étudiant' : $course->students->count().' étudiants'}} </span> 
+          Dèja inscris <span>{{ $specific_course->students->count() <= 1 ? $specific_course->students->count().' étudiant' : $specific_course->students->count().' étudiants'}} </span> 
       </div>
   
       <div class="course-widget course-details-info">
@@ -248,14 +245,14 @@ Page de formation
               <li>
                   <div class="d-flex justify-content-between align-items-center">
                       <span><i class="bi bi-user-ID"></i>Formateur :</span>
-                      <a href="#" class="d-inline-block">{{ $course->instructor->user->full_name }}</a>
+                      <a href="#" class="d-inline-block">{{ $specific_course->instructor->user->full_name }}</a>
                   </div>
               </li>
 
               <li>
                   <div class="d-flex justify-content-between align-items-center">
                       <span><i class="bi bi-forward"></i>Langues :</span>
-                      @switch($course->langue)
+                      @switch($specific_course->langue)
                           @case('en')
                             Anglais
                               @break
@@ -274,7 +271,7 @@ Page de formation
               <li>
                   <div class="d-flex justify-content-between align-items-center">
                       <span><i class="bi bi-madel"></i>Certificat :</span>
-                      {{ $course->isCertified == true ? 'Oui' : 'Non' }}
+                      {{ $specific_course->isCertified == true ? 'Oui' : 'Non' }}
                   </div>
               </li>
           </ul>
@@ -332,12 +329,13 @@ Page de formation
           <div class="row align-items-center">
               <div class="col-lg-6">
                   <div class="section-heading">
-                      <h4>Des formations que vous pourrez aimer</h4>
+                      <h4>Des Formations qui peuvent vous interesser !</h4>
                   </div>
               </div>
           </div>
   
           <div class="row">
+
               <div class="col-lg-4 col-md-6">
                   <div class="course-block">
                       <div class="course-img">
@@ -370,6 +368,8 @@ Page de formation
                       </div>
                   </div>
               </div>
+
+              
             
           </div>
       </div>

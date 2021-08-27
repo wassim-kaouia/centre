@@ -235,30 +235,41 @@ class CourseController extends Controller
         ]);
     }
 
+    public function relatedCourses($category){
+
+        $relatedCourses = Course::whereHas('categories',function(Builder $query){
+            $query->where('name','=',$category);
+        });
+
+        return view('front.course_detail',[
+            'relatedCourses' => $relatedCourses,
+        ]);
+    }
+
 
     public function show_detail(Request $request,$id){
-
-        $course = Course::findOrFail($id);
+        
+        $mycourse = Course::find($id);
         $nbr_students = 0;
-        $instructor = $course->instructor;
+        $instructor = $mycourse->instructor;
         
         foreach($instructor->courses as $course){
             $nbr_students+=$course->students->count();
         }
 
-        $req = $course->requirement;
+        $req = $mycourse->requirement;
         
         $requirements = explode('/',$req);
 
-        $reviews = Review::paginate(10);
+        $reviews = Review::where('course_id',$id)->paginate(10);
         
-        
+        // dd($mycourse);
         
         return view('front.course_detail',[
-            'course'        => $course,
-            'nbr_students'  => $nbr_students,
-            'requirements'  => $requirements,
-            'reviews'       => $reviews,
+            'specific_course'   => $mycourse,
+            'nbr_students'      => $nbr_students,
+            'requirements'      => $requirements,
+            'reviews'           => $reviews,
         ]);
     }
 
