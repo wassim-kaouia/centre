@@ -9,7 +9,7 @@
 					</p>
 					<ul class="list-inline footer-socials">
 						<li class="list-inline-item"><a href="{{ $settings->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
-						<li class="list-inline-item"> <a href="{{ $settings->twitter }}"><i class="fab fa-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="{{ $settings->twitter }}"><i class="fab fa-twitter"></i></a></li>
 						<li class="list-inline-item"><a href="{{ $settings->linkedin }}"><i class="fab fa-linkedin"></i></a></li>
 						<li class="list-inline-item"><a href="{{ $settings->pinterest }}"><i class="fab fa-pinterest"></i></a></li>
 					</ul>
@@ -20,10 +20,14 @@
 				<div class="footer-widget mb-5 mb-lg-0">
 					<h5 class="widget-title">GCC</h5>
 					<ul class="list-unstyled footer-links">
-						<li><a href="#">À Propos</a></li>
-						<li><a href="#">Contacter Nous</a></li>
-						<li><a href="#">Conditions Générales</a></li>
-						<li><a href="#">Politique de Confidentialité</a></li>
+						<li><a onMouseOver="this.style.color='#96c221'"
+							onMouseOut="this.style.color='#ffff'" href="#">À Propos</a></li>
+						<li><a onMouseOver="this.style.color='#96c221'"
+							onMouseOut="this.style.color='#ffff'" href="#">Contacter Nous</a></li>
+						<li><a onMouseOver="this.style.color='#96c221'"
+							onMouseOut="this.style.color='#ffff'" href="#">Conditions Générales</a></li>
+						<li><a onMouseOver="this.style.color='#96c221'"
+							onMouseOut="this.style.color='#ffff'" href="#">Politique de Confidentialité</a></li>
 					</ul>
 				</div>
 			</div>
@@ -31,7 +35,8 @@
 				<div class="footer-widget mb-5 mb-lg-0">
 					<h5 class="widget-title">Formations</h5>
 					<ul class="list-unstyled footer-links">
-						<li><a href="#">Formation</a></li>
+						<li><a onMouseOver="this.style.color='#96c221'"
+							onMouseOut="this.style.color='#ffff'"href="#">Formation</a></li>
 					</ul>
 				</div>
 			</div>
