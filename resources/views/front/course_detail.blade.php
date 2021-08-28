@@ -144,7 +144,7 @@ Page de formation
                 <div class="col-lg-4 mt-2 mb-4">
                     <input type="hidden" name="course_id" id="course_id" value="{{ $specific_course->id }}">
                     <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <button type="submit" {{  }} class="btn btn-primary">Ajouter</button>
                 </div>
              </div>
            </form>
