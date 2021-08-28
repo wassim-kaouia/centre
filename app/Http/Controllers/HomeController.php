@@ -43,6 +43,7 @@ class HomeController extends Controller
         ]);
     }
 
+
     public function login_register(){
 
         return view('front.login_register');

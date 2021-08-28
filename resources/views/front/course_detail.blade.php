@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}">
 
 <!-- default styles -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"> --}}
 <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
 
 <!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme CSS files as mentioned below (and change the theme property of the plugin) -->
@@ -35,7 +35,6 @@ Page de formation
 @endsection
 
 @section('content')
-
 {{-- content here --}}
 <section class="page-header">
     <div class="container">
@@ -64,12 +63,32 @@ Page de formation
               <div class="col-lg-8">
                   <div class="course-single-header">
       <div class="rating">
-          <a href="#"><i class="fa fa-star"></i></a>
-          <a href="#"><i class="fa fa-star"></i></a>
-          <a href="#"><i class="fa fa-star"></i></a>
-          <a href="#"><i class="fa fa-star"></i></a>
-          <a href="#"><i class="fa fa-star"></i></a>
-          <span>(5.00)</span>
+        @if ($avgReviews == 1)
+        <a href="#"><i class="fa fa-star"></i></a>
+     @endif
+     @if ($avgReviews == 2)
+        <a href="#"><i class="fa fa-star"></i></a>
+        <a href="#"><i class="fa fa-star"></i></a>
+     @endif
+     @if ($avgReviews == 3)
+        <a href="#"><i class="fa fa-star"></i></a>
+        <a href="#"><i class="fa fa-star"></i></a>
+        <a href="#"><i class="fa fa-star"></i></a>
+     @endif
+     @if ($avgReviews == 4)
+         <a href="#"><i class="fa fa-star"></i></a>
+         <a href="#"><i class="fa fa-star"></i></a>
+         <a href="#"><i class="fa fa-star"></i></a>
+         <a href="#"><i class="fa fa-star"></i></a>
+     @endif
+     @if ($avgReviews == 5)
+         <a href="#"><i class="fa fa-star"></i></a>
+         <a href="#"><i class="fa fa-star"></i></a>
+         <a href="#"><i class="fa fa-star"></i></a>
+         <a href="#"><i class="fa fa-star"></i></a>
+         <a href="#"><i class="fa fa-star"></i></a>
+     @endif
+          <span>({{ $avgReviews }}.00)</span>
       </div>
   
       <h3 class="single-course-title">{{ $specific_course->title }}</h3> 
@@ -113,12 +132,32 @@ Page de formation
           <div class="profile-info">
               <h5>{{ $specific_course->instructor->user->full_name }}</h5>
               <div class="rating">
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star-half"></i></a>
-                  <span>3.79 ratings (29 )</span>
+                @if ($instructor_review_array['stars'] == 1)
+                <a href="#"><i class="fa fa-star"></i></a>
+             @endif
+             @if ($instructor_review_array['stars'] == 2)
+                <a href="#"><i class="fa fa-star"></i></a>
+                <a href="#"><i class="fa fa-star"></i></a>
+             @endif
+             @if ($instructor_review_array['stars'] == 3)
+                <a href="#"><i class="fa fa-star"></i></a>
+                <a href="#"><i class="fa fa-star"></i></a>
+                <a href="#"><i class="fa fa-star"></i></a>
+             @endif
+             @if ($instructor_review_array['stars'] == 4)
+                 <a href="#"><i class="fa fa-star"></i></a>
+                 <a href="#"><i class="fa fa-star"></i></a>
+                 <a href="#"><i class="fa fa-star"></i></a>
+                 <a href="#"><i class="fa fa-star"></i></a>
+             @endif
+             @if ($instructor_review_array['stars'] == 5)
+                 <a href="#"><i class="fa fa-star"></i></a>
+                 <a href="#"><i class="fa fa-star"></i></a>
+                 <a href="#"><i class="fa fa-star"></i></a>
+                 <a href="#"><i class="fa fa-star"></i></a>
+                 <a href="#"><i class="fa fa-star"></i></a>
+             @endif
+                  <span> {{ $instructor_review_array['stars'] }} Étoiles ({{ $instructor_review_array['nbr'] }} )</span>
               </div>
               <p>{{ $specific_course->instructor->about }}</p>
               <div class="instructor-courses">
@@ -144,7 +183,7 @@ Page de formation
                 <div class="col-lg-4 mt-2 mb-4">
                     <input type="hidden" name="course_id" id="course_id" value="{{ $specific_course->id }}">
                     <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                    <button type="submit" {{  }} class="btn btn-primary">Ajouter</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
              </div>
            </form>
@@ -335,42 +374,70 @@ Page de formation
           </div>
   
           <div class="row">
+               @foreach ($relatedCourses as $relatedcourse)
+               <div class="col-lg-4 col-md-6">
+                <div class="course-block">
+                    <div class="course-img">
+                        <img src="{{ $relatedcourse->thumbnail }}" alt="" class="img-fluid">
+                        <span class="course-label">{{ $relatedcourse->isCertified == true ? 'Formation Certifiée' : 'Formation Non Certifiée' }}</span>
+                    </div>
+                    
+                    <div class="course-content">
+                        <div class="course-price ">{{ $relatedcourse->price }} MAD</div>   
+                        
+                        <h4><a href="#">{{ $relatedcourse->title }}</a></h4>    
+                        <div class="rating">
+                        <?php           
+                            $nbr_reviews = 0;
+                            $some=0;                      
+                        ?>    
+                        @foreach ($relatedcourse->reviews as $review)
+                            <?php $nbr_reviews++; ?> 
+                            <?php $some+=$review->stars; ?> 
+                        @endforeach 
+                        
+                        @if (round($some/$nbr_reviews) == 0)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if (round($some/$nbr_reviews) == 2)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if (round($some/$nbr_reviews) == 3)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if (round($some/$nbr_reviews) == 4)
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if (round($some/$nbr_reviews) == 5)
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                             <span>{{ $nbr_reviews == 0 ? '0' : round($some/$nbr_reviews)}}</span>
+                            <span>({{ $nbr_reviews }})</span>   
+                        </div>
+                        <p>{{ $relatedcourse->description }}</p>
 
-              <div class="col-lg-4 col-md-6">
-                  <div class="course-block">
-                      <div class="course-img">
-                          <img src="assets/images/course/course1.jpg" alt="" class="img-fluid">
-                          <span class="course-label">Beginner</span>
-                      </div>
-                      
-                      <div class="course-content">
-                          <div class="course-price ">$50</div>   
-                          
-                          <h4><a href="#">Information About UI/UX Design Degree</a></h4>    
-                          <div class="rating">
-                              <a href="#"><i class="fa fa-star"></i></a>
-                              <a href="#"><i class="fa fa-star"></i></a>
-                              <a href="#"><i class="fa fa-star"></i></a>
-                              <a href="#"><i class="fa fa-star"></i></a>
-                              <a href="#"><i class="fa fa-star"></i></a>
-                              <span>(5.00)</span>
-                          </div>
-                          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, alias.</p>
-  
-                          <div class="course-footer d-lg-flex align-items-center justify-content-between">
-                              <div class="course-meta">
-                                  <span class="course-student"><i class="bi bi-group"></i>340</span>
-                                  <span class="course-duration"><i class="bi bi-badge3"></i>82 Lessons</span>
-                              </div> 
-                             
-                              <div class="buy-btn"><a href="#" class="btn btn-main-2 btn-small">Details</a></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              
-            
+                        <div class="course-footer d-lg-flex align-items-center justify-content-between">
+                            <div class="course-meta">
+                                <span class="course-student"><i class="bi bi-group"></i>{{ $relatedcourse->students->count() }}</span>
+                                <span class="course-duration"><i class="bi bi-badge3"></i>Max {{ $relatedcourse->student_limit }} étudiants</span>
+                            </div> 
+                           
+                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $relatedcourse->id,'category' => $relatedcourse->category->name]) }}" class="btn btn-main-2 btn-small">Details</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               @endforeach
           </div>
       </div>
 </section>
@@ -395,7 +462,7 @@ Page de formation
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/js/locales/LANG.js"></script>
 
     <!-- Main jQuery -->
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script> --}}
     <!-- Bootstrap 4.5 -->
     <script src="{{ asset('assets/libs/bootstrap/bootstrap.min.js') }}"></script>
     <!-- Counterup -->
@@ -409,9 +476,9 @@ Page de formation
 
     <script>
         // initialize with defaults
-    $("#input-id").rating();
+    // $("#input-id").rating();
     
     // with plugin options (do not attach the CSS class "rating" to your input if using this approach)
-    $("#input-id").rating({'size':'xs'});
+    // $("#input-id").rating({'size':'xs'});
     </script>
 @endsection

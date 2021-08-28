@@ -77,8 +77,8 @@ Page Principale
                                 <span class="course-student"><i class="bi bi-group"></i>{{ $course->students->count() }}</span>
                                 <span class="course-duration"><i class="bi bi-badge3"></i>Max {{ $course->student_limit }} étudiants</span>
                             </div> 
-                           
-                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id]) }}"  class="btn btn-danger btn-small">Détails</a></div>
+                            
+                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id,'category' => $course->category->name]) }}"  class="btn btn-danger btn-small">Détails</a></div>
                         </div>
                     </div>
                 </div>
@@ -114,8 +114,7 @@ Page Principale
                     </div>
                     <ul class="team-socials list-inline">
                         <li class="list-inline-item"><a href="{{ $settings->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+\                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div>

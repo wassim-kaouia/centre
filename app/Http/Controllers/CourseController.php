@@ -234,24 +234,48 @@ class CourseController extends Controller
         ]);
     }
 
-    public function relatedCourses($category){
+    public function calculateReviews($c){
+        $course = Course::find($c);
+        $nbr_reviews = $course->reviews->count();
+        $avg_reviews = 0;
+        $some_reviews= 0;
 
-        $relatedCourses = Course::whereHas('categories',function(Builder $query){
-            $query->where('name','=',$category);
-        });
-
-        return view('front.course_detail',[
-            'relatedCourses' => $relatedCourses,
-        ]);
+        for($i=0; $i<$course->reviews->count(); $i++){
+            $some_reviews+=$course->reviews[$i]->stars;
+        }
+        return $nbr_reviews == 0 ? 0 : $some_reviews/$nbr_reviews;
     }
 
+    public function calculateReviewsPerInstructor($c){
+        $course = Course::find($c);
+        $instructor = $course->instructor;
+        $nbr_reviews_instructor=0;
+        $some_reviews_instructor=0;
+        
+        for($i=0; $i<$instructor->courses->count(); $i++){
+            $nbr_reviews_instructor  += $instructor->courses[$i]->reviews->count();
+            for($j=0; $j<$instructor->courses[$i]->reviews->count(); $j++){
+                $some_reviews_instructor += $instructor->courses[$i]->reviews[$j]->stars;              
+            }
+        }
+        $reviews_array = [
+            'nbr'     => $nbr_reviews_instructor,
+            'stars'   => $nbr_reviews_instructor == 0 ? 0 : round($some_reviews_instructor/$nbr_reviews_instructor),
+        ];
+        return $reviews_array;
+    }
 
-    public function show_detail(Request $request,$id){
+    public function show_detail(Request $request,$id,$category){
         
         $mycourse = Course::find($id);
         $nbr_students = 0;
         $instructor = $mycourse->instructor;
-        
+
+        $relatedCourses = Course::whereHas('category',function($query) use($category){
+            $query->where('name',$category);
+        })->take(3)->get();
+
+    
         foreach($instructor->courses as $course){
             $nbr_students+=$course->students->count();
         }
@@ -262,13 +286,18 @@ class CourseController extends Controller
 
         $reviews = Review::where('course_id',$id)->paginate(10);
         
-        // dd($mycourse);
-        
+        $avgReviews = $this->calculateReviews($id);
+
+        $instructor_array= $this->calculateReviewsPerInstructor($id);
+
         return view('front.course_detail',[
-            'specific_course'   => $mycourse,
-            'nbr_students'      => $nbr_students,
-            'requirements'      => $requirements,
-            'reviews'           => $reviews,
+            'specific_course'        => $mycourse,
+            'nbr_students'           => $nbr_students,
+            'requirements'           => $requirements,
+            'reviews'                => $reviews,
+            'relatedCourses'         => $relatedCourses,
+            'avgReviews'             => $avgReviews,
+            'instructor_review_array'=> $instructor_array,
         ]);
     }
 

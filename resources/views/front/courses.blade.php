@@ -93,7 +93,7 @@ Les Formations
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
-                                <span>(5.00)</span>
+                                <span>({{ $course->reviews->count() }})</span>
                             </div>
                             <p>{{ $course->description }}</p>
     
@@ -103,7 +103,7 @@ Les Formations
                                     <span class="course-duration"><i class="bi bi-badge3"></i>Max {{ $course->student_limit }} étudiants</span>
                                 </div> 
                                
-                                <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id]) }}" class="btn btn-main-2 btn-small">Détails</a></div>
+                                <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id,'category' => $course->category->name]) }}" class="btn btn-main-2 btn-small">Détails</a></div>
                             </div>
                         </div>
                     </div>

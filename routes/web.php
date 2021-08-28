@@ -31,7 +31,7 @@ Route::get('/',[HomeController::class,'main'])->name('main');
 Route::get('/login_register',[HomeController::class,'login_register'])->name('login.register')->middleware('islogged');
 Route::post('/nouveau/etudiant',[HomeController::class,'store_user_front'])->name('etudiant.register')->middleware('islogged');
 Route::get('/formations/lists',[CourseController::class,'show_courses_front'])->name('show.courses');
-Route::get('/formation/{id}/show',[CourseController::class,'show_detail'])->name('show.detail.course');
+Route::get('/formation/{id}/show/{category}',[CourseController::class,'show_detail'])->name('show.detail.course');
 
 Route::middleware(['auth','rolechecker'])->group(function () {
 //Update User Details

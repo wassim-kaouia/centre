@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Course extends Model
 {
     use HasFactory;
-
+    
     protected $guarded =[];
 
     public function tags(){
@@ -40,5 +40,4 @@ class Course extends Model
     public function reviews(){
         return $this->hasMany(Review::class);
     }
-    
 }
