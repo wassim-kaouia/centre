@@ -78,7 +78,7 @@ Page Principale
                                 <span class="course-duration"><i class="bi bi-badge3"></i>Max {{ $course->student_limit }} étudiants</span>
                             </div> 
                            
-                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id]) }}" class="btn btn-danger btn-small">Détails</a></div>
+                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id]) }}"  class="btn btn-danger btn-small">Détails</a></div>
                         </div>
                     </div>
                 </div>

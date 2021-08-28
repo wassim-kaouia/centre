@@ -94,7 +94,6 @@ class CourseController extends Controller
         $course->isCertified  = $request->is_certified === 'on' ? true : false;
         $course->discount     = $request->discountable === 'on' ? $request->discount : 0;
         
-
         
         $thumbnail_path = public_path($course->thumbnail);
         if (request()->has('thumbnail')) {    
