@@ -43,6 +43,15 @@ class HomeController extends Controller
         ]);
     }
 
+    public function politiques(){
+
+        return view('front.policy');
+    }
+    public function conditions(){
+
+        return view('front.conditions');
+    }
+
 
     public function login_register(){
 

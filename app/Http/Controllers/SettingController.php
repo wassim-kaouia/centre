@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Policy;
 use App\Models\Setting;
+use App\Models\Condition;
 use Illuminate\Http\Request;
+
 class SettingController extends Controller
 {
     public function edit(Request $request){
@@ -11,7 +14,7 @@ class SettingController extends Controller
         $data = Setting::latest()->get();
         return view('settings.edit',['setting' => $data]);
     }
-
+    
     public function update(Request $request){
         // dd($request->phone);   
         $setting = Setting::first();
@@ -52,6 +55,58 @@ class SettingController extends Controller
         
         session()->flash('success','Mise à jour réussie !');
 
+        return redirect()->back();
+    }
+
+    public function show_conditions_page(){
+        $conditions = Condition::exists() ? Condition::first() : null;
+        return view('settings.conditions',['conditions' => $conditions]);
+    }
+
+    public function show_politiques_page(){
+        $policies = Policy::exists() ? Policy::first() : null;
+        return view('settings.politiques',['policies' => $policies]);
+    }
+
+    public function conditions(Request $request){
+        
+        $content = new Condition();
+        $content->conditions = $request->content;
+        $content->save();
+
+        session()->flash('success','Page des Conditions est bien Crée');
+
+        return redirect()->back();
+    }
+
+    public function conditions_update(Request $request){
+        $content = Condition::first();
+
+        $content->conditions = $request->content;
+        $content->save();
+
+        session()->flash('success','Page de Conditions est bien Mise à jour !');
+        return redirect()->back();
+    }
+
+    public function politiques(Request $request){
+        
+        $content = new Policy();
+
+        $content->policy = $request->content;
+        $content->save();
+
+        session()->flash('success','Page de politiques est bien Crée');
+        return redirect()->back();
+    }
+
+    public function politiques_update(Request $request){
+        $content = Policy::first();
+
+        $content->policy = $request->content;
+        $content->save();
+
+        session()->flash('success','Page de Politiques est bien Mise à jour !');
         return redirect()->back();
     }
 }

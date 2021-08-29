@@ -32,6 +32,9 @@ Route::get('/login_register',[HomeController::class,'login_register'])->name('lo
 Route::post('/nouveau/etudiant',[HomeController::class,'store_user_front'])->name('etudiant.register')->middleware('islogged');
 Route::get('/formations/lists',[CourseController::class,'show_courses_front'])->name('show.courses');
 Route::get('/formation/{id}/show/{category}',[CourseController::class,'show_detail'])->name('show.detail.course');
+Route::get('/politiques',[HomeController::Class,'politiques'])->name('home.politiques');
+Route::get('/conditions',[HomeController::Class,'conditions'])->name('home.conditions');
+
 
 Route::middleware(['auth','rolechecker'])->group(function () {
 //Update User Details
@@ -156,8 +159,16 @@ Route::get('smsbulk/index',[BulkSmsController::class,'index'])->name('sms.index'
 Route::post('smsbulk/send/compaign',[BulkSmsController::class,'sndSms'])->name('sms.send');    
 });
 
+Route::middleware(['auth','rolechecker'])->group(function (){
 Route::get('/parametres/modification',[SettingController::class,'edit'])->name('settings.edit');
 Route::put('/parametres/miseajour',[SettingController::class,'update'])->name('settings.update');
+Route::get('/page/conditions',[SettingController::class,'show_conditions_page'])->name('settings.conditionPage');
+Route::get('/page/politique',[SettingController::class,'show_politiques_page'])->name('settings.politiquePage');
+Route::post('/pages/conditions',[SettingController::class,'conditions'])->name('settings.conditions');
+Route::post('/pages/politiques',[SettingController::class,'politiques'])->name('settings.politique');
+Route::put('/pages/politiques/update',[SettingController::class,'politiques_update'])->name('settings.edit_politique');
+Route::put('/pages/conditions/update',[SettingController::class,'conditions_update'])->name('settings.edit_conditions');
+});
 
 Route::post('/commentaire/ajouter',[ReviewController::class,'store'])->name('reviews.store');
 

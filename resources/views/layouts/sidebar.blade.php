@@ -129,6 +129,8 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('fees.index') }}">Les frais</a></li>
                         <li><a href="{{ route('settings.edit') }}">Paramètres Generales</a></li>
+                        <li><a href="{{ route('settings.conditionPage') }}">Conditions Generales</a></li>
+                        <li><a href="{{ route('settings.politiquePage') }}">Politiques de confidentialitée</a></li>
                     </ul>
                 </li>
             </ul>
