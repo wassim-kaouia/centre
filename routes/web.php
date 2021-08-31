@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Payment;
+use App\Mail\EmailToAdmin;
 use App\Models\PaymentDetail;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UploadAttachment;
 use App\Http\Controllers\BulkSmsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SettingController;
@@ -169,6 +171,12 @@ Route::post('/pages/conditions',[SettingController::class,'conditions'])->name('
 Route::post('/pages/politiques',[SettingController::class,'politiques'])->name('settings.politique');
 Route::put('/pages/politiques/update',[SettingController::class,'politiques_update'])->name('settings.edit_politique');
 Route::put('/pages/conditions/update',[SettingController::class,'conditions_update'])->name('settings.edit_conditions');
+});
+
+Route::post('/contacter/email',[ContactController::class,'sendMail'])->name('mail.send');
+
+Route::get('/mailexemple',function(){
+     return new EmailToAdmin();
 });
 
 Route::post('/commentaire/ajouter',[ReviewController::class,'store'])->name('reviews.store');

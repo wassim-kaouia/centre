@@ -8,13 +8,8 @@
 <link rel="stylesheet" href="{{ asset('front/vendors/bicon/css/bicon.min.css') }}">
 <!-- animate.css -->
 <link rel="stylesheet" href="{{ asset('front/vendors/animate-css/animate.css') }}">
-<!-- WooCOmmerce CSS -->
-<link rel="stylesheet" href="{{ asset('front/vendors/woocommerce/woocommerce-layouts.css') }}">
-<link rel="stylesheet" href="{{ asset('front/vendors/woocommerce/woocommerce-small-screen.css') }}">
-<link rel="stylesheet" href="{{ asset('front/vendors/woocommerce/woocommerce.css') }}">
-<!-- Owl Carousel  CSS -->
-<link rel="stylesheet" href="{{ asset('front/vendors/owl/assets/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{ asset('front/vendors/owl/assets/owl.theme.default.min.css') }}">
+
+
  
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
@@ -31,14 +26,14 @@ Conditions Generales
       <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="page-header-content">
-              <h1>Contact Us</h1>
+              <h1>Contacter nous</h1>
               <ul class="list-inline mb-0">
                 <li class="list-inline-item">
-                  <a href="#">Home</a>
+                  <a href="{{ route('main') }}">Accueil</a>
                 </li>
                 <li class="list-inline-item">/</li>
                 <li class="list-inline-item">
-                    Contact
+                    Contacter nous
                 </li>
               </ul>
             </div>
@@ -84,15 +79,8 @@ Conditions Generales
               </div>
   
               <div class="col-lg-8">
-                  <form class="contact__form form-row " method="POST" action="mail.php" id="contactForm">
-                      <div class="row">
-                         <div class="col-12">
-                             <div class="alert alert-success contact__msg" style="display: none" role="alert">
-                                 Votre Message est Envoyé avec Succée.
-                             </div>
-                         </div>
-                     </div>
-  
+                  <form class="contact__form form-row" method="POST" action="{{ route('mail.send') }}" id="contactForm">
+                     @csrf
                      <div class="row">
                          <div class="col-lg-6">
                              <div class="form-group">
@@ -136,12 +124,5 @@ Conditions Generales
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4.5 -->
     <script src="{{ asset('assets/libs/bootstrap/bootstrap.min.js') }}"></script>
-    <!-- Counterup -->
-    <script src="{{ asset('assets/js/waypoint.js') }}"></script>
-    <script src="{{ asset('assets/js/counterup.js') }}"></script>
-    <script src="{{ asset('assets/js/isotope.js') }}"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-    <!--  Owlk Carousel-->
-    <script src="{{ asset('assets/js/carousel.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+
 @endsection
