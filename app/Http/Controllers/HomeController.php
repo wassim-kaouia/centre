@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Policy;
 use App\Models\Review;
+use App\Models\Partner;
 use App\Models\Student;
 use App\Models\Condition;
 use App\Models\Instructor;
@@ -36,14 +37,17 @@ class HomeController extends Controller
         $courses     = Course::where('status','=',true)->take(3)->get();
         $instructors = Instructor::take(3)->get();
         $reviews = Review::where('stars','>=',4)->paginate(6);
-
+        $partners = Partner::all();
 
         return view('front.index',[
             'courses'      => $courses,
             'insctructors' => $instructors,
             'reviews'      => $reviews,
+            'partners'     => $partners,
         ]);
     }
+
+
 
     public function contact(){
 

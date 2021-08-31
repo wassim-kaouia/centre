@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -16,10 +15,8 @@ class EmailToAdmin extends Mailable
     {
         $this->detail = $detail;
     }
-
-    
     public function build()
     {
-        return $this->subject('Message from')->to('services@greencitycentre.com')->from('greencitycentre@gmail.com')->view('emails.adminmail');
+        return $this->subject('Message from '.$detail['name'])->to('services@greencitycentre.com')->from('greencitycentre@gmail.com')->view('emails.adminmail');
     }
 }

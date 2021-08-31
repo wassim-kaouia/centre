@@ -126,12 +126,10 @@ Page Principale
     </div>
 </section>
 
-<section class="partners">
-    <h2 class="text-center p-4">Nos Partenaires</h2>
-    <section class="customer-logos slider">
-        <div class="slide"><img src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg"></div>
-     </section>
-</section>
+
+
+
+@include('layouts_front.partners')
 
 @include('layouts_front.reviews')
 @include('layouts_front.newsletter')
@@ -153,7 +151,7 @@ Page Principale
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
-    
+
     <script>
         $(document).ready(function(){
         $('.customer-logos').slick({

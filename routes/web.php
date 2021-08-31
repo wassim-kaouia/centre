@@ -17,6 +17,7 @@ use App\Http\Controllers\UploadAttachment;
 use App\Http\Controllers\BulkSmsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentController;
@@ -180,6 +181,10 @@ Route::get('/mailexemple',function(){
 });
 
 Route::post('/commentaire/ajouter',[ReviewController::class,'store'])->name('reviews.store');
+
+Route::get('getPartenaires',[PartnerController::class,'index'])->name('partner.index');
+Route::delete('deletePartenaires/{id}',[PartnerController::class,'destroy'])->name('partner.destroy');
+Route::post('/partenairs/sauvegarder',[PartnerController::class,'store'])->name('partner.store');
 
 // Route::view('/bulksms', 'testsms');
 // Route::get('/getNumbers/{id}', [BulkSmsController::class,'dataToViewOnRequest'])->name('sms.numbers');
