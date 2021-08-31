@@ -107,7 +107,7 @@
                         @endauth
                         
                         <li class="nav-item ">
-                            <a href="contact.html" class="nav-link">
+                            <a href="{{ route('home.contact') }}" class="nav-link">
                                 Contacter nous
                             </a>
                         </li>
