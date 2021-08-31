@@ -7,7 +7,7 @@
     <title>Email Admin</title>
 </head>
 <body>
-    Message : </br>
+    Message : {{ $detail['message'] }} <br>
 
     Thank you,
 </body>

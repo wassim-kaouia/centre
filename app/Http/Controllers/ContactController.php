@@ -22,7 +22,7 @@ class ContactController extends Controller
             'message' => $request->message,
         ];
 
-        Mail::to('greencitycentre@gmail.com')->send(new EmailToAdmin($data));
+        Mail::send(new EmailToAdmin($data));
         
         session()->flash('success','Merci ! Votre message est bien envoyé.');
         return redirect()->back();
