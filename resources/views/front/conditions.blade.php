@@ -55,16 +55,10 @@ Conditions Generales
   <section class="section-padding course">
   
       <div class="container">
-          <div class="row">
-              
-          </div>
-  
-  
+          
           <div class="row">
               <div class="col-lg-12">
-                   
-                    
-            
+                   {!! $conditions == null ? 'Page sous construction' : $conditions->conditions !!}
               </div>
           </div>
       </div>

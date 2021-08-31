@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Policy;
 use App\Models\Review;
 use App\Models\Student;
+use App\Models\Condition;
 use App\Models\Instructor;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -43,13 +45,21 @@ class HomeController extends Controller
         ]);
     }
 
-    public function politiques(){
+    public function contact(){
 
-        return view('front.policy');
+        return view('front.contact');
     }
-    public function conditions(){
 
-        return view('front.conditions');
+    public function politiques(){
+        $policies = Policy::exists() ? Policy::first() : null;
+
+        return view('front.policy',['policies' => $policies]);
+    }
+
+    public function conditions(){
+        $conditions = Condition::exists() ? Condition::first() : null;
+
+        return view('front.conditions',['conditions' => $conditions]);
     }
 
 

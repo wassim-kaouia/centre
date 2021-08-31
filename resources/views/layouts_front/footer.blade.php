@@ -25,9 +25,9 @@
 						<li><a onMouseOver="this.style.color='#96c221'"
 							onMouseOut="this.style.color='#ffff'" href="#">Contacter Nous</a></li>
 						<li><a onMouseOver="this.style.color='#96c221'"
-							onMouseOut="this.style.color='#ffff'" href="#">Conditions Générales</a></li>
+							onMouseOut="this.style.color='#ffff'" href="{{ route('home.conditions') }}">Conditions Générales</a></li>
 						<li><a onMouseOver="this.style.color='#96c221'"
-							onMouseOut="this.style.color='#ffff'" href="#">Politique de Confidentialité</a></li>
+							onMouseOut="this.style.color='#ffff'" href="{{ route('home.politiques') }}">Politique de Confidentialité</a></li>
 					</ul>
 				</div>
 			</div>

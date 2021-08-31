@@ -34,6 +34,7 @@ Route::get('/formations/lists',[CourseController::class,'show_courses_front'])->
 Route::get('/formation/{id}/show/{category}',[CourseController::class,'show_detail'])->name('show.detail.course');
 Route::get('/politiques',[HomeController::Class,'politiques'])->name('home.politiques');
 Route::get('/conditions',[HomeController::Class,'conditions'])->name('home.conditions');
+Route::get('/contacter',[HomeController::class,'contact'])->name('home.contact');
 
 
 Route::middleware(['auth','rolechecker'])->group(function () {

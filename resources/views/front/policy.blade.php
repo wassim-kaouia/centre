@@ -36,14 +36,14 @@ Politique de confidentialitée
       <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="page-header-content">
-              <h1>Politique de confidentialitée</h1>
+              <h1>Politique De Confidentialité</h1>
               <ul class="list-inline mb-0">
                 <li class="list-inline-item">
                   <a href="#">Accueil</a>
                 </li>
                 <li class="list-inline-item">/</li>
                 <li class="list-inline-item">
-                    Politique de confidentialitée
+                  Politique De Confidentialité                
                 </li>
               </ul>
             </div>
@@ -53,25 +53,15 @@ Politique de confidentialitée
   </section>
   
   <section class="section-padding course">
-  
       <div class="container">
           <div class="row">
-              
-          </div>
-  
-  
-          <div class="row">
               <div class="col-lg-12">
-                   
-                    
-            
+                   {!! $policies == null ? 'Page sous Construction' : $policies->policy !!}
               </div>
           </div>
       </div>
   </section>
-
 @endsection
-
 
 @section('scriptjs')
     <!-- Main jQuery -->

@@ -19,6 +19,8 @@
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/partners.css') }}">
+
 
 @endsection
 
@@ -59,7 +61,7 @@ Page Principale
                     </div>
                     
                     <div class="course-content">
-                        <div class="course-price ">{{ $course->price }} MAD</div>   
+                        <div class="course-price" style="color:black;">{{ $course->price }} MAD</div>   
                         
                         <h4><a href="#">{{ $course->title }}</a></h4>    
                         <div class="rating">
@@ -78,7 +80,7 @@ Page Principale
                                 <span class="course-duration"><i class="bi bi-badge3"></i>Max {{ $course->student_limit }} étudiants</span>
                             </div> 
                             
-                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id,'category' => $course->category->name]) }}"  class="btn btn-danger btn-small">Détails</a></div>
+                            <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id,'category' => $course->category->name]) }}"  class="btn btn-success btn-small">Détails</a></div>
                         </div>
                     </div>
                 </div>
@@ -90,6 +92,7 @@ Page Principale
     </div>
 </section>
 @endif
+
 
 <section class="section-padding bg-grey team-2">
     <div class="container">
@@ -123,12 +126,19 @@ Page Principale
     </div>
 </section>
 
+<section class="partners">
+    <h2 class="text-center p-4">Nos Partenaires</h2>
+    <section class="customer-logos slider">
+        <div class="slide"><img src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg"></div>
+     </section>
+</section>
+
 @include('layouts_front.reviews')
 @include('layouts_front.newsletter')
 @endsection
 
-
 @section('scriptjs')
+    
     <!-- Main jQuery -->
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4.5 -->
@@ -141,4 +151,31 @@ Page Principale
     <!--  Owlk Carousel-->
     <script src="{{ asset('assets/js/carousel.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+        $('.customer-logos').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 1500,
+            arrows: false,
+            dots: false,
+            pauseOnHover: false,
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 4
+                }
+            },{
+                breakpoint: 520,
+                settings: {
+                slidesToShow: 3
+            }
+            }]
+            });
+        });
+    </script>
 @endsection

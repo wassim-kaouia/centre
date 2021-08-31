@@ -75,13 +75,11 @@ class SettingController extends Controller
         $content->save();
 
         session()->flash('success','Page des Conditions est bien Crée');
-
         return redirect()->back();
     }
 
     public function conditions_update(Request $request){
         $content = Condition::first();
-
         $content->conditions = $request->content;
         $content->save();
 
@@ -92,7 +90,6 @@ class SettingController extends Controller
     public function politiques(Request $request){
         
         $content = new Policy();
-
         $content->policy = $request->content;
         $content->save();
 
@@ -101,8 +98,8 @@ class SettingController extends Controller
     }
 
     public function politiques_update(Request $request){
+        
         $content = Policy::first();
-
         $content->policy = $request->content;
         $content->save();
 

@@ -336,7 +336,7 @@ Banner Area
   height: 2px;
   bottom: 0px;
   margin: 0px  auto;
-  background: #FF1949;
+  background: #96c221;
 }
 
 .font-size-26 {
@@ -1029,7 +1029,7 @@ Clientns Partners
 }
 
 .contact__form .form-control:hover {
-  border-color: #FF1949;
+  border-color: #96c221;
 }
 
 .contact__form .form-group {
