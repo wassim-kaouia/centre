@@ -8,7 +8,7 @@
 </head>
 <body>
     Message : {{ $detail['message'] }} <br>
-
+    
     Thank you,
 </body>
 </html>
