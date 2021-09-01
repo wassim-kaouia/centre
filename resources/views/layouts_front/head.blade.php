@@ -68,7 +68,7 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="#" class="nav-link js-scroll-trigger">
+                            <a href="{{ route('home.about') }}" class="nav-link js-scroll-trigger">
                                 Qui Somme nous
                             </a>
                         </li>

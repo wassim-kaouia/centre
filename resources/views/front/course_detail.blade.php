@@ -396,25 +396,25 @@ Page de formation
                             <?php $some+=$review->stars; ?> 
                         @endforeach 
                         
-                        @if (round($some/$nbr_reviews) == 0)
+                        @if (round($nbr_reviews == 0 ? 0 : $some/$nbr_reviews) == 0)
                            <a href="#"><i class="fa fa-star"></i></a>
                         @endif
-                        @if (round($some/$nbr_reviews) == 2)
-                           <a href="#"><i class="fa fa-star"></i></a>
-                           <a href="#"><i class="fa fa-star"></i></a>
-                        @endif
-                        @if (round($some/$nbr_reviews) == 3)
-                           <a href="#"><i class="fa fa-star"></i></a>
+                        @if (round($nbr_reviews == 0 ? 0 : $some/$nbr_reviews) == 2)
                            <a href="#"><i class="fa fa-star"></i></a>
                            <a href="#"><i class="fa fa-star"></i></a>
                         @endif
-                        @if (round($some/$nbr_reviews) == 4)
+                        @if (round($nbr_reviews == 0 ? 0 : $some/$nbr_reviews) == 3)
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                           <a href="#"><i class="fa fa-star"></i></a>
+                        @endif
+                        @if (round($nbr_reviews == 0 ? 0 : $some/$nbr_reviews) == 4)
                             <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
                         @endif
-                        @if (round($some/$nbr_reviews) == 5)
+                        @if (round($nbr_reviews == 0 ? 0 : $some/$nbr_reviews) == 5)
                             <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
