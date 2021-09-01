@@ -6,12 +6,15 @@
         max-width: 800px;
         margin: auto;
         padding: 30px;
-        border: 1px solid #eee;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
         font-size: 16px;
         line-height: 24px;
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
+    }
+
+    .invoice-box-borders {
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     }
     
     .invoice-box table {
@@ -115,9 +118,9 @@ Reçu de paiement
 @section('content')
 <div class="row">
     <div class="col-lg-12">  
-              <div class="invoice-box">
+              <div id="border-class" class="invoice-box invoice-box-borders">
                 <div class="button-print">
-                    <button id="printPageButton"  class="btn btn-success" onClick="window.print();">Imprimer</button>
+                    <button id="printPageButton"  class="btn btn-success" onClick="printPDF()">Imprimer</button>
                 </div>
                     <table cellpadding="0" cellspacing="0">
                         <tr class="top">
@@ -127,18 +130,15 @@ Reçu de paiement
                                         <td class="title">
                                             <img src="{{ URL::asset('logo-light.png') }}" style="width: 100%; max-width: 300px" />
                                         </td>
-        
                                         <td>
-                                            Facture #: 123<br />
+                                            Facture #: R0-{{ $payment->id }}<br />
                                             Crée: {{ \Carbon\Carbon::parse($payment->created_at)->format('d/m/Y') }}<br />
-                                            Editeur: {{ Auth::user()->full_name }}
-                                            
+                                            Editeur: {{ Auth::user()->full_name }}              
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
-        
                         <tr class="information">
                             <td colspan="2">
                                 <table>
@@ -193,6 +193,13 @@ Reçu de paiement
 @endsection
 
 @section('js')
-    
+<script>
+    function printPDF() {
+        var element = document.getElementById("border-class");
+        element.classList.remove("invoice-box-borders");
+        window.print();
+        element.classList.add("invoice-box-borders");
+    }
+</script>
 @endsection
 

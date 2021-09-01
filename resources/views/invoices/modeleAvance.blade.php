@@ -5,17 +5,20 @@
 		<title>A simple, clean, and responsive HTML invoice template</title>
 
 		<style>
-			.invoice-box {
-				max-width: 800px;
-				margin: auto;
-				padding: 30px;
-				border: 1px solid #eee;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-				font-size: 16px;
-				line-height: 24px;
-				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-				color: #555;
-			}
+			 .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+
+    .invoice-box-borders {
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
             
 			.invoice-box table {
 				width: 100%;
@@ -100,7 +103,7 @@
 	</head>
 
 	<body>
-		<div class="invoice-box">
+		<div id="border-class" class="invoice-box">
 			<table cellpadding="0" cellspacing="0">
 				<tr class="top">
 					<td colspan="2">
@@ -111,7 +114,7 @@
 								</td>
 
 								<td>
-									Reçu #: 123<br />
+									Reçu #: RA-{{ $payment_a->id }}<br />
 									Crée: {{ \Carbon\Carbon::parse($payment_a->created_at)->format('d/m/Y') }}<br />
 									Editeur: {{ Auth::user()->full_name }}
 									
@@ -168,5 +171,15 @@
 				</tr>
 			</table>
 		</div>
+
+{{-- <script>
+    function printPDF() {
+        var element = document.getElementById("border-class");
+        element.classList.remove("invoice-box-borders");
+        window.print();
+        element.classList.add("invoice-box-borders");
+    }
+</script> --}}
+
 	</body>
 </html>

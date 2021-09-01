@@ -17,6 +17,6 @@ class EmailToAdmin extends Mailable
     }
     public function build()
     {
-        return $this->subject('Message from '.$detail['name'])->to('services@greencitycentre.com')->from('greencitycentre@gmail.com')->view('emails.adminmail');
+        return $this->subject('Message Externe')->to('services@greencitycentre.com')->from('greencitycentre@gmail.com')->view('emails.adminmail');
     }
 }

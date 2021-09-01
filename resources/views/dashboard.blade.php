@@ -103,7 +103,7 @@ Tableau de Board
                                 <i class="bx bx-copy-alt"></i>
                             </span>
                         </div>
-                        <h5 class="font-size-14 mb-0">Haute Formation</h5>
+                        <h5 class="font-size-14 mb-0">Top Formation</h5>
                     </div>
                     <div class="text-muted mt-4">
                         <h4>{{ $high['revenue'].' MAD' }} <i class="{{ $high['revenue'] > 0 ? 'mdi mdi-chevron-up ms-1 text-success' : 'mdi mdi-chevron-down ms-1 text-danger'}}"></i></h4>

@@ -21,7 +21,7 @@
 					<h5 class="widget-title">GCC</h5>
 					<ul class="list-unstyled footer-links">
 						<li><a onMouseOver="this.style.color='#96c221'"
-							onMouseOut="this.style.color='#ffff'" href="#">À Propos</a></li>
+							onMouseOut="this.style.color='#ffff'" href="{{ route('home.about') }}">À Propos</a></li>
 						<li><a onMouseOver="this.style.color='#96c221'"
 							onMouseOut="this.style.color='#ffff'" href="#">Contacter Nous</a></li>
 						<li><a onMouseOver="this.style.color='#96c221'"

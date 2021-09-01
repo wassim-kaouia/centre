@@ -34,18 +34,21 @@ Paiements
                                     {{ $payment->full_price }} MAD
                                 </td>
                                 <td>
-                                            @if ($payment->status === 'paid')
-                                                 <span class="badge badge-pill badge-soft-success font-size-11">Payé</span>
-                                            @endif
-                                            @if ($payment->status === 'avance')
-                                                <span class="badge badge-pill badge-soft-danger font-size-11">Avec Avance</span>
-                                            @endif
-                                            @if ($payment->status === 'partie')
-                                                <span class="badge badge-pill badge-soft-danger font-size-11">Paiement Partiel</span>
-                                            @endif
-                                            @if ($payment->status === 'canceled')
-                                                <span class="badge badge-pill badge-soft-danger font-size-11">Annulé</span>
-                                            @endif
+                               @if ($payment->status === 'paid')
+                                    <span class="badge badge-pill badge-soft-success font-size-11">Payé</span>
+                               @endif
+                               @if ($payment->status === 'avance')
+                                   <span class="badge badge-pill badge-soft-danger font-size-11">Avec Avance</span>
+                               @endif
+                               @if ($payment->status === 'partie')
+                                   <span class="badge badge-pill badge-soft-danger font-size-11">Paiement Partiel</span>
+                               @endif
+                               @if ($payment->status === 'withoutavance')
+                               <span class="badge badge-pill badge-soft-danger font-size-11">Sans Avance</span>
+                               @endif
+                               @if ($payment->status === 'canceled')
+                                   <span class="badge badge-pill badge-soft-danger font-size-11">Annulé</span>
+                               @endif
                                 </td>
                                 <td>
                                     <i class="bx bx-money me-1"></i> Espèces

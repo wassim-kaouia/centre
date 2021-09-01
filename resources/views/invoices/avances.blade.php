@@ -39,7 +39,7 @@ Les reçus de paiement en avance
                 
                 <div class="col-lg-8">
                     <div>
-                        <a href="{{ route('receipts.show',['id' => $payment->id]) }}" class="d-block text-primary text-decoration-underline mb-2">Facture #14251</a>
+                        <a href="{{ route('receipts.show',['id' => $payment->id]) }}" class="d-block text-primary text-decoration-underline mb-2">Facture #AV-{{ $payment->id }}</a>
                         <h5 class="text-truncate mb-4 mb-lg-5">{{ $payment->course->title }}</h5>
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item me-3">

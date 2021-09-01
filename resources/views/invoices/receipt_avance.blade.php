@@ -6,12 +6,15 @@
         max-width: 800px;
         margin: auto;
         padding: 30px;
-        border: 1px solid #eee;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
         font-size: 16px;
         line-height: 24px;
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
+    }
+
+    .invoice-box-borders {
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     }
     
     .invoice-box table {
@@ -114,7 +117,7 @@ Reçu de paiement
 @section('content')
 <div class="row">
     <div class="col-lg-12">  
-              <div class="invoice-box">
+              <div id="border-class" class="invoice-box invoice-box-borders">
 				<div class="button-print">
 					<button id="printPageButton"  class="btn btn-success" onClick="window.print();">Imprimer</button>
 				</div>
@@ -128,7 +131,7 @@ Reçu de paiement
                                         </td>
         
                                         <td>
-                                            Reçu #: 123<br />
+                                            Reçu #: <br />
                                             Crée: {{ \Carbon\Carbon::parse($payment->created_at)->format('d/m/Y') }}<br />
                                             Editeur: {{ Auth::user()->full_name }}
                                             
@@ -191,7 +194,14 @@ Reçu de paiement
 <!-- end row -->
 @endsection
 
-@section('js')
-    
+@section('script')
+<script>
+    function printPDF() {
+        var element = document.getElementById("border-class");
+        element.classList.remove("invoice-box-borders");
+        window.print();
+        element.classList.add("invoice-box-borders");
+    }
+</script>
 @endsection
 

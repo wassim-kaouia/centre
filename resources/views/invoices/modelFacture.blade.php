@@ -9,8 +9,8 @@
 				max-width: 800px;
 				margin: auto;
 				padding: 30px;
-				border: 1px solid #eee;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+				/* border: 1px solid #eee;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
 				font-size: 16px;
 				line-height: 24px;
 				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
@@ -111,7 +111,7 @@
 								</td>
 
 								<td>
-									Facture #: 123<br />
+									Facture #: 'FA0-{{ $payment_i->id }}'<br />
 									Crée: {{ \Carbon\Carbon::parse($payment_i->created_at)->format('d/m/Y') }}<br />
 									Editeur: {{ Auth::user()->full_name }}
 									
@@ -126,9 +126,7 @@
 						<table>
 							<tr>
 								<td>
-									Green City Centre<br />
-									Centre green lotissement<br />
-									Benguerire, MA 12345
+									{{$settings->address}}
 								</td>
 
 								<td>

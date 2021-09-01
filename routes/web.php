@@ -11,6 +11,7 @@ use App\Http\Controllers\FeesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UploadAttachment;
@@ -38,6 +39,7 @@ Route::get('/formation/{id}/show/{category}',[CourseController::class,'show_deta
 Route::get('/politiques',[HomeController::Class,'politiques'])->name('home.politiques');
 Route::get('/conditions',[HomeController::Class,'conditions'])->name('home.conditions');
 Route::get('/contacter',[HomeController::class,'contact'])->name('home.contact');
+Route::get('quisommenous',[HomeController::class,'aboutus'])->name('home.about');
 
 
 Route::middleware(['auth','rolechecker'])->group(function () {
@@ -176,19 +178,19 @@ Route::put('/pages/conditions/update',[SettingController::class,'conditions_upda
 
 Route::post('/contacter/email',[ContactController::class,'sendMail'])->name('mail.send');
 
-Route::get('/mailexemple',function(){
-     return new EmailToAdmin();
-});
-
 Route::post('/commentaire/ajouter',[ReviewController::class,'store'])->name('reviews.store');
 
 Route::get('getPartenaires',[PartnerController::class,'index'])->name('partner.index');
 Route::delete('deletePartenaires/{id}',[PartnerController::class,'destroy'])->name('partner.destroy');
 Route::post('/partenairs/sauvegarder',[PartnerController::class,'store'])->name('partner.store');
 
-// Route::view('/bulksms', 'testsms');
-// Route::get('/getNumbers/{id}', [BulkSmsController::class,'dataToViewOnRequest'])->name('sms.numbers');
-// Route::post('/sendSMS', [BulkSmsController::class,'sendSMS'])->name('sms.send');;
+Route::get('/pageQuisommenous',[AboutController::class,'aboutus'])->name('about.index');
+Route::post('/quisommenous/ajouter',[AboutController::class,'store'])->name('about.create');
+Route::put('/quisommenous/miseajour',[AboutController::class,'update'])->name('about.update');
+
+Route::view('/bulksms', 'testsms');
+Route::get('/getNumbers/{id}', [BulkSmsController::class,'dataToViewOnRequest'])->name('sms.numbers');
+Route::post('/sendSMS', [BulkSmsController::class,'sendSMS'])->name('sms.send');;
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 

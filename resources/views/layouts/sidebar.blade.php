@@ -132,6 +132,7 @@
                         <li><a href="{{ route('settings.conditionPage') }}">Conditions Generales</a></li>
                         <li><a href="{{ route('settings.politiquePage') }}">Politiques de confidentialitée</a></li>
                         <li><a href="{{ route('partner.index') }}">Les Partenaires</a></li>
+                        <li><a href="{{ route('about.index') }}">Page À Propos</a></li>
                     </ul>
                 </li>
             </ul>

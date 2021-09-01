@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\About;
 use App\Models\Course;
 use App\Models\Policy;
 use App\Models\Review;
@@ -47,7 +48,10 @@ class HomeController extends Controller
         ]);
     }
 
-
+    public function aboutus(){
+        $aboutus = About::exists() ? About::first() : null;
+        return view('front.aboutus',['aboutus' => $aboutus]);
+    }
 
     public function contact(){
 
