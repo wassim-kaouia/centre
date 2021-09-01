@@ -66,8 +66,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="section-heading center-heading text-center">
-                    <span class="subheading">Testimonials</span>
-                    <h3>Learn New Skills to Go Ahead for Your Career</h3>
+                    <span class="subheading">Feedback De Nos Étudiants</span>
+                    <h3>Ce qu'ils disent nos étudiants</h3>
                 </div>
             </div>
         </div>
