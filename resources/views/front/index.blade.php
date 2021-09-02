@@ -103,7 +103,7 @@ Page Principale
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-6">
                 <div class="section-heading center-heading">
-                    <span class="subheading">Top meilleurs formateurs</span>
+                    <span class="subheading text-dark">Top meilleurs formateurs</span>
                     <h3>Nos formateurs profesionnaux</h3>
                 </div>
             </div>
