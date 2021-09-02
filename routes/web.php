@@ -185,16 +185,18 @@ Route::view('/bulksms', 'testsms');
 Route::get('/getNumbers/{id}', [BulkSmsController::class, 'dataToViewOnRequest'])->name('sms.numbers');
 Route::post('/sendSMS', [BulkSmsController::class, 'sendSMS'])->name('sms.send');
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
-Route::post('/blog/post', [BlogController::class, 'store'])->name('blog.store');
-Route::put('/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
-Route::get('/blog/modifier/{id}', [BlogController::class, 'edit'])->name('blog.edit');
-Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
-Route::get('/blog/show/{id}', [BlogController::class, 'show'])->name('blog.show');
-Route::delete('/blog/delete', [BlogController::class, 'destroy'])->name('blog.destroy');
+Route::middleware(['auth', 'rolechecker'])->group(function () {
+    Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
+    Route::post('/blog/post', [BlogController::class, 'store'])->name('blog.store');
+    Route::put('/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::get('/blog/modifier/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::get('/blog/show/{id}', [BlogController::class, 'show'])->name('blog.show');
+    Route::delete('/blog/delete', [BlogController::class, 'destroy'])->name('blog.destroy');
 
-Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
-Route::get('/comments', [CommentController::class, 'show_comments'])->name('comment.show');
+    Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/comments', [CommentController::class, 'show_comments'])->name('comment.show');
+});
 
 Route::get('/blog/index', [HomeController::class, 'blogs'])->name('home.blogs');
 

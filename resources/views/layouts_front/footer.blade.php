@@ -23,7 +23,7 @@
 						<li><a onMouseOver="this.style.color='#96c221'"
 							onMouseOut="this.style.color='#ffff'" href="{{ route('home.about') }}">À Propos</a></li>
 						<li><a onMouseOver="this.style.color='#96c221'"
-							onMouseOut="this.style.color='#ffff'" href="#">Contacter Nous</a></li>
+							onMouseOut="this.style.color='#ffff'" href="{{ route('home.contact') }}">Contacter Nous</a></li>
 						<li><a onMouseOver="this.style.color='#96c221'"
 							onMouseOut="this.style.color='#ffff'" href="{{ route('home.conditions') }}">Conditions Générales</a></li>
 						<li><a onMouseOver="this.style.color='#96c221'"

@@ -111,30 +111,22 @@ Page de formation
        <div class="widget widget_news">
           <h4 class="widget-title">Latest Posts</h4>
           <ul class="recent-posts">
-              <li>
-                  <div class="widget-post-thumb">
-                      <a href="#"><img src="assets/images/blog/post-thumb-2.jpg" alt="" class="img-fluid"></a>
-                  </div>
-                  <div class="widget-post-body">
-                      <span>10 april 2020</span>
-                      <h6> <a href="#">Organic Food in your door</a></h6>
-                  </div>
-              </li>
-              <li>
-                  <div class="widget-post-thumb">
-                      <a href="#"><img src="assets/images/blog/post-thumb-3.jpg" alt="" class="img-fluid"></a>
-                  </div>
-                  <div class="widget-post-body">
-                      <span>10 april 2020</span>
-                      <h6> <a href="#">Get high quality food</a></h6>
-                  </div>
-              </li>
-             
+             @foreach ($lasts as $post)
+             <li>
+                <div class="widget-post-thumb">
+                    <a href="#"><img src="{{ $post->couverture }}" alt="" class="img-fluid"></a>
+                </div>
+                <div class="widget-post-body">
+                    <span>{{ date('d-m-Y', strtotime($post->created_at))}}</span>
+                    <h6> <a href="#">{{ $post->title }}</a></h6>
+                </div>
+            </li>
+             @endforeach
           </ul>
       </div>
   
   
-      <div class="widget widget_categories">
+      {{-- <div class="widget widget_categories">
           <h4 class="widget-title">Categories</h4>
           <ul>
             <li class="cat-item"><a href="#"><i class="fa fa-angle-right"></i>Web Design</a>(4)</li>
@@ -142,9 +134,9 @@ Page de formation
             <li class="cat-item"><a href="#"><i class="fa fa-angle-right"></i>Marketing</a>(24)</li>
             <li class="cat-item"><a href="#"><i class="fa fa-angle-right"></i>Design & dev</a>(6)</li>
           </ul>
-      </div>
+      </div> --}}
   
-      <div class="widget widget_tag_cloud">
+      {{-- <div class="widget widget_tag_cloud">
           <h4 class="widget-title">Tags</h4>
           <a href="#">Design</a>
           <a href="#">Development</a>
@@ -158,7 +150,7 @@ Page de formation
           <a href="#">bootstrap</a>
           <a href="#">Tutorial</a>
           <a href="#">Html</a>
-      </div>
+      </div> --}}
   
   </div>
                 </div>

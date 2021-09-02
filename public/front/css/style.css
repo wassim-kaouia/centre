@@ -2652,7 +2652,7 @@ Course Page Tab Panel
 Course Page Tab Panel
 ==================================*/
 .subscribe-section {
-  background: url("../images/bg/cta-bg.jpg") no-repeat;
+  background: url("../images/bg/class.jpg") no-repeat;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -2672,7 +2672,7 @@ Course Page Tab Panel
   width: 100%;
   height: 100%;
   background: #263b5e;
-  opacity: .98;
+  opacity: .85;
 }
 
 .subscribe-section .section-heading {

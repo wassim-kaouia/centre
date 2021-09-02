@@ -58,7 +58,11 @@ class HomeController extends Controller
     public function blogs()
     {
         $blogs = Blog::exists() ? Blog::paginate(10) : null;
-        return view('front.blogs', ['blogs' => $blogs]);
+        $lasts = Blog::orderBy('created_at', 'desc')->take(5)->get();
+        return view('front.blogs', [
+            'blogs' => $blogs,
+            'lasts' => $lasts,
+        ]);
     }
 
     public function contact()
