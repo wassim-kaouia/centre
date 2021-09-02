@@ -60,33 +60,43 @@ Page de formation
       <div class="container">
           <div class="row">
               <div class="col-md-8">
-                @foreach ($blogs as $blog)
-                <article class="blog-post-item">
-                    <div class="post-thumb">
-                        <img src="{{ $blog->couverture }}" alt="" class="img-fluid">
-                    </div>
-                    <div class="post-item mt-4">
-                        <div class="post-meta">
-                            <span class="post-date"><i class="fa fa-calendar-alt mr-2"></i>{{ $blog->created_at }}</span>
-                            <span class="post-author"><i class="fa fa-user mr-2"></i>{{ $blog->user->role->role == 'Admin' ? 'Admin' : 'Secretaire' }}</span>
-                            <span><a href="#" class="post-comment"><i class="fa fa-comments mr-2"></i>1 Comment</a></span>
-                        </div>
-                        <h2 class="post-title"><a href="#">{{ $blog->title }}</a></h2>
-                        <div class="post-content">
-                            {{-- <p>{!! $blog->content !!}</p> --}}
-                            <p>{{ $blog->getAbbreviatedPostAttribute() }}</p>
-                            <a href="{{ route('blog.show',['id' => $blog->id]) }}" class="read-more">Continuer <i class="fa fa-angle-right ml-2"></i></a>
-                        </div>
-                    </div>
-              </article>
-                @endforeach
-                  <nav class="blog-pagination">
-                      <ul>
-                        <li class="page-num active" ><a href="#">1</a></li>
-                        <li class="page-num"><a href="#">2</a></li>
-                        <li class="page-num"><a href="#">3</a></li>
-                      </ul>
-                  </nav>
+               @if ($blogs != null)
+               @foreach ($blogs as $blog)
+               <article class="blog-post-item">
+                   <div class="post-thumb">
+                       <img src="{{ $blog->couverture }}" alt="" class="img-fluid">
+                   </div>
+                   <div class="post-item mt-4">
+                       <div class="post-meta">
+                           <span class="post-date"><i class="fa fa-calendar-alt mr-2"></i>{{ $blog->created_at }}</span>
+                           <span class="post-author"><i class="fa fa-user mr-2"></i>{{ $blog->user->role->role == 'Admin' ? 'Admin' : 'Secretaire' }}</span>
+                           <span><a href="#" class="post-comment"><i class="fa fa-comments mr-2"></i>{{ $blog->comments->count() }} Comment</a></span>
+                       </div>
+                       <h2 class="post-title"><a href="#">{{ $blog->title }}</a></h2>
+                       <div class="post-content">
+                           {{-- <p>{!! $blog->content !!}</p> --}}
+                           <p>{{ $blog->getAbbreviatedPostAttribute() }}</p>
+                           <a href="{{ route('blog.show',['id' => $blog->id]) }}" class="read-more">Continuer <i class="fa fa-angle-right ml-2"></i></a>
+                       </div>
+                   </div>
+             </article>
+               @endforeach
+               {{-- <div class="row">
+                <div class="col-lg-12">
+                    
+                </div>
+               </div> --}}
+               <nav class="blog-pagination">
+                {{-- <ul>
+                  <li class="page-num active" ><a href="#">1</a></li>
+                  <li class="page-num"><a href="#">2</a></li>
+                  <li class="page-num"><a href="#">3</a></li>
+                </ul> --}}
+                {{ $blogs->links('vendor.pagination.custom') }}
+            </nav>
+               @endif
+               
+                 
                 </div>
                 <div class="col-md-4">
                   <div class="blog-sidebar mt-5 mt-lg-0 mt-md-0">
