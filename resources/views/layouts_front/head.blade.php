@@ -50,7 +50,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('main') }}">
-                    <img src="{{ asset('assets/images/logo-dark.png') }}" alt="Edutim" class="img-fluid" width="200">
+                    <img src="{{ asset($settings->logo) }}" alt="Greencitycentre" class="img-fluid" width="250">
                 </a>
 
                 <!-- Toggler -->
@@ -82,7 +82,7 @@
                       
                     
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="{{ route('home.blogs') }}" id="navbar3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Blog
                             </a>
                             

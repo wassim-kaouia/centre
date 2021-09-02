@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="{{ route('main') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset ('/assets/images/logo.svg') }}" alt="" height="22">
+                        <img src="{{ asset($settings->logo) }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset ('/assets/images/logo-dark.png') }}" alt="" height="17">
+                        <img src="{{ asset($settings->logo) }}" alt="" height="17">
                     </span>
                 </a>
 
                 <a href="index" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset ('/assets/images/logo-light.svg') }}" alt="" height="22">
+                        <img src="{{ asset($settings->logo) }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset ('/assets/images/logo-light.png') }}" alt="" height="40">
+                        <img src="{{ asset($settings->logo) }}" alt="" height="40">
                     </span>
                 </a>
             </div>

@@ -75,7 +75,7 @@
 			<div class="row justify-content-center align-items-center">
 				<div class="col-lg-6">
 					<div class="footer-logo">
-						<img src="{{ asset('assets/images/logo-dark.png') }}" alt="greencitycentre" class="img-fluid" width="300">
+						<img src="{{ asset($settings->logo) }}" alt="greencitycentre" class="img-fluid" width="300">
 					</div>
 				</div>
 				<div class="col-lg-6">

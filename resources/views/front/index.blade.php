@@ -117,7 +117,7 @@ Page Principale
                     </div>
                     <div class="team-info">
                         <h4>{{ $instructor->user->full_name }}</h4>
-                        <p>Formateur</p>
+                        <p style="color: #96c221">Formateur</p>
                     </div>
                     <ul class="team-socials list-inline">
                         <li class="list-inline-item"><a href="{{ $settings->facebook }}"><i class="fab fa-facebook-f"></i></a></li>

@@ -115,6 +115,17 @@
                 </li>
 
                 <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-receipt"></i>
+                        <span>Blog</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('blog.create') }}">Créer un blog</a></li>
+                        <li><a href="{{ route('blog.index') }}">Gérer Les Blogs</a></li>
+                    </ul>
+                </li>
+
+                <li>
                     <a href="{{ route('sms.index') }}" class="waves-effect">
                         <i class="bx bx-user-voice"></i>
                         <span key="t-dashboards">Promotions</span>

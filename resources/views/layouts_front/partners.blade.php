@@ -3,8 +3,7 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-7">
                 <div class="section-heading center-heading">
-                    <span class="subheading" style="color: #96c221">Partenariat</span>
-                    <h3>Nos Meilleurs Partenaires</h3>
+                    <h3 class="mt-5">Nos Meilleurs Partenaires</h3>
                 </div>
             </div>
         </div>

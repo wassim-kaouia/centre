@@ -103,8 +103,11 @@ Les Formations
                                     <span class="course-duration"><i class="bi bi-badge3"></i>Max {{ $course->student_limit }} étudiants</span>
                                 </div> 
                                
-                                <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id,'category' => $course->category->name]) }}" class="btn btn-main-2 btn-small">Détails</a></div>
-                            </div>
+                                @if ($course->student_limit == $course->students->count())
+                                <div class="buy-btn"><button class="btn btn-main-2 btn-small" disabled>Complet</button></div>
+                              @else
+                                <div class="buy-btn"><a href="{{ route('show.detail.course',['id' => $course->id,'category' => $course->category->name]) }}" class="btn btn-main-2 btn-small">Details</a></div>
+                              @endif                              </div>
                         </div>
                     </div>
                 </div>

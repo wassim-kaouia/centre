@@ -35,7 +35,7 @@ Modifier les parametres générales
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Modifier Les Paramètres</h4>
-                <form class="outer-repeater"  method="POST" action="{{ route('settings.update') }}" >
+                <form class="outer-repeater"  method="POST" action="{{ route('settings.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div data-repeater-list="outer-group" class="outer">
@@ -176,6 +176,16 @@ Modifier les parametres générales
                                 </div>
                             </div>
 
+                            <div class="form-group row mb-4">
+                                <label for="twitter" class="col-form-label col-lg-2">Logo</label>
+                                <div class="col-lg-10">
+                                    
+                                    <input type="file" name="logo" class="form-control" id="inputGroupFile01">
+                                    <div class="p-4">
+                                        <img src="{{ $settings->logo }}"  alt="" width="50%">
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Blog;
 use App\Models\Role;
 use App\Models\Review;
 use App\Models\Student;
@@ -37,6 +38,13 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    public function posts(){
+        return $this->hasMany(Blog::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
     
     public static function boot(){
         parent::boot();
